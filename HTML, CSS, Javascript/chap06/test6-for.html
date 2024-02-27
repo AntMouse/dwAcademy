@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>반복문 타이틀</title>
+</head>
+<body>
+  <script>
+    let inputValue = prompt("짝수와 홀수 중 원하는 출력을 입력하세요.", "");
+    
+    if (inputValue == "홀수") {
+      for (let i = 0; i <= 100; i++) {
+        if (i % 2 != 0) {
+          document.write(i + " ");
+        }     
+      }
+    } else if (inputValue == "짝수") {
+      for (let i = 0; i <= 100; i++) {
+        if (i % 2 == 0) {
+          document.write(i + " ");
+        }     
+      }
+    } else {
+      document.write("잘못입력함")
+    }
+  </script>
+</body>
+</html>

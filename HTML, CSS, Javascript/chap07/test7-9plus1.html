@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test7-9plus1 타이틀</title>
+  <script>
+    let account = new Array();
+    let ownerList = ["황기태", "김기태", "민기태"];
+    let codeList = ["111", "222", "333"];
+    let balanceList = [35000, 50000, 90000];
+
+    for (let i = 0; i < 3; i++) {
+      account[i] = new Object();
+      account[i].owner = ownerList[i];
+      account[i].code = codeList[i];
+      account[i].balance = balanceList[i];
+      account[i].inquiry = inquiry;
+      account[i].deposit = deposit;
+      account[i].withdraw = withdraw;
+    }
+
+    function inquiry() {
+      return this.balance;
+    }
+    function deposit(money) {
+      this.balance += money;
+    }
+    function withdraw(money) {
+      this.balance -= money;
+    }
+  </script>
+</head>
+<body>
+  <script>
+    for (let i = 0; i < 3; i++) {
+      document.write("account : ");
+      document.write(account[i].owner + ", ");
+      document.write(account[i].code + ", ");
+      document.write(account[i].balance + "<br>");
+
+      let test1 = 10000 * (i + 1);
+
+      account[i].deposit(test1);
+      document.write(test1 + "원 저금 후 잔액은 " + account[i].inquiry() + "<br>");
+
+      let test2 = 5000 * (i + 1);
+
+      account[i].withdraw(test2);
+      document.write(test2 + "원 인출 후 잔액은 " + account[i].inquiry() + "<br><br><br>");     
+    }
+  </script>
+</body>
+</html>

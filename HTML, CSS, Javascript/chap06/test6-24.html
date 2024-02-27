@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test6-24 타이틀</title>
+  <script>
+    function gugudan(num) {
+      let funNum = parseInt(num);
+      if (9 < funNum || funNum < 1 || isNaN(funNum)) {
+        alert("잘못입력하셨습니다.");
+        return;
+      }
+      for (let i = 1; i <= 9; i++) {
+        document.write(funNum + " x " + i + " = " + (funNum* i) + "<br>");      
+      }
+    }
+  </script>
+</head>
+<body>
+  <h3>구구단 출력 함수 만들기</h3>
+  <hr>
+  <script>
+    let firstInput = prompt("구구단 몇 단을 원하세요", "");
+    gugudan(firstInput);
+  </script>
+</body>
+</html>

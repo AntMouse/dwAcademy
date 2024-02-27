@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test6-23 타이틀</title>
+</head>
+<body>
+  <h3>eval(), parseInt(), isNaN()</h3>
+  <hr>
+  <script>
+    let test1 = eval("2*3+4*6");
+    let test2 = parseInt("32");
+    let test3 = parseInt("0x32");
+    let test4 = parseInt("hello");
+
+    document.write("eval(\"2*3+4*6\")는 " + test1 + "<br>");
+    document.write("parseInt(\"32\")눈 " + test2 + "<br>");
+    document.write("parseInt(\"0x32\")는 " + test3 + "<br><br>");
+    if (isNaN(test4)) {
+      document.write("hello는 숫자가 아닙니다.")
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test-sample2-2 타이틀</title>
+  <style>
+    table.table1 {
+      border: 1px solid blue;
+    }
+    table.table1 td  {
+      border: 1px dotted green;
+      width: 100px;
+      height: 20px;
+      padding: 10px;
+      text-align: right;
+    }
+    table.table1 th  {
+      width: 100px;
+      height: 20px;
+      padding: 10px;
+      text-align: right;
+    }
+    table.table1 > thead th {
+      border: 1px dotted green;
+      width: 100px;
+      height: 40px;
+    }
+    table.table1 > tfoot th {
+      border: 1px dotted green;
+      width: 100px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+  <table class="table1">
+    <thead>
+      <tr><th>이름</th><th>HTML</th><th>CSS</th></tr>
+    </thead>
+    <tfoot>
+      <tr><th>합</th><th>175</th><th>169</th></tr>
+    </tfoot>
+    <tbody>
+      <tr><td>황기태</td><td>80</td><td>70</td></tr>
+      <tr><td>이재문</td><td>95</td><td>99</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>testhost2 타이틀</title>
+  <style>
+    h1 ~ ul { color: blue; }
+    div ~ h3 { color: red; }
+    h3 ~ p { color: purple; background-color: yellow; }
+    p.test1 ~ h5.test1-1 {color: aqua}
+  </style>
+</head>
+<body>
+  <div>
+    <h1>형제 선택자1</h1>
+    <h2>형제 선택자2</h2>
+    <ul>목록
+      <li>주제1</li>
+      <li>주제2</li>
+    </ul>
+  </div>
+  <h3>Sibling Selector-1</h3>
+  <h4>같은 레벨 형제</h4>
+  <p>일반형제 선택자에 의한 스타일 적용</p>
+  <h3>Sibling Selector_2</h3>
+  <h3>Sibling Selector_3</h3>
+
+  <h5 class="test1-1">내용0</h5>
+  <p class="test1">메시지</p>
+  <h5 class="test1-1">내용1</h5>
+  <h6>내용2</h6>
+  <h5 class="test1-2">내용3</h5>
+</body>
+</html>

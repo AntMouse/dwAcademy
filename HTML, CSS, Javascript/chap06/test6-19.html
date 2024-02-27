@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test6-19 타이틀</title>
+</head>
+<body>
+  <h3>do-while 문으로 0에서 n까지 합</h3>
+  <hr>
+  <script>
+    let inputNum = prompt("0보다 큰 정수를 입력하세요", "");
+    inputNum = parseInt(inputNum);
+
+    let oriNum = 0; sum = 0;
+    do {
+      sum += oriNum;
+      oriNum++;
+    } while (oriNum <= inputNum);
+    document.write("0에서 " + inputNum + "까지 합은 " + sum);
+  </script>
+</body>
+</html>

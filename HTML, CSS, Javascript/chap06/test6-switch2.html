@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test6-switch2 타이틀</title>
+</head>
+<body>
+  <script>
+    let city = "Seoul";
+    switch (city) {
+      case "Seoul":
+        document.write("서울");
+      
+      case "NewYork": // 위 case에 break가 없기 때문에 아래 뉴욕도 실행한 것.
+        document.write("뉴욕");
+        break;
+      case "Paris": // 뉴욕에는 break가 있기 때문에 아래 파리 case는 실행하지 않았다.
+        document.write("파리");
+        break;
+    }
+  </script>
+</body>
+</html>

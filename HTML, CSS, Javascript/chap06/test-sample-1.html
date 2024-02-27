@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test-sample-1 타이틀</title>
+  <style>
+    #menubar {
+      background-color: olive;
+    }
+    #menubar > ul{
+      margin: 0;
+      padding: 0;
+      width: 2000px;
+    }
+    #menubar > ul > li {
+      display: inline;
+      list-style-type: none;
+      padding: 0px 15px;
+      margin-left: 50px;
+      margin-right: 75px;
+    }
+    #menubar a {
+      color: white;
+      text-decoration: none;
+    }
+    #menubar a:hover {
+      color: violet;
+    }
+    #menubar span.npspspan {
+      background-color: olive;
+    }
+    #menubar > ul > li:first-child {
+      margin-left: 35px;
+    }
+  </style>
+</head>
+<body>
+  <nav id="menubar">
+    <ul>     
+      <li><a href="https://en.dict.naver.com/#/search?query=verdata"
+      target="iframe1">Home</a></li>
+      <li><a href="https://ko.dict.naver.com/#/search?query=verdata"
+      target="iframe2">Espresso</a></li>
+      <li><a href="https://hanja.dict.naver.com/#/search?query=verdata&range=all"
+      target="iframe3">Cappuccino</a></li>
+      <li><a href="https://ja.dict.naver.com/#/search?query=verdata&range=all"
+      target="iframe4">Cafe Latte</a></li>
+      <li><a href="https://zh.dict.naver.com/#/search?query=verdata"
+      target="iframe5">F.A.Q</a></li>
+    </ul>
+  </nav>
+  <br>
+  <nav id="menubar2">
+    <iframe src="" width="200px" height="300" name="iframe1"> 
+    </iframe>
+    <iframe src="" width="200px" height="300" name="iframe2">
+    </iframe>
+    <iframe src="" width="200px" height="300" name="iframe3">
+    </iframe>
+    <iframe src="" width="200px" height="300" name="iframe4">
+    </iframe>
+    <iframe src="" width="200px" height="300" name="iframe5">
+    </iframe>
+  </nav>
+</body>
+</html>

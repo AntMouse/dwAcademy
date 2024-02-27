@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test5-14 타이틀</title>
+  <style>
+    div {
+      display: inline-block;
+      background-color: olivedrab;
+      color: white;
+      padding: 5px;
+    }
+    .d1 {
+      transform: rotate(20deg);
+    }
+    .d2 {
+      transform: skew(0,-20deg);
+    }
+    .d3 {
+      transform: translateY(100px);
+    }
+    .d4 {
+      transform: scale(3,1);
+    }
+    .d1:hover {
+      transform: rotate(80deg);
+    }
+    .d2:hover {
+      transform: skew(0, -80deg);
+    }
+    .d3:hover {
+      transform: translateY(400px);
+    }
+    .d4:hover {
+      transform: scale(12,4);
+    }
+  </style>
+</head>
+<body>
+  <h3>다양한 Transform</h3>
+  아래는 회전(rotate), 기울임(skew), 이동(translate),
+  확대/축소(scale)가 적용된 사례이다.
+  또한 마우스를 올리면 추가적 변환이 일어난다.
+  <hr>
+  <div class="d1">rotate(20deg)</div>
+  <div class="d2">skew(0,-20deg)</div>
+  <div class="d3">translateY(100px)</div>
+  <div class="d4">scale(3,1)</div>
+</body>
+</html>

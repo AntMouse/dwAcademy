@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test6-17 타이틀</title>
+</head>
+<body>
+  <h3>for 문으로 10px~35px 크기 출력</h3>
+  <hr>
+  <script>
+    let fontSize = 10;
+    for (let i = 0; i < 6; i++, fontSize += 5) {
+      document.write("<span style='font-size:" + fontSize + "px;'>");
+      document.write(fontSize + "px");
+      document.write("</sapn>");
+    }
+  </script>
+</body>
+</html>

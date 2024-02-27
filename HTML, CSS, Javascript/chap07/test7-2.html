@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test7-2 타이틀</title>
+</head>
+<body>
+  <h3>[]로 배열 만들기</h3>
+  <hr>
+  <script>
+    let plots = [20, 5, 8, 15, 20];
+    document.write("let plots = [20, 5, 8, 15, 20]<br>");
+
+    for (let i = 0; i < 5; i++) {
+      let size = plots[i];
+      while (size > 0) {
+        document.write("*");
+        size--;
+      }
+      document.write(plots[i] + "<br>");
+    }
+  </script>
+</body>
+</html>

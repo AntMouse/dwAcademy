@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>testa 타이틀</title>
+  <script>
+    document.write("<h3>Welcome!</h3>");
+  </script>
+  <style>
+    @keyframes textColorAnimaiton {
+      0% { color: aqua; }
+      50% { color: red; }
+      100% { color: black; }
+    }
+    span {
+      animation-name: textColorAnimaiton;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+    }
+  </style>
+</head>
+<body>
+  <p><span>텍스트 애니메이션 출력</span></p>
+  <p></p>
+  <img src="4.jpg" alt="4번 이미지" onclick="this.src='3.jpg'" width="200px" height="200px">
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test6-21 타이틀</title>
+</head>
+<body>
+  <h3>3으로 나눈 나머지가 1인 수만 더하기</h3>
+  <hr>
+  <script>
+    let sum = 0;
+    for (let i = 1; i <= 100; i++) {
+      if (i %10 == 9) {
+        continue;
+      }
+      document.write(i + " ");
+      sum += i;
+    }
+    document.write("합은 " + sum);
+  </script>
+</body>
+</html>

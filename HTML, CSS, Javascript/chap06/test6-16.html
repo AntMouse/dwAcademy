@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test6-16 타이틀</title>
+</head>
+<body>
+  <h3>switch 문으로 커피 주문</h3>
+  <hr>
+  <script>
+    let price = 0;
+    let order = prompt("무슨 커피를 드릴까요?", "");
+    switch (order) {
+      case "espresso" :
+      case "에스프레소":
+        price = 2000;
+        break;
+
+      case "카푸치노":
+        price = 3000;
+        break;
+
+      case "카페라떼":
+        price = 3500;
+        break;
+    
+      default:
+        document.write(order + "는 없습니다.")
+        break;
+    }
+
+    if (price != 0) {
+      document.write(order + "는 " + price + "원입니다.");
+    }
+
+    if (order == "espresso" ||
+        order == "에스프레소") {
+      
+        price = 2000;  
+    } else if (order == "카푸치노") {
+
+               price = 3000;
+    } else if (order == "카페라떼") {
+
+               price = 3500;
+    } else {
+      document.write(order + "는 없습니다.")
+    }
+
+    if (price != 0) {
+      document.write(order + "는 " + price + "원입니다.");
+    }
+  </script>
+</body>
+</html>

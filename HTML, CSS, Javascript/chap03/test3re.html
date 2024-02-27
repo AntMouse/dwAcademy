@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <video width="400" controls id="theVideo">
+        <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        type="video/mp4">
+        </video>
+    </body>
+    <script>
+        document.getElementById("theVideo").addEventListener('loadedmetadata', function(e) {
+            console.log(this.vidolWidth, this.videoHeight, this.duration);
+        });
+    </script>
+    <video width="400" height="400" controls id="theVideo">
+        <source src="https://www.youtube.com/embed/3jmCD_JXDbQ.mp4">
+    </video>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test7-6 타이틀</title>
+  <style>
+  </style>
+</head>
+<body>
+  <h3>페이지 방문 초시간이 짝수이면 violet, 홀수이면 lightskyblue 배경</h3>
+  <hr>
+  <script>
+    let current = new Date();
+    if (current.getSeconds() % 2 == 0) {
+      document.body.style.backgroundColor = "violet";
+    } else {
+      document.body.style.backgroundColor = "lightskyblue";
+    }
+
+    document.write("현재 시간 : " + current.getHours() + "시," + 
+    current.getMinutes() + "분," + current.getSeconds() + "초");
+  </script>
+</body>
+</html>
