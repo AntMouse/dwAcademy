@@ -1,0 +1,7 @@
+1. Tyrannosaurus: Carnivore
+2. Brachiosaurus: Herbivore
+3. Triceratops: Herbivore
+4. Velociraptor: Carnivore
+5. Stegosaurus: Herbivore
+6. Spinosaurus: Carnivore
+7. Ankylosaurus: Herbivore
