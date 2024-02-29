@@ -12,6 +12,8 @@ public class Chap12QProjectDinosaurCareSystem {
         // 건강 상태가 나쁜 경우 예외를 던짐
         if (healthStatus < 5) {
             throw new Chap12QProjectSubDinosaurIllException("공룡이 아픕니다.");
+        } else {
+            System.out.println("공룡이 건강합니다.");
         }
     }
     
@@ -24,6 +26,8 @@ public class Chap12QProjectDinosaurCareSystem {
         // 보안 상태가 나쁜 경우 예외를 던짐
         if (securityStatus < 3) {
             throw new Chap12QProjectSubEnclosureBreachException("우리의 보안이 위험 상태입니다.");
+        } else {
+            System.out.println("우리의 보안이 안정적입니다.");
         }
     }
 
