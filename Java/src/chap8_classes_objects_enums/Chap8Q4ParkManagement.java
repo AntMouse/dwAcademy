@@ -45,7 +45,7 @@ public class Chap8Q4ParkManagement {
 		}
 		return true;
     }
-    // 0-3-4. 처음 인덱스 입력했을 때 추가일 경우(공룡)
+    // 0-3-4. 처음 인덱스 입력했을 때 추가일 경우(직원)
     public boolean checkEmployeeIndex(String addAndChange, int index) {
 		if (0 <= index && index < employee.length) {
 			// if를 2번 써야 무조건 아래 메시지가 출력 되는 걸 방지할 수 있다 and 조건 쓰기 힘듦
@@ -54,6 +54,23 @@ public class Chap8Q4ParkManagement {
                 return false;
             } else if (isRegistered(index, employee) && addAndChange.equals("change")) {
                 System.out.println("해당 인덱스에는 등록된 직원이 없습니다.");
+                return false;
+			}
+		} else {
+			indexErrorMessage(); // 유효하지 않은 인덱스
+			return false;
+		}
+		return true;
+    }   
+    // 0-3-5. 처음 인덱스 입력했을 때 추가일 경우(티켓)
+    public boolean checkTicketIndex(String addAndChange, int index) {
+		if (0 <= index && index < tickets.length) {
+			// if를 2번 써야 무조건 아래 메시지가 출력 되는 걸 방지할 수 있다 and 조건 쓰기 힘듦
+            if (!isRegistered(index, tickets) && addAndChange.equals("add")) {
+                System.out.println("해당 인덱스에는 이미 티켓이 등록되어 있습니다.");
+                return false;
+            } else if (isRegistered(index, tickets) && addAndChange.equals("change")) {
+                System.out.println("해당 인덱스에는 등록된 티켓이 없습니다.");
                 return false;
 			}
 		} else {
@@ -149,14 +166,29 @@ public class Chap8Q4ParkManagement {
 	public void addEmployeeSchedule(int index, String schedule) {
     	employee[index].addSchedule(schedule);
     }
-	// 2-2. 직원 정보 보기
+	// 2-2-1. 직원 정보 출력
 	public void printEmployeeInfo(int index) {
+		if (index == -1) {
+			for (int i = 0; i < employee.length; i++) {
+                if (employee[i] != null) {
+                	printSingleEmployeeInfo(i);
+                }
+            }
+		} else if (0 <= index && index < employee.length && employee[index] != null) {
+			printSingleEmployeeInfo(index); 
+        } else {
+        	findValueIndexErrorMessage("직원");
+        }
+    }
+	// 2-1-2. 단일 직원 정보 출력
+	public void printSingleEmployeeInfo(int index) {
 		if (0 <= index && index < employee.length && employee[index] != null) {
             System.out.println("직원 관리 번호 : " + index);
             System.out.println("이름 : " + employee[index].getEmployeeName());
             System.out.println("직무 : " + employee[index].getEmployeeJobTitle());
             System.out.println("경력 : " + employee[index].getEmployeeYearsOfExperience() + "년");
             employee[index].printAllSchedules();
+            System.out.println("==================================");
         } else {
             System.out.println("유효하지 않은 인덱스이거나 추가된 직원이 없습니다.");
         }
@@ -170,7 +202,7 @@ public class Chap8Q4ParkManagement {
         	findValueIndexErrorMessage("직원");
         }
     }	
-	// 1-4. 직원 정보 수정	
+	// 2-4. 직원 정보 수정	
 	public void allChangeEmployee(int index, String newEmployeeName, String newEmployeeJobTitle, String newEmployeeYearsOfExperience) {
 	    if (0 <= index && index < employee.length && employee[index] != null) {    	
 	        // 입력된 값이 비어있지 않으면 새 값으로 수정, 비어있으면 기존 값으로 유지
@@ -195,7 +227,6 @@ public class Chap8Q4ParkManagement {
     	employee[index].changeSchedule(turn, newSchedule);
     }
 
-    
     private int ticketAndGuest = 999;
 	private Chap8Q8Ticket[] tickets = new Chap8Q8Ticket[ticketAndGuest];	
 	private int currentVisitorCount = 0; // 현재 공원의 손님 숫자
@@ -206,26 +237,32 @@ public class Chap8Q4ParkManagement {
         		tickets[index] = new Chap8Q8Ticket(parkTicketPrice, parkTicketVisitorsName, parkTicketVisitDate);
         		currentVisitorCount++; // 티켓 발급할 때마다 바로 들어온 걸로 가정
             } else {
-                int findEmptyIndex = findEmptyIndex(tickets); // 비어있는 공간 있는지 체크
-                if (findEmptyIndex != -1) {
-                	System.out.println("해당 인덱스에는 이미 공룡이 등록되어 있습니다.");
-                	System.out.println(findEmptyIndex + " 번은 비어있으니 티켓을 등록하려면 " + 
-                	findEmptyIndex + " 번에 등록해주세요.");
-				} else {
-					System.out.println("현재 빈 저장 공간이 없어서 더 이상 티켓을 등록할 수 없습니다.");
-				}
+            	indexErrorMessage();
             }
-        } else {
-        	indexErrorMessage();
         }
     }
-    // 3-2. 티켓 정보 보기
-    public void printParkTicketInfo(int index) {
+    // 3-2-1. 티켓 정보 출력
+	public void printParkTicketInfo(int index) {
+		if (index == -1) {
+			for (int i = 0; i < tickets.length; i++) {
+                if (tickets[i] != null) {
+                	printSingleParkTicketInfo(i);
+                }
+            }
+		} else if (0 <= index && index < tickets.length && tickets[index] != null) {
+			printSingleParkTicketInfo(index); 
+        } else {
+        	findValueIndexErrorMessage("티켓");
+        }
+    }
+    // 3-2-2. 티켓 단일 정보 출력
+    public void printSingleParkTicketInfo(int index) {
 		if (0 <= index && index < tickets.length && tickets[index] != null) {
             System.out.println("티켓 번호 : " + index);
             System.out.println("티켓 가격 : " + tickets[index].getParkTicketPrice());
             System.out.println("방문자 이름 : " + tickets[index].getParkTicketVisitorsName());
             System.out.println("방문 일자 : " + tickets[index].getParkTicketVisitDate());
+            System.out.println("==================================");
         } else {
         	findValueIndexErrorMessage("티켓");
         }

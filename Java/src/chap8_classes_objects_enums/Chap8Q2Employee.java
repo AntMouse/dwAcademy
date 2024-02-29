@@ -58,6 +58,8 @@ public class Chap8Q2Employee {
     public void changeSchedule(int index, String newSchedule) {
         if (0 <= index && index < schedules.size()) {
             schedules.set(index, newSchedule);
+        } else if (index == schedules.size()) { // 해당 인덱스에 스케줄이 없는 경우
+            addSchedule(newSchedule); // 스케줄 추가
         } else {
             System.out.println("유효하지 않은 인덱스입니다.");
         }

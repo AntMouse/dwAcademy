@@ -1,4 +1,4 @@
-package chap8_classes_objects_enums;
+package test_package;
 
 public class Chap8DateDelete {
 	// 각 공룡 추가 메서드 통합 관리

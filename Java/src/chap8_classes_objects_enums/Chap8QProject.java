@@ -232,7 +232,7 @@ public class Chap8QProject {
 			break;
 			
 		case 2:
-			System.out.print("조회할 직원의 관리 번호를 입력하세요 : ");
+			System.out.print("조회할 직원의 관리 번호를 입력하세요(전체 직원 조회는 -1) : ");
 			int printEmployeeInfo = scanner.nextInt();
 			scanner.nextLine();
 			parkTotalManagement.printEmployeeInfo(printEmployeeInfo);
@@ -276,15 +276,15 @@ public class Chap8QProject {
 					changeEmployeeScheduleIndex = Integer.parseInt(changeEmployeeScheduleNumber);
 				}
 				
-				System.out.print("수정할 스케줄 내용을 입력하세요 : ");
+				System.out.print("수정할 스케줄 내용을 입력하세요 (수정하지 않으려면 엔터를 누르세요) : ");		
 				String changeEmployeeSchedule = scanner.nextLine();
 				if (changeEmployeeSchedule.isEmpty()) {
 					break;
 				}
-				parkTotalManagement.changeEmployeeSchedule(changeEmployeeIndex, changeEmployeeIndex, changeEmployeeSchedule);
+				parkTotalManagement.changeEmployeeSchedule(changeEmployeeIndex, changeEmployeeScheduleIndex, changeEmployeeSchedule);
 			}    	
 			parkTotalManagement.allChangeEmployee(changeEmployeeIndex, changeEmployeeName, changeEmployeeJobTitle, changeEmployeeYearsOfExperience);
-			 System.out.println("내용이 성공적으로 반영되었습니다.");
+			System.out.println("내용이 성공적으로 반영되었습니다.");
 			break;
 		default:
 			scanner.nextLine();
@@ -304,6 +304,12 @@ public class Chap8QProject {
 			int newParkTicketIndex = scanner.nextInt();
 			scanner.nextLine();
 			
+			// 인덱스 유효범위 검사
+			boolean checkTicketIndex = parkTotalManagement.checkTicketIndex("add", newParkTicketIndex);	
+			if (!checkTicketIndex) {
+				break;
+			}
+			
 			System.out.print("추가할 티켓의 가격을 입력하세요 : ");
 			int newParkTicketPrice = scanner.nextInt();
 			scanner.nextLine();
@@ -319,7 +325,7 @@ public class Chap8QProject {
 			break;
 			
 		case 2:
-			System.out.print("조회할 티켓의 관리 번호를 입력하세요 : ");
+			System.out.print("조회할 티켓의 관리 번호를 입력하세요(전체 티켓 조회는 -1) : ");
 			int printParkTicketInfo = scanner.nextInt();
 			scanner.nextLine();
 			parkTotalManagement.printParkTicketInfo(printParkTicketInfo);
@@ -336,6 +342,13 @@ public class Chap8QProject {
 			System.out.print("정보를 수정할 티켓의 관리 번호를 입력하세요 : ");
 			int changeParkTicketIndex = scanner.nextInt();
 			scanner.nextLine();
+			
+			// 인덱스 유효범위 검사
+			// checkTicketIndex 변수는 case 1에서 boolean으로 변수를 선언했다
+			checkTicketIndex = parkTotalManagement.checkTicketIndex("change", changeParkTicketIndex);	
+			if (!checkTicketIndex) {
+				break;
+			}
 			
 			System.out.print("티켓 가격 수정 (수정하지 않으려면 엔터를 누르세요): ");
 		    String changeParkTicketPrice = scanner.nextLine();
