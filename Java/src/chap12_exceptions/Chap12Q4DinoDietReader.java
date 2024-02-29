@@ -14,7 +14,7 @@ public class Chap12Q4DinoDietReader {
                 System.out.println(line);
             }
         } catch (IOException e) {
-            System.out.println("데이터를 읽어오는 중 에러가 발생했습니다: " + e.getMessage());
+            System.err.println("데이터를 읽어오는 중 에러가 발생했습니다: " + e.getMessage());
         }
     }
 

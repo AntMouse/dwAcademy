@@ -13,13 +13,12 @@ public class Chap12Q2DinosaurUpdater {
 		Chap12Q2DinosaurUpdater updater = new Chap12Q2DinosaurUpdater();
 		Chap12QS1Dinosaur dino = new Chap12QS1Dinosaur();
         double newWeight = -100; // 유효하지 않은 체중
-        
+
         try {
             updater.updateDinosaurWeight(newWeight, dino);
         } catch (IllegalArgumentException e) {
             System.out.println("체중 업데이트 중 오류 발생: " + e.getMessage());
         }
-
 	}
 
 }

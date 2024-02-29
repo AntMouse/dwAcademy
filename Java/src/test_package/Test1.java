@@ -1,68 +1,29 @@
 package test_package;
 
-import java.util.HashMap;
+interface A1 {
+	public abstract void abc();
+}
 
-class A {
-	String name;
-	A(String name) {
-		this.name = name;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this.name == ((A)obj).name) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	@Override
-	public String toString() {
-		return name;
+class B1 implements A1 {
+	public void abc() {
+		System.out.println("입력매개변수 전달");
 	}
 }
-class B {
-	String name;
-	B(String name) {
-		this.name = name;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this.name == ((B)obj).name) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	@Override
-	public int hashCode() {
-		return name.hashCode();
-	}
-	@Override
-	public String toString() {
-		return name;
+
+class C1 {
+	void cde(A1 a) {
+		a.abc();
 	}
 }
 
 public class Test1 {
 
 	public static void main(String[] args) {
-		HashMap<Integer, String> hm1 = new HashMap<>();
-		hm1.put(1, "데이터1");
-		hm1.put(1, "데이터2");
-		hm1.put(2, "데이터3");
-		System.out.println(hm1);
-		
-		HashMap<A, String> hm2 = new HashMap<>();
-		hm2.put(new A("첫 번째"), "데이터1");
-		hm2.put(new A("첫 번째"), "데이터2");
-		hm2.put(new A("두 번째"), "데이터3");
-		System.out.println(hm2);
-		
-		HashMap<B, String> hm3 = new HashMap<>();
-		hm3.put(new B("첫 번째"), "데이터1");
-		hm3.put(new B("첫 번째"), "데이터2");
-		hm3.put(new B("두 번째"), "데이터3");
-		System.out.println(hm3);
+		C1 c = new C1();
+		A1 a = new B1();
+		c.cde(a);
+		c.cde(new B1());
+
 	}
 
 }
