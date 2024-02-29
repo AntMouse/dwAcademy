@@ -1,4 +1,4 @@
-package m2_02_21;
+package chap9_inheritance_polymorphism;
 
 import java.util.Scanner;
 

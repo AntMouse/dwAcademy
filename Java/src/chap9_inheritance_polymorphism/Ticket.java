@@ -1,4 +1,4 @@
-package m2_02_21;
+package chap9_inheritance_polymorphism;
 
 // 정규권 티켓 클래스
 public class Ticket {

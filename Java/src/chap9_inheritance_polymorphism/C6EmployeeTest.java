@@ -13,7 +13,7 @@ class Employee {
 	}
 }
 
-class Manager extends Chap9Q2Employee {
+class Manager extends Employee {
 	private String deptName;
 	Manager(int empld, String name, String deptName) {
 		super(empld, name);
@@ -40,7 +40,7 @@ class Director extends Manager {
 public class C6EmployeeTest {
 
 	public static void main(String[] args) {
-		Chap9Q2Employee emplDir = new Director(754, "Joe Bloggs", "Marketing", 10_1000.00);
+		Employee emplDir = new Director(754, "Joe Bloggs", "Marketing", 10_1000.00);
 		System.out.println(emplDir);
 
 	}

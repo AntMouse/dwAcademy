@@ -104,7 +104,7 @@ public class Chap9Q2Employee {
         if (obj == null || this.getClass() != obj.getClass()) { 
         	return false;
         }
-        Employee other = (Employee) obj;
+        Chap9Q2Employee other = (Chap9Q2Employee) obj;
         return Objects.equals(name, other.name) &&
         	   empld == other.empld &&
         	   Objects.equals(schedules, other.schedules);
