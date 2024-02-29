@@ -2,7 +2,7 @@ package chap8_classes_objects_enums;
 
 import java.util.Scanner;
 
-public class Chap8Q4ParkManagement {
+public class Copy {
 	private Chap8Q1Dinosaur[] dino = new Chap8Q1Dinosaur[999];	
 
 	// 0. 스캐너
@@ -33,7 +33,7 @@ public class Chap8Q4ParkManagement {
 		if (0 <= index && index < dino.length) {
 			// if를 2번 써야 무조건 아래 메시지가 출력 되는 걸 방지할 수 있다 and 조건 쓰기 힘듦
             if (!isRegistered(index, dino) && addAndChange.equals("add")) {
-                System.out.println("해당 인덱스에는 이미 등록된 공룡이 있습니다.");
+                System.out.println("해당 인덱스에는 이미 공룡이 등록되어 있습니다.");
                 return false;
             } else if (isRegistered(index, dino) && addAndChange.equals("change")) {
                 System.out.println("해당 인덱스에는 등록된 공룡이 없습니다.");
@@ -45,23 +45,6 @@ public class Chap8Q4ParkManagement {
 		}
 		return true;
     }
-    // 0-3-4. 처음 인덱스 입력했을 때 추가일 경우(공룡)
-    public boolean checkEmployeeIndex(String addAndChange, int index) {
-		if (0 <= index && index < employee.length) {
-			// if를 2번 써야 무조건 아래 메시지가 출력 되는 걸 방지할 수 있다 and 조건 쓰기 힘듦
-            if (!isRegistered(index, employee) && addAndChange.equals("add")) {
-                System.out.println("해당 인덱스에는 이미 직원이 등록되어 있습니다.");
-                return false;
-            } else if (isRegistered(index, employee) && addAndChange.equals("change")) {
-                System.out.println("해당 인덱스에는 등록된 직원이 없습니다.");
-                return false;
-			}
-		} else {
-			indexErrorMessage(); // 유효하지 않은 인덱스
-			return false;
-		}
-		return true;
-    }   
 	// 1-1. 공룡 정보 추가
     // 각 공룡 추가 메서드 통합 관리
     public void addDinosaur(int index, String dinoName, int dinoAge, String dinoSpecies, String dinoStatus) {
@@ -135,20 +118,25 @@ public class Chap8Q4ParkManagement {
 
 	
 	private Chap8Q2Employee[] employee = new Chap8Q2Employee[999];
-	// 2-1-1. 직원 기본 정보 추가
-	public void addEmployee(int index, String employeeName, String employeeJobTitle, int employeeYearsOfExperience) {
+	// 2-1. 직원 정보 추가
+	public void employeeAdd(int index, String employeeName, String employeeJobTitle, int employeeYearsOfExperience, String...schedules) {
 		if (0 <= index && index < employee.length) {
 			if (isRegistered(index, employee)) {
-				employee[index] = new Chap8Q2Employee(employeeName, employeeJobTitle, employeeYearsOfExperience);
+				employee[index] = new Chap8Q2Employee(employeeName, employeeJobTitle, employeeYearsOfExperience, schedules);
 			} else {
-				indexErrorMessage();
-			}
-		}
+				int findEmptyIndex = findEmptyIndex(employee); // 비어있는 공간 있는지 체크
+                if (findEmptyIndex != -1) {
+                	System.out.println("해당 인덱스에는 이미 직원이 등록되어 있습니다.");
+                	System.out.println(findEmptyIndex + " 번은 비어있으니 직원을 등록하려면 " + 
+                	findEmptyIndex + " 번에 등록해주세요.");
+				} else {
+					System.out.println("현재 빈 저장 공간이 없어서 더 이상 직원을 등록할 수 없습니다.");
+				}			
+			}            
+		} else {
+        	indexErrorMessage();
+        }
 	}
-	// 2-1-2. 직원 스케줄 정보 추가
-	public void addEmployeeSchedule(int index, String schedule) {
-    	employee[index].addSchedule(schedule);
-    }
 	// 2-2. 직원 정보 보기
 	public void printEmployeeInfo(int index) {
 		if (0 <= index && index < employee.length && employee[index] != null) {
@@ -156,7 +144,7 @@ public class Chap8Q4ParkManagement {
             System.out.println("이름 : " + employee[index].getEmployeeName());
             System.out.println("직무 : " + employee[index].getEmployeeJobTitle());
             System.out.println("경력 : " + employee[index].getEmployeeYearsOfExperience() + "년");
-            employee[index].printAllSchedules();
+            System.out.println(employee[index].getEmployeeSchedule());
         } else {
             System.out.println("유효하지 않은 인덱스이거나 추가된 직원이 없습니다.");
         }
@@ -171,7 +159,7 @@ public class Chap8Q4ParkManagement {
         }
     }	
 	// 1-4. 직원 정보 수정	
-	public void allChangeEmployee(int index, String newEmployeeName, String newEmployeeJobTitle, String newEmployeeYearsOfExperience) {
+	public void allChangeEmployee(int index, String newEmployeeName, String newEmployeeJobTitle, String newEmployeeYearsOfExperience, String...schedules) {
 	    if (0 <= index && index < employee.length && employee[index] != null) {    	
 	        // 입력된 값이 비어있지 않으면 새 값으로 수정, 비어있으면 기존 값으로 유지
 	        if (!newEmployeeName.isEmpty()) {
@@ -184,15 +172,16 @@ public class Chap8Q4ParkManagement {
 	        	int changeEmployeeYearsOfExperience = Integer.parseInt(newEmployeeYearsOfExperience);
 	        	employee[index].changeEmployeeYearsOfExperience(changeEmployeeYearsOfExperience);
 	        }
+	        System.out.println("직원 정보가 성공적으로 수정되었습니다.");
 	    } else {
 	    	findValueIndexErrorMessage("직원");
 	    }
 	}	
     public void getEmployeeSchedule(int index) {
-    	employee[index].printAllSchedules();
+    	employee[index].getEmployeeSchedule();
     }
-    public void changeEmployeeSchedule(int index, int turn, String newSchedule) {
-    	employee[index].changeSchedule(turn, newSchedule);
+    public void changeEmployeeSchedule(int index, int turn, String task) {
+    	employee[index].changeEmployeeSchedule(turn, task);
     }
 
     

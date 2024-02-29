@@ -17,6 +17,7 @@ class C3 implements A3.B3 {
 public class Test3 {
 
 	public static void main(String[] args) {
+		// A3.B3 ab3 = new C3();
 		C3 c = new C3();
 		c.bcd();
 		A3.B3 ab1 = new A3.B3() {		

@@ -2,7 +2,7 @@ package chap8_classes_objects_enums;
 
 import java.util.Scanner; 
 
-public class Chap8QProject {
+public class Copy2 {
 	Scanner scanner = new Scanner(System.in);
 
 	// 공룡, 종업원 관리 양식 불러오기
@@ -17,11 +17,11 @@ public class Chap8QProject {
 		parkTotalManagement.addDinosaur(4, "둘째타르보", 10, "타르보사우루스", "주의");
 		
 		// 직원 초기값
-		parkTotalManagement.addEmployee(0, "Kim", "사육장 관리자", 5);
-		parkTotalManagement.addEmployee(1, "John", "파크 안내인", 7);
-		parkTotalManagement.addEmployee(2, "Tom", "경비원", 2);
-		parkTotalManagement.addEmployee(3, "Smith", "영양 관리사", 12);
-		parkTotalManagement.addEmployee(4, "Dan", "사육장 관리자", 17);
+		parkTotalManagement.employeeAdd(0, "Kim", "사육장 관리자", 5);
+		parkTotalManagement.employeeAdd(1, "John", "파크 안내인", 7);
+		parkTotalManagement.employeeAdd(2, "Tom", "경비원", 2);
+		parkTotalManagement.employeeAdd(3, "Smith", "영양 관리사", 12);
+		parkTotalManagement.employeeAdd(4, "Dan", "사육장 관리자", 17);
 		
 		// 티켓 초기값				
 		parkTotalManagement.addParkTicket(0, 20000, "이재일", 20240219);				
@@ -34,7 +34,7 @@ public class Chap8QProject {
 	boolean mainMenu = false;
 
 	public static void main(String[] args) {	
-		Chap8QProject main = new Chap8QProject();
+		Copy2 main = new Copy2();
 		main.initialValue(); // 초기값 설정
 		main.start();
 	}
@@ -202,12 +202,6 @@ public class Chap8QProject {
 			int newEmployeeIndex = scanner.nextInt();
 			scanner.nextLine();
 			
-			// 인덱스 유효범위 검사
-			boolean checkEmployeeIndex = parkTotalManagement.checkEmployeeIndex("add", newEmployeeIndex);	
-			if (!checkEmployeeIndex) {
-				break;
-			}
-			
 			System.out.print("추가할 직원의 이름을 입력하세요 : ");
 			String newEmployeeName = scanner.nextLine();
 			
@@ -218,17 +212,16 @@ public class Chap8QProject {
 			int newEmployeeYearsOfExperience = scanner.nextInt();
 			scanner.nextLine();
 			
-			parkTotalManagement.addEmployee(newEmployeeIndex, newEmployeeName, newEmployeeJobTitle, newEmployeeYearsOfExperience);
-			
 			while (true) {
 				System.out.print("직원의 스케줄을 입력하세요 (스케줄을 입력하지 않을 거면 엔터를 입력) : ");
 				String newEmployeeSchedule = scanner.nextLine();
 				if (newEmployeeSchedule.isEmpty()) {
 					break;
 				}
-				parkTotalManagement.addEmployeeSchedule(newEmployeeIndex, newEmployeeSchedule);
-			}	
-			System.out.println("직원 정보가 추가되었습니다.");
+				parkTotalManagement.changeEmployeeSchedule(newEmployeeIndex, newEmployeeIndex, newEmployeeSchedule);
+			}
+			parkTotalManagement.employeeAdd(newEmployeeIndex, newEmployeeName, newEmployeeJobTitle, newEmployeeYearsOfExperience);
+			
 			break;
 			
 		case 2:
@@ -250,13 +243,6 @@ public class Chap8QProject {
 			int changeEmployeeIndex = scanner.nextInt();
 			scanner.nextLine();
 			
-			// 인덱스 유효범위 검사
-			// checkEmployeeIndex 변수는 case 2에서 boolean으로 변수를 선언했다
-			checkEmployeeIndex = parkTotalManagement.checkEmployeeIndex("change", changeEmployeeIndex);	
-			if (!checkEmployeeIndex) {
-				break;
-			}
-			
 			System.out.print("직원 이름 수정 (수정하지 않으려면 엔터를 누르세요): ");
 		    String changeEmployeeName = scanner.nextLine();
 		    
@@ -265,26 +251,17 @@ public class Chap8QProject {
 
 		    System.out.print("직원 경력 수정 (수정하지 않으려면 엔터를 누르세요): ");
 		    String changeEmployeeYearsOfExperience = scanner.nextLine();
-		    		    
+		    
+			parkTotalManagement.allChangeEmployee(changeEmployeeIndex, changeEmployeeName, changeEmployeeJobTitle, changeEmployeeYearsOfExperience);
+		    
 			while (true) {
-				int changeEmployeeScheduleIndex = 0;
-				System.out.print("수정할 스케줄 번호를 입력하세요 (수정하지 않으려면 엔터를 누르세요) : ");
-				String changeEmployeeScheduleNumber = scanner.nextLine();
-				if (changeEmployeeScheduleNumber.isEmpty()) {
-					break;
-				} else {
-					changeEmployeeScheduleIndex = Integer.parseInt(changeEmployeeScheduleNumber);
-				}
-				
-				System.out.print("수정할 스케줄 내용을 입력하세요 : ");
+				System.out.print("직원의 스케줄 수정 (수정하지 않으려면 엔터를 누르세요) : ");
 				String changeEmployeeSchedule = scanner.nextLine();
-				if (changeEmployeeSchedule.isEmpty()) {
+				if (!changeEmployeeSchedule.isEmpty()) {
 					break;
 				}
 				parkTotalManagement.changeEmployeeSchedule(changeEmployeeIndex, changeEmployeeIndex, changeEmployeeSchedule);
-			}    	
-			parkTotalManagement.allChangeEmployee(changeEmployeeIndex, changeEmployeeName, changeEmployeeJobTitle, changeEmployeeYearsOfExperience);
-			 System.out.println("내용이 성공적으로 반영되었습니다.");
+			}    	    						
 			break;
 		default:
 			scanner.nextLine();
