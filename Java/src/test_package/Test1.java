@@ -1,29 +1,44 @@
 package test_package;
 
-interface A1 {
-	public abstract void abc();
-}
+import java.util.Arrays;
 
-class B1 implements A1 {
-	public void abc() {
-		System.out.println("입력매개변수 전달");
-	}
-}
+final class Example {
+    private final int[] numbers;
 
-class C1 {
-	void cde(A1 a) {
-		a.abc();
-	}
+    private Example(final int[] numbers) {
+        this.numbers = Arrays.copyOf(numbers, numbers.length);
+    }
+
+    public static Example createNewInstance(int[] numbers) {
+        return new Example(numbers);
+    }
+
+    public int[] getNumbers() {
+        return Arrays.copyOf(numbers, numbers.length);
+    }
+
+    @Override
+    public String toString() {
+        return "Example{" +
+                "numbers=" + Arrays.toString(numbers) +
+                '}';
+    }
 }
 
 public class Test1 {
 
 	public static void main(String[] args) {
-		C1 c = new C1();
-		A1 a = new B1();
-		c.cde(a);
-		c.cde(new B1());
+        int[] numbers = {1, 2, 3, 4, 5};
 
-	}
+        Example example = Example.createNewInstance(numbers);
+        System.out.println("Created: " + example);
 
+        int[] retrievedNumbers = example.getNumbers();
+        System.out.println("Retrieved: " + Arrays.toString(retrievedNumbers));
+
+        numbers[0] = 100;
+        System.out.println("Any change?: " + example);
+        System.out.println("Original numbers: " + Arrays.toString(numbers));
+        System.out.println("Original numbers: " + Arrays.toString(retrievedNumbers));
+    }
 }
