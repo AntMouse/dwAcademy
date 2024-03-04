@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Test7_8_Q7 {
+public class Chap7QProject {
 	
 	int mamaximumGuestAmount = 5000;
 	int currentGuestAmount = 4000;
@@ -25,7 +25,7 @@ public class Test7_8_Q7 {
 	boolean mainMenu = false;
 	
 	public static void main(String[] args) {
-		Test7_8_Q7 main = new Test7_8_Q7();
+		Chap7QProject main = new Chap7QProject();
 		main.start();
 	}
 	
