@@ -1,0 +1,38 @@
+    public void addDinosaur() {
+        System.out.println("새로운 공룡을 추가합니다.");
+
+        System.out.print("이름: ");
+        String name = scanner.nextLine();
+
+        System.out.print("종: ");
+        String species = scanner.nextLine();
+
+        System.out.print("건강 상태: ");
+        String healthStatus = scanner.nextLine();
+
+        Chap13QProject1Dinosaur newDinosaur = new Chap13QProject1Dinosaur(name, species, healthStatus);
+        dinosaurs.add(newDinosaur);
+        System.out.println(name + "이(가) 추가되었습니다.");
+    }
+
+    public void logActivity() {
+        System.out.println("활동을 기록합니다.");
+
+        System.out.print("활동 이름: ");
+        String activityName = scanner.nextLine();
+
+        // 공룡 선택
+        System.out.println("활동에 참여한 공룡의 번호를 선택하세요:");
+        for (int i = 0; i < dinosaurs.size(); i++) {
+            System.out.println((i + 1) + ". " + dinosaurs.get(i).getName());
+        }
+        int dinoIndex = scanner.nextInt();
+        scanner.nextLine(); // 버퍼 비우기
+
+        Chap13QProject1Dinosaur selectedDinosaur = dinosaurs.get(dinoIndex - 1);
+
+        Chap13QProject2Activity activity = new Chap13QProject2Activity(activityName, LocalDate.now(), selectedDinosaur);
+        activities.add(activity);
+
+        System.out.println(activityName + "이(가) 기록되었습니다.");
+    }
