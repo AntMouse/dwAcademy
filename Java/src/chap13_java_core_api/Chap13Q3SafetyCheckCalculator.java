@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 public class Chap13Q3SafetyCheckCalculator {
 	
     // 다음 안전 점검까지의 일수를 계산하는 메서드
-    public static long calculateDaysUntilNextSafetyCheck(LocalDate lastSafetyCheckDate, LocalDate currentDate) {
+    public static long calculateDaysUntilNextSafetyCheck(LocalDate currentDate, LocalDate lastSafetyCheckDate) {
         // 다음 안전 점검 날짜 계산
         LocalDate nextSafetyCheckDate = lastSafetyCheckDate.plusDays(45);
 
@@ -15,9 +15,13 @@ public class Chap13Q3SafetyCheckCalculator {
 
         // 결과 출력
         if (daysUntilNextSafetyCheck > 45) {
-            System.out.println("지난 번 안전 점검을 하지 않았습니다.");
-        } else {
+            System.out.println("잘못된 값입니다.");
+        } else if (daysUntilNextSafetyCheck == 0) {
+            System.out.println("오늘은 안전 점검을 하는 날입니다.");
+        } else if (1 <= daysUntilNextSafetyCheck && daysUntilNextSafetyCheck <= 45) {
             System.out.println("다음 안전 점검까지 남은 일수: " + daysUntilNextSafetyCheck + "일");
+        } else {
+        	System.out.println("지난 번 안전 점검을 하지 않았습니다.");
         }
         
         return daysUntilNextSafetyCheck;
@@ -29,11 +33,11 @@ public class Chap13Q3SafetyCheckCalculator {
         // 현재 날짜
         LocalDate currentDate = LocalDate.now();
         // 임의의 날짜를 설정
-        LocalDate customDate = LocalDate.of(2024, 01, 21);
+        LocalDate customDate = LocalDate.of(2024, 03, 4);
 
         
         // 다음 안전 점검까지의 기간 계산
-        long daysUntilNextSafetyCheck = calculateDaysUntilNextSafetyCheck(lastSafetyCheckDate, customDate);
+        long daysUntilNextSafetyCheck = calculateDaysUntilNextSafetyCheck(customDate, lastSafetyCheckDate);
     }
 
 }
