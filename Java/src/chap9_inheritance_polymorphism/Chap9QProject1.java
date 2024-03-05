@@ -2,8 +2,6 @@ package chap9_inheritance_polymorphism;
 
 import java.util.Scanner;
 
-import m2_02_16.copy.Test8_Q8_Ticket;
-
 public class Chap9QProject1 {
 	// 0. 스캐너
 	Scanner scanner = new Scanner(System.in);
@@ -29,7 +27,7 @@ public class Chap9QProject1 {
         return obj[index] == null; // 등록이 되어 있지 않아서 비어 있으면 true 반환
     }   
     // 0-3-3. 공통 메서드
-    private boolean checkIndex(String addAndChange, Object[] array, int index, String objectType) {
+    private boolean checkObjectIndex(String addAndChange, Object[] array, int index, String objectType) {
         if (0 <= index && index < array.length) {
             // if를 2번 써야 무조건 아래 메시지가 출력 되는 걸 방지할 수 있다 and 조건 쓰기 힘듦
             if (!isRegistered(index, array) && addAndChange.equals("add")) {
@@ -44,6 +42,16 @@ public class Chap9QProject1 {
             return false;
         }
         return true;
+    } 
+    // 0-3-4. 메서드 호출 시
+    public boolean checkDinoIndex(String addAndChange, int index) {
+        return checkObjectIndex(addAndChange, dino, index, "공룡");
+    }
+    public boolean checkEmployeeIndex(String addAndChange, int index) {
+        return checkObjectIndex(addAndChange, employee, index, "직원");
+    }
+    public boolean checkTicketIndex(String addAndChange, int index) {
+        return checkObjectIndex(addAndChange, ticket, index, "티켓");
     }
 
 	// 1-1. 공룡 관리
@@ -52,55 +60,27 @@ public class Chap9QProject1 {
     // 각 공룡 추가 메서드 통합 관리
     public void addDinosaur(int index, String size, String diet, Chap9Q1Dinosaur dinosaur) {
         if (0 <= index && index < dino.length) {
-            if (isDinosaurRegistered(index)) {
+            if (isRegistered(index, dino)) {
                 dino[index] = dinosaur;
             } else {
-                int findEmptyIndex = findEmptyIndex(); // 비어있는 공간 있는지 체크
-                if (findEmptyIndex != -1) {
-                	System.out.println("해당 인덱스에는 이미 공룡이 등록되어 있습니다.");
-                	System.out.println(findEmptyIndex + " 번은 비어있으니 공룡을 등록하려면 " + 
-                	findEmptyIndex + " 번에 등록해주세요.");
-				} else {
-					System.out.println("현재 빈 저장 공간이 없어서 더 이상 공룡을 등록할 수 없습니다.");
-				}
+            	indexErrorMessage();
             }
-        } else {
-            indexErrorMessage();
         }
     }
 
-    // 익룡 추가
+    // 1-2-1. 익룡 추가
     public void addFlyingDinosaur(int index, String size, String diet, int wingspan) {
         addDinosaur(index, size, diet, new FlyingDinosaur(size, diet, wingspan));
     }
-    // 어룡 추가
+    // 1-2-2. 어룡 추가
     public void addAquaticDinosaur(int index, String size, String diet, int swimSpeed) {
         addDinosaur(index, size, diet, new AquaticDinosaur(size, diet, swimSpeed));
     }
-    // 육상 공룡 추가
+    // 1-2-3. 육상 공룡 추가
     public void addWalkingDinosaur(int index, String size, String diet, int walkingSpeed) {
         addDinosaur(index, size, diet, new WalkingDinosaur(size, diet, walkingSpeed));
-    }	
-    
-    // 인덱스 유효범위 검사
-    public boolean checkDinoIndex(String addAndChange, int index) {
-		if (0 <= index && index < dino.length) {
-			// if를 2번 써야 무조건 아래 메시지가 출력 되는 걸 방지할 수 있다 and 조건 쓰기 힘듦
-            if (!isDinosaurRegistered(index) && addAndChange.equals("add")) {
-                System.out.println("해당 인덱스에는 이미 공룡이 등록되어 있습니다.");
-                return false;
-            } else if (isDinosaurRegistered(index) && addAndChange.equals("change")) {
-                System.out.println("해당 인덱스에는 등록된 공룡이 없습니다.");
-                return false;
-			}
-		} else {
-			indexErrorMessage(); // 유효하지 않은 인덱스
-			return false;
-		}
-		return true;
-    }
-    
-    // 공룡 정보 출력
+    }	       
+    // 1-3-1. 공룡 정보 출력
     public void printDinoInfo(int index) {
         if (index == -1) {
             for (int i = 0; i < dino.length; i++) {
@@ -111,11 +91,10 @@ public class Chap9QProject1 {
         } else if (0 <= index && index < dino.length && dino[index] != null) {
             printSingleDinoInfo(index);
         } else {
-            indexErrorMessageTypePlus(dinosaurMethodInputName);
+        	typeErrorMessage("공룡");
         }
     }
-
-    // 단일 공룡 정보 출력
+    // 1-3-2. 단일 공룡 정보 출력
     private void printSingleDinoInfo(int index) {
         System.out.println("공룡 번호 : " + index);
         System.out.println("크기 : " + dino[index].getSize());
@@ -135,57 +114,25 @@ public class Chap9QProject1 {
         }
         System.out.println("==================================");
     }
-    
-    // 공룡 정보 제거하기
+    // 1-4. 공룡 정보 제거하기
     public void removeDino(int index) {
         if (0 <= index && index < dino.length && dino[index] != null) {
             System.out.println(dino[index].getSize() + " 크기의 " + dino[index].getClass().getSimpleName() + "을(를) 공룡 목록에서 제거합니다.");
             dino[index] = null;
         } else {
-            System.out.println("유효하지 않은 인덱스이거나 제거할 공룡이 없습니다.");
+        	typeErrorMessage("공룡");
         }
-    }
-    
-    // 등록된 공룡 숫자 확인
-    public int dinoAmountCheck() {
-        int dinoAmount = 0;
-        for (int i = 0; i < dino.length; i++) {
-            if (dino[i] != null) {
-                dinoAmount++;
-            }
-        }
-        return dinoAmount;
-    }
-    
-    // 공룡 종류 알려주기
-    public String getDinosaurType(int index) {
-        if (0 <= index && index < dino.length && dino[index] != null) {
-            if (dino[index] instanceof FlyingDinosaur) {
-                return "익룡";
-            } else if (dino[index] instanceof AquaticDinosaur) {
-                return "어룡";
-            } else if (dino[index] instanceof WalkingDinosaur) {
-                return "육상 공룡";
-            } else {
-                return "알 수 없는 종류";
-            }
-        } else {
-            return "유효하지 않은 인덱스이거나 추가된 공룡이 없습니다.";
-        }
-    }
-    
-    // 공룡 타입 입력값 인식, 범위에 없는 값 입력하면 다시 반복
-    public String getDinoType(String operation) {
+    }   
+    // 1-5. 공룡 타입 입력값 인식, 범위에 없는 값 입력하면 다시 반복
+    public String setDinoType(String operation) {
         while (true) {
             String dinoType;
             if (operation.equals("add")) {
                 System.out.print("공룡의 타입(익룡/어룡/육상공룡)을 입력하세요 : ");
             } else if (operation.equals("change")) {
                 System.out.print("공룡 타입(익룡/어룡/육상공룡) 수정 (수정하지 않으려면 엔터를 누르세요): ");
-            } else {
-                System.out.println("잘못된 작업입니다. 다시 입력해주세요.");
-                return "";
-            }
+            } 
+            
             dinoType = scanner.nextLine();    
             if (dinoType.equals("익룡") || dinoType.equals("어룡") || 
                 dinoType.equals("육상공룡")) {
@@ -196,9 +143,24 @@ public class Chap9QProject1 {
                 System.out.println("잘못된 값입니다. 다시 입력해주세요.");
             }
         }
+    }   
+    // 1-6. 공룡 종류 알려주기
+    public String getDinoType(int index) {
+        if (0 <= index && index < dino.length && dino[index] != null) {
+            if (dino[index] instanceof FlyingDinosaur) {
+                return "익룡";
+            } else if (dino[index] instanceof AquaticDinosaur) {
+                return "어룡";
+            } else if (dino[index] instanceof WalkingDinosaur) {
+                return "육상공룡";
+            } else {
+                return "알 수 없는 종류";
+            }
+        } else {
+            return "유효하지 않은 인덱스이거나 추가된 공룡이 없습니다.";
+        }
     }
-    
-    // 공룡 정보 수정하기
+    // 1-7. 공룡 정보 수정하기
     public void allChangeDino(int index, String size, String diet, String type, int value) {  
         if (0 <= index && index < dino.length && dino[index] != null) { 
         	// 기존 공룡값 가져오기
@@ -254,8 +216,7 @@ public class Chap9QProject1 {
             System.out.println("유효하지 않은 인덱스이거나 수정할 공룡이 없습니다.");
         }
     }
-  
-    // 공룡 타입 고유값 수정
+    // 1-8. 공룡 타입 고유값 수정
     public int changeDinoTypeValue(String changeDinoTypeValue) {
     	String[][] dinoTypeMessage = {
     			{"익룡", "어룡", "육상공룡"},

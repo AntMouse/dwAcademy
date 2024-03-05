@@ -3,13 +3,13 @@ package chap9_inheritance_polymorphism;
 import java.util.Iterator;
 import java.util.Scanner; 
 
-public class Chap9QProject2 {
+public class Chap9QProject2Copy {
 	Scanner scanner = new Scanner(System.in);
 	boolean mainMenu = false;
 	private Chap9QProject1 parkAdministration = new Chap9QProject1();
 
 	public static void main(String[] args) {
-		Chap9QProject2 main = new Chap9QProject2();
+		Chap9QProject2Copy main = new Chap9QProject2Copy();
 		main.initialValue(); // 초기값 설정
 		main.start();
 
