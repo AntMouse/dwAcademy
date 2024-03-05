@@ -67,53 +67,51 @@ public class Chap13QProject3DinosaurCareSystem {
         }
 
         // 공룡 선택
+        LocalDate date;
         while (true) {
-        	LocalDate date;
-        	while (true) {
-                System.out.println("날짜를 선택하세요:");
-                System.out.println("1. 오늘 날짜");
-                System.out.println("2. 임의의 날짜");
-                if (scanner.hasNextInt()) {
-                    int choice = scanner.nextInt();
-                    scanner.nextLine(); // consume newline
-                    
-                    if (choice == 1) {
-                        date = LocalDate.now();
-                        break;
-                    } else if (choice == 2) {
-                        date = getDateFromUser();
-                        break;
-                    } else {
-                        System.out.println("올바른 선택이 아닙니다. 다시 선택하세요.");
-                    }
-                } else {
-                    System.out.println("숫자를 입력하세요.");
-                    scanner.nextLine(); // 입력 버퍼 비우기
-                }   	
-			}
-
-            System.out.println("활동에 참여한 공룡의 번호를 선택하세요:");
-            for (int i = 0; i < dinosaurs.size(); i++) {
-                System.out.println((i + 1) + ". " + dinosaurs.get(i).getName());
-            }
+        	System.out.println("날짜를 선택하세요:");
+            System.out.println("1. 오늘 날짜");
+            System.out.println("2. 임의의 날짜");
             if (scanner.hasNextInt()) {
-                int dinoIndex = scanner.nextInt();
-                scanner.nextLine(); // 버퍼 비우기
-
-                if (1 <= dinoIndex && dinoIndex <= dinosaurs.size()) {
-                    Chap13QProject1Dinosaur selectedDinosaur = dinosaurs.get(dinoIndex - 1);
-                    Chap13QProject2Activity activity = new Chap13QProject2Activity(activityName, date, selectedDinosaur);
-                    activities.add(activity);
-                    System.out.println(activityName + "이(가) 기록되었습니다.");
-                    break;
-                } else {
-                    System.out.println("유효한 공룡 번호를 입력하세요.");
-                }
+            	int choice = scanner.nextInt();
+            	scanner.nextLine(); // consume newline                   
+            	if (choice == 1) {
+            		date = LocalDate.now();
+            		break;
+            	} else if (choice == 2) {
+            		date = getDateFromUser();
+            		break;
+            	} else {
+            		System.out.println("올바른 선택이 아닙니다. 다시 선택하세요.");
+            	}
             } else {
-                System.out.println("숫자를 입력하세요.");
-                scanner.nextLine(); // 입력 버퍼 비우기
-            }
+            	System.out.println("숫자를 입력하세요.");
+            	scanner.nextLine(); // 입력 버퍼 비우기
+            }   	
         }
+
+        while (true) {
+        	System.out.println("활동에 참여한 공룡의 번호를 선택하세요:");
+        	for (int i = 0; i < dinosaurs.size(); i++) {
+        		System.out.println((i + 1) + ". " + dinosaurs.get(i).getName());
+        	}
+        	if (scanner.hasNextInt()) {
+        		int dinoIndex = scanner.nextInt();
+        		scanner.nextLine(); // 버퍼 비우기
+        		if (1 <= dinoIndex && dinoIndex <= dinosaurs.size()) {
+        			Chap13QProject1Dinosaur selectedDinosaur = dinosaurs.get(dinoIndex - 1);
+        			Chap13QProject2Activity activity = new Chap13QProject2Activity(activityName, date, selectedDinosaur);
+        			activities.add(activity);
+        			System.out.println(activityName + "이(가) 기록되었습니다.");
+        			break;
+        		} else {
+        			System.out.println("유효한 공룡 번호를 입력하세요.");
+        		}
+        	} else {
+        		System.out.println("숫자를 입력하세요.");
+        		scanner.nextLine(); // 입력 버퍼 비우기
+        	}
+        }       
     }
     
     private LocalDate getDateFromUser() {
@@ -155,8 +153,8 @@ public class Chap13QProject3DinosaurCareSystem {
         system.addDinosaur(new Chap13QProject1Dinosaur("브란티", "브란티사우루스", "보통"));
 
         // 몇 가지 활동 기록
-        system.logActivity("급식");
-        system.logActivity("산책");
+        system.logActivity("급식1");
+        system.logActivity("산책1");
 
         // 공룡 목록 가져오기
         List<Chap13QProject1Dinosaur> dinosaurs = system.getDinosaurs();

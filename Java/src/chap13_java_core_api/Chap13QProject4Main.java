@@ -52,6 +52,20 @@ public class Chap13QProject4Main {
                 System.out.println("숫자를 입력하세요.");
                 scanner.nextLine(); // 입력 버퍼 비우기
             }     
+            
+            while (true) {
+				System.out.print("메뉴를 다시 불러오기는 'M', 종료는 'E'를 입력 : ");
+				String menuRestart = scanner.nextLine();
+				if (menuRestart.equalsIgnoreCase("m")) {
+					System.out.println();
+					break;
+				} else if (menuRestart.equalsIgnoreCase("e")) {
+					System.out.print("프로그램을 종료합니다.");
+					return;
+				} else {
+					System.out.println("잘못된 값입니다. 다시 입력해주세요.");
+				}
+			}
         }
 
 	}
@@ -74,11 +88,7 @@ public class Chap13QProject4Main {
     
     private static void removeDinosaurMenu(Chap13QProject3DinosaurCareSystem system, Scanner scanner) {
         System.out.println("제거할 공룡의 번호를 선택하세요:");
-        List<Chap13QProject1Dinosaur> dinosaurs = system.getDinosaurs();
-        for (int i = 0; i < dinosaurs.size(); i++) {
-            Chap13QProject1Dinosaur dinosaur = dinosaurs.get(i);
-            System.out.println((i + 1) + ". 이름: " + dinosaur.getName() + ", 종: " + dinosaur.getSpecies() + ", 건강 상태: " + dinosaur.getHealthStatus());
-        }
+        getDinosaursList(system);
         if (scanner.hasNextInt()) {
             int index = scanner.nextInt();
             scanner.nextLine(); // consume newline
@@ -109,11 +119,7 @@ public class Chap13QProject4Main {
     
     private static void removeActivityMenu(Chap13QProject3DinosaurCareSystem system, Scanner scanner) {
         System.out.println("제거할 활동의 번호를 선택하세요:");
-        List<Chap13QProject2Activity> activities = system.getActivities();
-        for (int i = 0; i < activities.size(); i++) {
-            Chap13QProject2Activity activity = activities.get(i);
-            System.out.println((i + 1) + ". 활동 이름: " + activity.getActivityName() + ", 날짜: " + activity.getDate() + ", 활동한 공룡: " + activity.getDinosaur().getName());
-        }
+        getActivitiesList(system);
         if (scanner.hasNextInt()) {
             int index = scanner.nextInt();
             scanner.nextLine(); // consume newline

@@ -40,7 +40,7 @@ public class Chap9Q2Employee {
 	// 해당 직원 정보 출력
     @Override
     public String toString() {
-        return "name: " + name + ", empld: " + empld + ", schedule: " + this.printSchedule();
+        return "name: " + name + ", empld: " + empld + ", schedule: " + schedules;
     }
     
     @Override
@@ -63,12 +63,12 @@ public class Chap9Q2Employee {
 }
 
 // 공원 매니저 직원 클래스
-class ParkManager extends Employee {
+class ParkManager extends Chap9Q2Employee {
 	private String department; // 소속 부서 속성
 
 	// 생성자
-	public ParkManager(String name, int empld, String department, String...schedules) {
-		super(name, empld, schedules);
+	public ParkManager(String name, int empld, String department) {
+		super(name, empld);
 		this.department = department;
 	}
 
@@ -104,12 +104,12 @@ class ParkManager extends Employee {
 }
 
 // 보안요원 직원 클래스
-class SecurityOfficer extends Employee {
+class SecurityOfficer extends Chap9Q2Employee {
 	private String shift; // 근무 시간대 속성
 
 	// 생성자
-	public SecurityOfficer(String name, int empld, String shift, String...schedules) {
-		super(name, empld, schedules);
+	public SecurityOfficer(String name, int empld, String shift) {
+		super(name, empld);
 		this.shift = shift;
 	}
 
@@ -146,12 +146,12 @@ class SecurityOfficer extends Employee {
 }
 
 // 수의사 직원 클래스
-class Veterinarian extends Employee {
+class Veterinarian extends Chap9Q2Employee {
 	private String specialization; // 전문 분야 속성
 
 	// 생성자
-	public Veterinarian(String name, int empld, String specialization, String...schedules) {
-		super(name, empld, schedules);
+	public Veterinarian(String name, int empld, String specialization) {
+		super(name, empld);
 		this.specialization = specialization;
 	}
 
@@ -189,7 +189,7 @@ class Veterinarian extends Employee {
 
 class App {
     // 종업원이 특정 우리에서 일하는 데 자격이 있는지를 확인하는 메서드
-    public static void checkQualification(Employee employee, int safetyRating) {
+    public static void checkQualification(Chap9Q2Employee employee, int safetyRating) {
         if (employee instanceof ParkManager) {
             ParkManager parkManager = (ParkManager) employee;
             // 매니저의 경우 안전 등급이 2 이상이어야 자격이 있음
