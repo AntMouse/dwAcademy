@@ -51,7 +51,7 @@ public class Chap9Q1Dinosaur {
         if (this == obj) {
         	return true;
         }
-        if (obj == null || this.getClass() != obj.getClass()) { 
+        if (obj == null || !(obj instanceof Chap9Q1Dinosaur)) { 
         	return false;
         }
         Chap9Q1Dinosaur other = (Chap9Q1Dinosaur) obj;

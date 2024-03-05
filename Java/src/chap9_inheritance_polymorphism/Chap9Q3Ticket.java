@@ -1,12 +1,12 @@
 package chap9_inheritance_polymorphism;
 
 // 정규권 티켓 클래스
-public class Ticket {
+public class Chap9Q3Ticket {
 	private String ticketType; // 티켓 종류
 	private int price; // 가격
 
 	// 생성자
-	public Ticket(String ticketType, int price) {
+	public Chap9Q3Ticket(String ticketType, int price) {
 		this.ticketType = ticketType;
 		this.price = price;
 	}
@@ -23,7 +23,7 @@ public class Ticket {
 }
 
 // 계절권 티켓 클래스
-class SeasonTicket extends Ticket {
+class SeasonTicket extends Chap9Q3Ticket {
 	private String startDate; // 시작일
     private String endDate; // 종료일
 

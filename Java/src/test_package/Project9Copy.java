@@ -1,15 +1,15 @@
-package chap9_inheritance_polymorphism;
+package test_package;
 
 import java.util.Iterator;
 import java.util.Scanner; 
 
-public class Project9 {
+public class Project9Copy {
 	Scanner scanner = new Scanner(System.in);
 	boolean mainMenu = false;
-	private ParkAdministration parkAdministration = new ParkAdministration();
+	private Chap9QProject1 parkAdministration = new Chap9QProject1();
 
 	public static void main(String[] args) {
-		Project9 main = new Project9();
+		Project9Copy main = new Project9Copy();
 		main.initialValue(); // 초기값 설정
 		main.start();
 
@@ -196,61 +196,9 @@ public class Project9 {
 		int menuChoice = scanner.nextInt();
 		
 		switch (menuChoice) {
-		case 1: // 1. 직원 정보 추가
-			System.out.print("추가할 직원의 사원 번호를 입력하세요 : ");
-			int newEmployeeIndexCreate = scanner.nextInt();
-			// 해당 사번 중복 체크
-			int employeeIndexOverlapCheck = parkAdministration.getEmployeeIndex(newEmployeeIndexCreate);
-			
-			if (employeeIndexOverlapCheck != -1) {
-				System.out.println("해당 사원 번호는 이미 사용중입니다.");
-				break;
-			}
-			// 사원 번호로 인덱스 만들기(문서 관리 번호)
-			int employeePaperIndexCreate = parkAdministration.createEmployeeIndex(newEmployeeIndexCreate);
-			if (employeePaperIndexCreate == -1) {
-				System.out.println("현재 용량 문제로 더 이상 사원을 추가할 수 없습니다.");
-				System.out.println("담당부서에 문의해주세요.");
-				break;
-			}
-			
-			// 인덱스 유효범위 검사
-			boolean checkEmployeeIndex = parkAdministration.checkEmployeeIndex("add", employeePaperIndexCreate);	
-			if (!checkEmployeeIndex) {
-				break;
-			}
-			
-			System.out.print("추가할 직원의 이름를 입력하세요 : ");
+		case 1:
+			System.out.print("추가할 직원의 이름을 입력하세요 : ");
 			String newEmployeeName = scanner.nextLine();
-			
-	        while (true) {
-	            System.out.print("추가할 스케줄을 입력하세요: ");
-	            String schedule = scanner.nextLine();
-	            newEmployee.addSchedule(schedule);
-
-	            System.out.print("더 추가하시겠습니까? (y/n): ");
-	            String choice = scanner.nextLine();
-	            continueAdding = choice.equalsIgnoreCase("y");
-	        }
-			
-			
-			System.out.print("추가할 직원의 스케줄을 입력하세요 : ");
-			String newEmployeeSchedule = scanner.nextLine();
-			
-			// 공룡 타입 정하기(익룡, 어룡 등)
-			String newDinoType = parkAdministration.getDinoType("add");
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			int employeeIndex;
 			int newEmployeeEmpld;

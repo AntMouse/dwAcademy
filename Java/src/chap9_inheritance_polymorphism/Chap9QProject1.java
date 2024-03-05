@@ -4,43 +4,51 @@ import java.util.Scanner;
 
 import m2_02_16.copy.Test8_Q8_Ticket;
 
-public class ParkAdministration {
-	// 스캐너
+public class Chap9QProject1 {
+	// 0. 스캐너
 	Scanner scanner = new Scanner(System.in);
-	
-	// 전체 출력 메시지1 - 인덱스 값 불일치 메서드
+	// 0-1. 전체 출력 메시지1 - 인덱스 값 불일치 메서드
 	public void indexErrorMessage() {
 		System.out.println("유효하지 않은 인덱스입니다.");
 	}
-	// 전체 출력 메시지2 - 인덱스 값 불일치 및 해당 타입(공룡, 직원 등) 동시 출력 메서드
-	public void indexErrorMessageTypePlus(String ouputMessageType) {
-		System.out.println("유효하지 않은 인덱스이거나 추가된 " + ouputMessageType + "이 없습니다.");
+	// 0-2. 전체 출력 메시지2 - 인덱스 값 불일치 및 해당 타입(공룡, 직원 등) 동시 출력 메서드
+	public void typeErrorMessage(String ouputMessage) {
+		System.out.println("유효하지 않은 인덱스이거나 해당하는 " + ouputMessage + "이 없습니다.");
 	}
-	
-	// 공룡 관리
-	// 공룡 999마리 추가
-    private Chap9Q1Dinosaur[] dino = new Chap9Q1Dinosaur[999];
-    // 공룡 문자열 변수
-    String dinosaurMethodInputName = "공룡";
-    
-    // 공룡 츠가 정보
-    public int dinoClassLength() {
-		return dino.length;
-	}
-
-    // 비어있는 공룡 등록 가능한 인덱스 찾기
-    public int findEmptyIndex() {
-        for (int i = 0; i < dino.length; i++) {
-            if (isDinosaurRegistered(i)) { // << 메서드는 아래에 있음
+	// 0-3-1. 인덱스 유효 범위에 다른 정보가 있는지 체크
+    public int findEmptyIndex(Object[] obj) {
+        for (int i = 0; i < obj.length; i++) {
+            if (isRegistered(i, obj)) { // << 메서드는 아래에 있음
                 return i;
             }
         }
         return -1; // 비어있는 인덱스를 찾지 못한 경우
     }
-    // 해당 공룡 등록 여부 확인 메서드
-    public boolean isDinosaurRegistered(int index) {
-        return dino[index] == null; // 공룡이 등록이 되어 있지 않아서 비어 있으면 true 반환
+    // 0-3-2. 해당 인덱스가 값이 비어있는지 체크
+    public boolean isRegistered(int index, Object[] obj) {
+        return obj[index] == null; // 등록이 되어 있지 않아서 비어 있으면 true 반환
+    }   
+    // 0-3-3. 공통 메서드
+    private boolean checkIndex(String addAndChange, Object[] array, int index, String objectType) {
+        if (0 <= index && index < array.length) {
+            // if를 2번 써야 무조건 아래 메시지가 출력 되는 걸 방지할 수 있다 and 조건 쓰기 힘듦
+            if (!isRegistered(index, array) && addAndChange.equals("add")) {
+                System.out.println("해당 인덱스에는 이미 " + objectType + "이 등록되어 있습니다.");
+                return false;
+            } else if (isRegistered(index, array) && addAndChange.equals("change")) {
+                System.out.println("해당 인덱스에는 등록된 " + objectType + "이 없습니다.");
+                return false;
+            }
+        } else {
+            indexErrorMessage(); // 유효하지 않은 인덱스
+            return false;
+        }
+        return true;
     }
+
+	// 1-1. 공룡 관리
+	// 공룡 999마리 추가
+    private Chap9Q1Dinosaur[] dino = new Chap9Q1Dinosaur[999];
     // 각 공룡 추가 메서드 통합 관리
     public void addDinosaur(int index, String size, String diet, Chap9Q1Dinosaur dinosaur) {
         if (0 <= index && index < dino.length) {
@@ -537,13 +545,13 @@ public class ParkAdministration {
     
     
     // 티켓 10개 추가
-    private Ticket[] ticket = new Ticket[10];
+    private Chap9Q3Ticket[] ticket = new Chap9Q3Ticket[10];
 
     // 티켓 정보 추가
     public void addSeasonTicket(int index, String ticketType, int price, String startDate, String endDate) {
         if (0 <= index && index < ticket.length) {
         	if (ticketType.equals("일반")) {
-        		ticket[index] = new Ticket(ticketType, price);
+        		ticket[index] = new Chap9Q3Ticket(ticketType, price);
 			} else if (ticketType.equals("계절")) {
 				System.out.print("계절 티켓의 시작일을 입력하세요: ");
 				
