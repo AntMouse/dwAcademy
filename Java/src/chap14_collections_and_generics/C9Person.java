@@ -1,6 +1,10 @@
 package chap14_collections_and_generics;
 
 public class C9Person {
+    public C9Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
     private String name;
     private int age;
     @Override
@@ -12,7 +16,7 @@ public class C9Person {
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
