@@ -1,14 +1,14 @@
-package chap14_project_collections;
+package test_package;
 
 import chap14_collections_and_generics.Chap14Q1Dinosaur;
 
 import java.util.*;
 
-public class Chap14QProjectDinosaurCareSystem {
+public class Chap14Q2ProjectDinosaurCareSystem {
     private Set<Chap14Q1Dinosaur> dinosaurs;
-    private List<Chap14QProjectActivity> activities;
+    private List<Chap14Q3ProjectActivity> activities;
 
-    public Chap14QProjectDinosaurCareSystem() {
+    public Chap14Q2ProjectDinosaurCareSystem() {
         dinosaurs = new HashSet<>();
         activities = new ArrayList<>();
     }
@@ -17,30 +17,36 @@ public class Chap14QProjectDinosaurCareSystem {
         dinosaurs.add(dinosaur);
     }
 
-    public void logActivity(Chap14QProjectActivity activity) {
+    public void logActivity(Chap14Q3ProjectActivity activity) {
         activities.add(activity);
     }
 
     public List<Chap14Q1Dinosaur> sortDinosaursByAge() {
         List<Chap14Q1Dinosaur> sortedDinosaurs = new ArrayList<>(dinosaurs);
-        Collections.sort(sortedDinosaurs, new Chap14QProjectDinosaurComparator(Chap14QProjectDinosaurComparator.SortingCriteria.AGE));
+        Collections.sort(sortedDinosaurs, new Chap14Q1ProjectDinosaurComparator(Chap14Q1ProjectDinosaurComparator.SortingCriteria.AGE));
         return sortedDinosaurs;
     }
 
     public List<Chap14Q1Dinosaur> sortDinosaursByDangerLevel() {
         List<Chap14Q1Dinosaur> sortedDinosaurs = new ArrayList<>(dinosaurs);
-        Collections.sort(sortedDinosaurs, new Chap14QProjectDinosaurComparator(Chap14QProjectDinosaurComparator.SortingCriteria.DANGER_LEVEL));
+        Collections.sort(sortedDinosaurs, new Chap14Q1ProjectDinosaurComparator(Chap14Q1ProjectDinosaurComparator.SortingCriteria.DANGER_LEVEL));
         return sortedDinosaurs;
     }
 
     public List<Chap14Q1Dinosaur> sortDinosaursBySize() {
         List<Chap14Q1Dinosaur> sortedDinosaurs = new ArrayList<>(dinosaurs);
-        Collections.sort(sortedDinosaurs, new Chap14QProjectDinosaurComparator(Chap14QProjectDinosaurComparator.SortingCriteria.SIZE));
+        Collections.sort(sortedDinosaurs, new Chap14Q1ProjectDinosaurComparator(Chap14Q1ProjectDinosaurComparator.SortingCriteria.SIZE));
+        return sortedDinosaurs;
+    }
+    
+    public List<Chap14Q1Dinosaur> sortDinosaurs(Comparator<Chap14Q1Dinosaur> comparator) {
+        List<Chap14Q1Dinosaur> sortedDinosaurs = new ArrayList<>(dinosaurs);
+        Collections.sort(sortedDinosaurs, comparator);
         return sortedDinosaurs;
     }
 
 	public static void main(String[] args) {
-	    Chap14QProjectDinosaurCareSystem careSystem = new Chap14QProjectDinosaurCareSystem();
+	    Chap14Q2ProjectDinosaurCareSystem careSystem = new Chap14Q2ProjectDinosaurCareSystem();
 
 	    // 공룡 객체 생성
 	    Chap14Q1Dinosaur dino1 = new Chap14Q1Dinosaur("Tyrannosaurus", "Tyrannosaurus rex", "큼", 25, 10);

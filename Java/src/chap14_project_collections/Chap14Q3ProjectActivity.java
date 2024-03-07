@@ -4,12 +4,12 @@ import chap14_collections_and_generics.Chap14Q1Dinosaur;
 
 import java.time.LocalDate;
 
-public class Chap14QProjectActivity {
+public class Chap14Q3ProjectActivity {
     private String activityName;
     private LocalDate date;
     private Chap14Q1Dinosaur dinosaur;
 
-    public Chap14QProjectActivity(String activityName, LocalDate date, Chap14Q1Dinosaur dinosaur) {
+    public Chap14Q3ProjectActivity(String activityName, LocalDate date, Chap14Q1Dinosaur dinosaur) {
         this.activityName = activityName;
         this.date = date;
         this.dinosaur = dinosaur;

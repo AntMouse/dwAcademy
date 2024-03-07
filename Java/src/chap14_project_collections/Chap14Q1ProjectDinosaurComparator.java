@@ -6,16 +6,16 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chap14QProjectDinosaurComparator implements Comparator<Chap14Q1Dinosaur> {
+public class Chap14Q1ProjectDinosaurComparator implements Comparator<Chap14Q1Dinosaur> {
     public enum SortingCriteria {
         AGE,
         DANGER_LEVEL,
-        SIZE
+        SIZE;
     }
 
     private SortingCriteria sortingCriteria;
 
-    public Chap14QProjectDinosaurComparator(SortingCriteria sortingCriteria) {
+    public Chap14Q1ProjectDinosaurComparator(SortingCriteria sortingCriteria) {
         this.sortingCriteria = sortingCriteria;
     }
 
@@ -29,7 +29,7 @@ public class Chap14QProjectDinosaurComparator implements Comparator<Chap14Q1Dino
             case SIZE:
                 return compareSize(d1.getSize(), d2.getSize());
             default:
-                throw new IllegalArgumentException("Invalid sorting criteria");
+                throw new IllegalArgumentException("유효하지 않은 값입니다.");
         }
     }
 
@@ -45,7 +45,7 @@ public class Chap14QProjectDinosaurComparator implements Comparator<Chap14Q1Dino
             }
         }
         if (index1 == -1 || index2 == -1) {
-            throw new IllegalArgumentException("Invalid size");
+            throw new IllegalArgumentException("유효하지 않은 값입니다.");
         }
         return Integer.compare(index1, index2);
     }
@@ -68,21 +68,21 @@ public class Chap14QProjectDinosaurComparator implements Comparator<Chap14Q1Dino
 
         // 나이를 기준으로 정렬
         System.out.println("===== Age Sorting =====");
-        dinosaurs.sort(new Chap14QProjectDinosaurComparator(Chap14QProjectDinosaurComparator.SortingCriteria.AGE));
+        dinosaurs.sort(new Chap14Q1ProjectDinosaurComparator(Chap14Q1ProjectDinosaurComparator.SortingCriteria.AGE));
         for (Chap14Q1Dinosaur dino : dinosaurs) {
             System.out.println(dino.getName() + " - " + dino.getSize());
         }
 
         // 위험 레벨을 기준으로 정렬
         System.out.println("\n===== Danger Level Sorting =====");
-        dinosaurs.sort(new Chap14QProjectDinosaurComparator(Chap14QProjectDinosaurComparator.SortingCriteria.DANGER_LEVEL));
+        dinosaurs.sort(new Chap14Q1ProjectDinosaurComparator(Chap14Q1ProjectDinosaurComparator.SortingCriteria.DANGER_LEVEL));
         for (Chap14Q1Dinosaur dino : dinosaurs) {
             System.out.println(dino.getName() + " - " + dino.getSize());
         }
 
         // 크기를 기준으로 정렬
         System.out.println("\n===== Size Sorting =====");
-        dinosaurs.sort(new Chap14QProjectDinosaurComparator(Chap14QProjectDinosaurComparator.SortingCriteria.SIZE));
+        dinosaurs.sort(new Chap14Q1ProjectDinosaurComparator(Chap14Q1ProjectDinosaurComparator.SortingCriteria.SIZE));
         for (Chap14Q1Dinosaur dino : dinosaurs) {
             System.out.println(dino.getName() + " - " + dino.getSize());
         }
