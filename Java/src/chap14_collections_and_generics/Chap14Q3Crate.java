@@ -32,13 +32,13 @@ public class Chap14Q3Crate<T> {
 
         // 공룡 객체를 포장한 상자 생성
         Chap14Q3Crate<Chap14Q1Dinosaur> dinosaurCrate1 = 
-        new Chap14Q3Crate<>(new Chap14Q1Dinosaur("바둑이", "티라노사우루스", 4, 10));
+        new Chap14Q3Crate<>(new Chap14Q1Dinosaur("바둑이", "티라노사우루스", "매우큼", 4, 10));
         System.out.println(dinosaurCrate1);
         
         System.out.println();
         
         Chap14Q3Crate<Chap14Q1Dinosaur> dinosaurCrate2 = new Chap14Q3Crate<>
-        (new Chap14Q1Dinosaur("점박이", "벨로키라톱스", 15, 8));
+        (new Chap14Q1Dinosaur("점박이", "벨로키라톱스", "보통", 15, 8));
         Chap14Q3Crate<Chap14Q41Jeep> jeepCrate = new Chap14Q3Crate<>
         (new Chap14Q41Jeep("랜드로버", "검정"));
         Chap14Q3Crate<Chap14Q42DinosaurFood> foodCrate = new Chap14Q3Crate<>
