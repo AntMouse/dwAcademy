@@ -48,25 +48,28 @@ public class C7Person implements Comparable<C7Person> {
         personList.add(new C7Person("Anne1", 3));
         personList.add(new C7Person("Anne23", 3));
         personList.add(new C7Person("Anne345", 3));
-        Collections.sort(personList);
+        personList.add(new C7Person("Znne1", 7));
+        personList.add(new C7Person("Mnne1", 5));
+        /* Collections.sort(personList);
         /*
         for (C7Person person : personList) {
             System.out.println(person.getName());
         }
         */
-
+        /*
         Comparator<C7Person> nameComparator = (p1, p2) -> 
         p1.getName().compareTo(p2.getName());
-        Collections.sort(personList);
-        /*
+        Collections.sort(personList, nameComparator);
+        
         for (C7Person person : personList) {
         System.out.println(person.getName());
         }
         System.out.println();
         */
 
-        Collections.sort(personList, nameComparator);
         /*
+        Collections.sort(personList, nameComparator);
+        
         for (C7Person person : personList) {
         System.out.println(person.getName());
         }
@@ -84,6 +87,7 @@ public class C7Person implements Comparable<C7Person> {
         for (C7Person person : personTreeSet) {
         System.out.println("Name: " + person.getName() + ", Age: " + person.getAge());
         }
+        System.out.println();
         */
 
         Comparator<C7Person> nameComparatorLambda = (p1, p2) -> 
@@ -93,11 +97,12 @@ public class C7Person implements Comparable<C7Person> {
         personTreeSetByName.add(new C7Person("Joep", 4));
         personTreeSetByName.add(new C7Person("Anne", 3));
         personTreeSetByName.add(new C7Person("Gnne", 8));
-        /*
+        
         for (C7Person person : personTreeSetByName) {
         System.out.println("Name: " + person.getName() + ", Age: " + person.getAge());
         }
-        */
+        System.out.println();
+        
         
         Comparator<C7Person> nameComparatorTreeMap = (p1, p2) -> 
         p1.getName().compareTo(p2.getName());

@@ -64,6 +64,12 @@ public class Chap14Q1Dinosaur {
 				species + '\'' + ", age=" + age + ", dangerLevel=" + 
 				dangerLevel + '}';
 	}
+	@Override
+	public int hashCode() {
+	    int result = name != null ? name.hashCode() : 0;
+	    result = 31 * result + dangerLevel;
+	    return result;
+	}
 	
 	public static void main(String[] args) {
         // 맞춤형 공룡 객체 생성
