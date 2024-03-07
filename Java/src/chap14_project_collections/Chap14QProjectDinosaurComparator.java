@@ -3,6 +3,8 @@ package chap14_project_collections;
 import chap14_collections_and_generics.Chap14Q1Dinosaur;
 
 import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Chap14QProjectDinosaurComparator implements Comparator<Chap14Q1Dinosaur> {
     public enum SortingCriteria {
@@ -49,8 +51,41 @@ public class Chap14QProjectDinosaurComparator implements Comparator<Chap14Q1Dino
     }
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+        // 공룡 객체들 생성
+        Chap14Q1Dinosaur dino1 = new Chap14Q1Dinosaur("Tyrannosaurus", "Tyrannosaurus rex", "큼", 25, 10);
+        Chap14Q1Dinosaur dino2 = new Chap14Q1Dinosaur("Triceratops", "Triceratops horridus", "보통", 20, 5);
+        Chap14Q1Dinosaur dino3 = new Chap14Q1Dinosaur("Velociraptor", "Velociraptor mongoliensis", "작음", 10, 8);
+        Chap14Q1Dinosaur dino4 = new Chap14Q1Dinosaur("Stegosaurus", "Stegosaurus stenops", "큼", 30, 3);
+        Chap14Q1Dinosaur dino5 = new Chap14Q1Dinosaur("Brachiosaurus", "Brachiosaurus altithorax", "매우큼", 40, 2);
 
+        // 공룡 객체들을 리스트에 추가
+        List<Chap14Q1Dinosaur> dinosaurs = new ArrayList<>();
+        dinosaurs.add(dino1);
+        dinosaurs.add(dino2);
+        dinosaurs.add(dino3);
+        dinosaurs.add(dino4);
+        dinosaurs.add(dino5);
+
+        // 나이를 기준으로 정렬
+        System.out.println("===== Age Sorting =====");
+        dinosaurs.sort(new Chap14QProjectDinosaurComparator(Chap14QProjectDinosaurComparator.SortingCriteria.AGE));
+        for (Chap14Q1Dinosaur dino : dinosaurs) {
+            System.out.println(dino.getName() + " - " + dino.getSize());
+        }
+
+        // 위험 레벨을 기준으로 정렬
+        System.out.println("\n===== Danger Level Sorting =====");
+        dinosaurs.sort(new Chap14QProjectDinosaurComparator(Chap14QProjectDinosaurComparator.SortingCriteria.DANGER_LEVEL));
+        for (Chap14Q1Dinosaur dino : dinosaurs) {
+            System.out.println(dino.getName() + " - " + dino.getSize());
+        }
+
+        // 크기를 기준으로 정렬
+        System.out.println("\n===== Size Sorting =====");
+        dinosaurs.sort(new Chap14QProjectDinosaurComparator(Chap14QProjectDinosaurComparator.SortingCriteria.SIZE));
+        for (Chap14Q1Dinosaur dino : dinosaurs) {
+            System.out.println(dino.getName() + " - " + dino.getSize());
+        }
 	}
 
 }
