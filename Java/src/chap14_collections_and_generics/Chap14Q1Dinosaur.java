@@ -17,12 +17,14 @@ class DangerLevelComparator implements Comparator<Chap14Q1Dinosaur> {
 public class Chap14Q1Dinosaur {
 	private String name;
 	private String species;
+	private String size;
 	private int age;
     private int dangerLevel; // 위험 레벨
-
-    public Chap14Q1Dinosaur(String name, String species, int age, int dangerLevel) {
+    
+    public Chap14Q1Dinosaur(String name, String species, String size, int age, int dangerLevel) {
         this.name = name;
         this.species = species;
+        this.size = size;
         this.age = age;
         this.dangerLevel = dangerLevel;
     }
@@ -32,27 +34,31 @@ public class Chap14Q1Dinosaur {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
     public String getSpecies() {
         return species;
     }
-
-    public int getDangerLevel() {
-        return dangerLevel;
-    }
-
-    public void setSpecies(String species) {
-        this.species = species;
+    public String getSize() {
+        return size;
     }
     public int getAge() {
         return age;
     }
+    public int getDangerLevel() {
+        return dangerLevel;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+    public void setSize(String size) {
+        this.size = size;
+    }
     public void setAge(int age) {
         this.age = age;
     }
-
     public void setDangerLevel(int dangerLevel) {
         this.dangerLevel = dangerLevel;
     }
@@ -73,9 +79,9 @@ public class Chap14Q1Dinosaur {
 	
 	public static void main(String[] args) {
         // 맞춤형 공룡 객체 생성
-        Chap14Q1Dinosaur dino1 = new Chap14Q1Dinosaur("바둑이", "티라노사우루스", 4, 10);
-        Chap14Q1Dinosaur dino2 = new Chap14Q1Dinosaur("점박이", "벨로키라톱스", 15, 8);
-        Chap14Q1Dinosaur dino3 = new Chap14Q1Dinosaur("삼색이", "트리케라톱스", 7, 5);
+        Chap14Q1Dinosaur dino1 = new Chap14Q1Dinosaur("바둑이", "티라노사우루스", "매우큼", 4, 10);
+        Chap14Q1Dinosaur dino2 = new Chap14Q1Dinosaur("점박이", "벨로키라톱스", "보통", 15, 8);
+        Chap14Q1Dinosaur dino3 = new Chap14Q1Dinosaur("삼색이", "트리케라톱스", "작음", 7, 5);
         
         // List에 맞춤형 공룡 객체 추가
         List<Chap14Q1Dinosaur> dinosaurList = new ArrayList<>();
