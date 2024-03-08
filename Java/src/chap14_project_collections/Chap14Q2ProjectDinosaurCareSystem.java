@@ -23,25 +23,7 @@ public class Chap14Q2ProjectDinosaurCareSystem {
         dinosaurs.add(dinosaur);
         System.out.println(dinosaur.getName() + "이(가) 추가되었습니다.");
     }
-    /*
-    public void removeDinosaur(int index) {
-        if (0 <= index && index < dinosaurs.size()) {
-            Iterator<Chap14Q1Dinosaur> iterator = dinosaurs.iterator();
-            int i = 0;
-            while (iterator.hasNext()) {
-                Chap14Q1Dinosaur dinosaur = iterator.next();
-                if (i == index) {
-                    iterator.remove();
-                    System.out.println(dinosaur.getName() + "이(가) 제거되었습니다.");
-                    return;
-                }
-                i++;
-            }
-        } else {
-            System.out.println("유효하지 않은 공룡 번호입니다.");
-        }
-    }
-    */
+
     public List<Chap14Q1Dinosaur> getDinosaurs() {
         List<Chap14Q1Dinosaur> dinosaurList = new ArrayList<>(dinosaurs);
         return dinosaurList;
@@ -77,36 +59,35 @@ public class Chap14Q2ProjectDinosaurCareSystem {
             	scanner.nextLine(); // 입력 버퍼 비우기
             }   	
         }
-
+        
+        List<Chap14Q1Dinosaur> sortedDinosaurs = sortDinosaursByAge();
+        
         while (true) {
-        	System.out.println("활동에 참여한 공룡의 번호를 선택하세요:");
-        	int count = 1;
-        	for (Chap14Q1Dinosaur dinosaur : dinosaurs) {
-        	    System.out.println(count + ". " + dinosaur.getName());
-        	    count++;
-        	}
-        	if (scanner.hasNextInt()) {
-        		int dinoIndex = scanner.nextInt();
-        		scanner.nextLine(); // 버퍼 비우기
-        		Chap14Q1Dinosaur selectedDinosaur = null;
-        		int currentIndex = 0;
-        		for (Chap14Q1Dinosaur dinosaur : dinosaurs) {
-        		    if (currentIndex == dinoIndex - 1) {
-        		        selectedDinosaur = dinosaur;
-        		        break;
-        		    }
-        		    currentIndex++;
-        		}
+            System.out.println("활동에 참여한 공룡의 이름을 선택하세요:");
+            int count = 1;
+            for (Chap14Q1Dinosaur dinosaur : sortedDinosaurs) {
+                System.out.println(count + ". " + dinosaur.getName());
+                System.out.println("=============================");
+                count++;
+            }
+            String selectedDinoName = scanner.nextLine();
+            // 입력한 공룡 이름이 존재하는지 찾기
+            boolean found = false;
+            for (Chap14Q1Dinosaur dinosaur : dinosaurs) {
+                if (dinosaur.getName().equalsIgnoreCase(selectedDinoName)) {
+                	
+                	
+                    found = true;
+                    break;
+                }
+            }
 
-        		if (selectedDinosaur != null) {
-        		    // 선택된 공룡(selectedDinosaur)을 사용할 수 있습니다.
-        		} else {
-        		    System.out.println("유효한 공룡 번호를 입력하세요.");
-        		}
-        	} else {
-        		System.out.println("숫자를 입력하세요.");
-        		scanner.nextLine(); // 입력 버퍼 비우기
-        	}
+            if (!found) {
+                System.out.println("해당 이름의 공룡이 존재하지 않습니다.");
+                break;
+            } else {
+                System.out.println("활동이 추가되었습니다.");
+            }
         }       
     }
     
@@ -120,8 +101,7 @@ public class Chap14Q2ProjectDinosaurCareSystem {
             return LocalDate.now();
         }
     }
-    
-    
+      
     public void logActivity(Chap14Q3ProjectActivity activity) {
         activities.add(activity);
     }

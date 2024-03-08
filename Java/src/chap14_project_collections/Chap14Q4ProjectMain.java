@@ -34,7 +34,7 @@ public class Chap14Q4ProjectMain {
                 	removeDinosaurMenu(system, scanner);
                     break;
                 case 3:
-                	getDinosaursList(system);
+                	getDinosaursList(system, scanner);
                     break;
                 case 4:
                     logActivity(system, scanner);
@@ -72,7 +72,7 @@ public class Chap14Q4ProjectMain {
         }
 
 	}
-	
+	// 케이스 1 공룡 추가
     private static void addDinosaur(Chap14Q2ProjectDinosaurCareSystem system, Scanner scanner) {
         System.out.println("새로운 공룡을 추가합니다.");
         System.out.print("이름: ");
@@ -114,7 +114,7 @@ public class Chap14Q4ProjectMain {
         system.addDinosaur(newDinosaur);
         System.out.println();
     }
-    
+    // 케이스 2-1 공룡 제거
     private static void removeDinosaurMenu(Chap14Q2ProjectDinosaurCareSystem system, Scanner scanner) {
         sampleDinosaursList(system);
         System.out.println("제거할 공룡의 이름을 입력하세요:");
@@ -136,7 +136,7 @@ public class Chap14Q4ProjectMain {
             System.out.println(name + "이(가) 제거되었습니다.");
         }
     }
-      
+ // 케이스 2-2 공룡 제거용 목록 보여주기  
     private static void sampleDinosaursList(Chap14Q2ProjectDinosaurCareSystem system) {
         List<Chap14Q1Dinosaur> dinosaurs = system.getDinosaurs();
         System.out.println("공룡 목록:");
@@ -148,7 +148,7 @@ public class Chap14Q4ProjectMain {
             System.out.println("=============================");
         }
     }
-    
+    // 케이스 3-1 공룡 목록 보기
     private static void getDinosaursList(Chap14Q2ProjectDinosaurCareSystem system, Scanner scanner) {
         while (true) {
         	System.out.println();
@@ -176,21 +176,22 @@ public class Chap14Q4ProjectMain {
                     return; // 이전 메뉴로 돌아가기
                 default:
                     System.out.println("올바른 선택이 아닙니다. 다시 선택하세요.");
-            }
-        } else {
-            System.out.println("숫자를 입력하세요.");
-            scanner.nextLine(); // 입력 버퍼 비우기
-            }
+                }
+	        } else {
+	            System.out.println("숫자를 입력하세요.");
+	            scanner.nextLine(); // 입력 버퍼 비우기
+	        }
         }
     }
-    
+    // 케이스 3-2 공룡 목록 보여주기 기본 메서드
     private static void displaySortedDinosaurs(List<Chap14Q1Dinosaur> sortedDinosaurs) {
         // 정렬된 공룡 출력
         for (Chap14Q1Dinosaur dinosaur : sortedDinosaurs) {
             System.out.println("이름: " + dinosaur.getName() + ", 나이: " + dinosaur.getAge() + ", 위험 레벨: " + dinosaur.getDangerLevel() + ", 크기: " + dinosaur.getSize());
+            System.out.println("=============================");
         }
     }
-    
+    // 케이스 4 활동 기록 추가
     private static void logActivity(Chap14Q2ProjectDinosaurCareSystem system, Scanner scanner) {
         System.out.println("활동을 기록합니다.");
         System.out.print("활동 이름: ");
@@ -198,7 +199,7 @@ public class Chap14Q4ProjectMain {
         system.logActivity(activityName);
         System.out.println();
     }
-    
+    // 케이스 5 활동 제거
     private static void removeActivityMenu(Chap14Q2ProjectDinosaurCareSystem system, Scanner scanner) {
         System.out.println("제거할 활동의 번호를 선택하세요:");
         getActivitiesList(system);
