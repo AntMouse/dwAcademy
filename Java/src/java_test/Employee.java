@@ -31,28 +31,22 @@ public class Employee implements Salary {
     public String getName() {
         return name;
     }
-
     public int getEmpId() {
         return empId;
     }
-
     public double getWage() {
         return wage;
     }
-
     public int getWorkHours() {
         return workHours;
     }
-
     public String getDepartment() {
         return department;
-    }
-    
+    }   
     // 상급자 지정 메서드
     public void setSupervisor(Employee supervisor) {
         this.supervisor = supervisor;
     }
-
     // 상급자 반환 메서드
     public Employee getSupervisor() {
         return supervisor;
@@ -68,8 +62,7 @@ public class Employee implements Salary {
     // 받은 업무를 반환하는 메서드
     public List<String> getReceivedInstructions() {
         return receivedInstructions;
-    }
-    
+    }  
     // 지시를 내리는 메서드
     public void issueInstructions(String instructions, Employee subordinate) {
         System.out.println("[" + this.getName() + "이(가) " + subordinate.getName() + "에게 업무를 지시합니다.]");
@@ -79,12 +72,10 @@ public class Employee implements Salary {
     public List<String> getSubordinateInstructions(Employee subordinate) {
         return subordinate.getReceivedInstructions();
     }
-
     @Override
     public double calcSalary() {
         return wage * workHours * WORKING_DAYS_PER_MONTH;
     }
-
     public String toString() {
         return "Employee ID: " + empId + "\nName: " + name + "\nDepartment: " + department + "\nSalary: " + calcSalary();
     }
@@ -140,6 +131,7 @@ public class Employee implements Salary {
         List<String> clerkInstructions = manager1.getSubordinateInstructions(clerk1);
         List<String> developerInstructions = manager1.getSubordinateInstructions(developer1);
         List<String> managerInstructions = director1.getSubordinateInstructions(manager1);
+        
     }
 }
 
