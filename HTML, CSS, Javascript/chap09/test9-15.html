@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test9-15 타이틀</title>
+  <script>
+    let files = ["과일1.jpg", "과일2.jpg", "과일3.jpg", "과일4.jpg",
+                 "과일5.jpg", "과일6.jpg", "과일7.jpg", "과일8.jpg"];
+    let imgs = new Array();
+    for (let i = 0; i < files.length; i++) {
+      imgs[i] = new Image();
+      imgs[i].src = files[i];
+    }
+
+    let next = 1;
+    function change(img) {
+      img.src = imgs[next].src;
+      next++;
+      next %= imgs.length;
+    }
+  </script>
+</head>
+<body>
+  <h3>new Image()로 이미지 로딩</h3>
+  <hr>
+  <p>
+  이미지를 클릭하면 다음 이미지를 보여줍니다.
+  </p>
+  <img style="border: 20px ridge wheat"
+  src="과일1.jpg" alt="." width="200" height="200" onclick="change(this)">
+</body>
+</html>

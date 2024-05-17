@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test9-16 타이틀</title>
+  <script>
+    function checkFilled(obj) {
+      if (obj.value == "") {
+        alert("enter name!");
+
+        // onblur 이벤트를 일시적으로 비활성화
+        obj.onblur = null;
+
+        // 포커스 이동 후, 다시 onblur 이벤트 할당
+        obj.focus();
+        setTimeout(function () {
+          obj.onblur = function () {
+            checkFilled(this);
+          };
+        }, 100); // 일정 시간 후에 다시 활성화
+      }
+    }
+  </script>
+</head>
+<body onload="document.getElementById('name').focus();">
+  <h3>onfocus와 onblur</h3>
+  <hr>
+  <p>
+    이름을 입력하지 않고 다른 창으로 이동할 수 없습니다.
+  </p>
+  <form>
+    <p>이름 <input type="text" id="name" onblur="checkFilled(this)"></p>
+    <p>학번 <input type="text"></p>
+  </form>
+</body>
+</html>

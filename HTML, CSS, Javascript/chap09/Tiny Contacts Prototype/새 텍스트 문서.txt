@@ -1,0 +1,19 @@
+웹페이지에 입력한 값을 배열에 넣고, 다 지우고 다시 작성해서 저장하면 다시 배열에 추가로 또 넣을 수 있게
+수정하기.
+
+name에 이름을 입력하고 find contact를 누르면 배열에서 다시 일치하는 정보를 찾아서 일치한다고
+alert 창을 띄워보기. 입력 칸에 이전에 입력한 주소랑 폰 번호가 아래에 뜨는 거 구현해보기.
+
+이름 중복이 안 되고, save 버튼 누르면 입력한 이름이랑 주소, 번호 사라지게
+
+
+
+
+if(name=="Rob Miles")
+        {
+            displayElementValue("address", "18 Pussycat Mews\nLondon\nNE1 410S");
+            displayElementValue("phone", "+44(1234) 56789");
+        }
+        else {
+            displayContactNotFound();
+        }
