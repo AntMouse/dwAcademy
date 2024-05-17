@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>38</title>
+  <style>
+    table, td, th {
+        border: 1px solid;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function ans38() {
+        let table = document.createElement("table");
+        let thead = table.createTHead();
+        let row1 = thead.insertRow();
+        let th1 = document.createElement("th");
+
+        row1.appendChild(th1);
+
+        for (let i = 1; i <= 9; i++) {
+            let th2 = document.createElement("th");
+            th2.textContent = i + "단";
+            row1.appendChild(th2);
+        }
+
+        for (let i = 1; i <= 9; i++) {
+            let row2 = table.insertRow();
+            let th3 = row2.insertCell();
+
+            for (let j = 1; j <= 9; j++) {
+                let td1 = row2.insertCell();
+                td1.textContent = j + " * " + i + " = " + i * j;
+            }
+        }
+        document.body.appendChild(table);
+    }
+
+    ans38();
+</script>
+</body>
+</html>

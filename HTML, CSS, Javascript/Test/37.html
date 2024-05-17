@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>37</title>
+</head>
+<body>
+  <script>
+    function digit8(v) { // 숫자 v를 8비트 2진수로 변환
+	let str="";
+	for(i=0; i<8; i++, v<<=1) {
+    if ((v & 0x80)) {
+      str += "1";
+    } else {
+      str += "0";
+    }
+	return str;
+}
+}
+
+
+    let x = 0x2F; y = 10;
+    let z = x ^ y;
+
+    digit8(z);
+    document.write(digit8(z));
+  </script>
+</body>
+</html>

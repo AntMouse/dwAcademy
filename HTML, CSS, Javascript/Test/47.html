@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>47</title>
+</head>
+<body>
+  <script>
+    let fruitArray = new Array();
+
+    let fruitName = ["사과", "참외", "귤"];
+    let fruitPrice = [21000, 18000, 15000];
+    let fruitAmount = [10, 20, 30];
+
+    for (let i = 0; i < fruitName.length; i++) {
+        let fruit = {
+        name: fruitName[i],
+        price: fruitPrice[i],
+        amount: fruitAmount[i]
+      } 
+      fruitArray.push(fruit);
+    }
+
+    let total = 0;
+
+    function calcPrice(price, amount) {
+        return price * amount;
+    }
+
+    for (let i = 0; i < fruitName.length; i++) {
+        let fruitResult = fruitArray[i];
+        let calcResult = calcPrice(fruitResult.price, fruitResult.amount);
+
+        document.write(fruitResult.name + "의 구매 가격: " + fruitResult.price + "원<br>");
+
+        total += calcResult;
+    }
+
+    document.write("총 구매 가격 : " + total + "원");
+  </script>
+</body>
+</html>
