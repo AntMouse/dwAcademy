@@ -1,0 +1,9 @@
+let duplicateItems = lotto.filter((item, index) => lotto.indexOf(item) != index);
+            let check1 = new Array();
+            check1.push(duplicateItems);
+            document.write('중복된 번호 : ' + check1[0]);
+            //break;
+            if (check1[0] == "")
+                  break;
+            else
+                check1.pop();

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test7-lotto1 타이틀</title>
+</head>
+<body>
+  <h3>복권 문제 1</h3>
+  <hr>
+  <script>
+    let lottoUserSelect = new Array();
+
+    for (let i = 0; i < 4; i++) {
+      if (lottoUserSelect[i] == null) {
+          lottoUserSelect[i] = prompt
+          ("자신의 로또 번호를 1~10 사이의 숫자와 A~E 사이의 알파벳 5개에서 원하는 것을 입력하세요.");
+      }
+    }
+
+    document.write("선택한 번호는 : ");
+
+    for (let i = 0; i < 4; i++) {
+      if (i == 3) {
+        document.write(lottoUserSelect[i] + " <br><hr>");
+      } else {
+        document.write(lottoUserSelect[i] + ", ");
+      }  
+    }
+    
+    let lottoArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E"]; 
+    // 숫자 10 + 문자 5
+
+    let lottoResult = new Array();
+
+    for (let i = 0; i < 4; i++) {
+
+      let lottoRandom;
+    
+      do {
+        lottoRandom = Math.floor(Math.random() * lottoArray.length);
+      } while (lottoResult.includes(lottoArray[lottoRandom]));
+
+        lottoResult[i] = lottoArray[lottoRandom];
+    }
+    
+    document.write("당첨 번호 : ");
+
+    for (let i = 0; i < 4; i++) {
+      if (i == 3) {
+        document.write(lottoResult[i] + " <br><hr>");
+      } else {
+        document.write(lottoResult[i] + ", ");
+      }  
+    }
+
+    let lottoCheck = 0;
+
+    for (let i = 0; i < 4; i++) {
+      if (lottoResult[i] == lottoUserSelect[i]) {
+          lottoCheck++;
+      }
+    }
+
+    if (lottoCheck === 4) {
+        document.write("축하합니다! 당첨되었습니다.");
+    } else {
+        document.write("아쉽지만 당첨되지 않았습니다.");
+    }
+  </script>
+</body>
+</html>

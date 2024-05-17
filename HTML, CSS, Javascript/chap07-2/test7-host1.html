@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test7-host1 타이틀</title>
+</head>
+<body>
+  <script>
+    let student = new Array(); // 학생 배열 선언 (숫자 없이 그냥 사용하기로)
+    let studentNameList = new Array(); // 학생 이름 목록
+
+    for (let i = 0; i < 24; i++) {
+      studentNameList[i] = (i + 1) + " 번 학생";  
+
+      let currentDate = new Date("2000.01.10");
+      let newDate = new Date(currentDate);
+      newDate.setDate(currentDate.getDate() + i);
+
+      student[i] = {
+        name: studentNameList[i],
+        birthday: newDate // 학생 객체에서 생일 데이터
+      };
+    }
+
+    function birthdayCheck(student, selectedStudentName) {
+      if (selectedStudentName == student.name) {
+        let today = new Date();
+          if (
+              student.birthday.getMonth() == today.getMonth() &&
+              student.birthday.getDate() == today.getDate()
+          ) {
+              document.write(student.name + "님 생일을 축하합니다.");
+          } else {
+              document.write(student.name + "님은 생일이 아닙니다.");
+          }
+      }
+    }
+
+    let select = prompt("양식에 맞춰 몇 번 학생으로 할지 입력하세요", "X 번 학생");
+
+    for (let i = 0; i < studentNameList.length; i++) {
+        birthdayCheck(student[i], select);
+    }
+  </script>
+</body>
+</html>
