@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Members</title>
+</head>
+<body>
+<link href="management.css" rel="stylesheet">
+<h1>Members</h1>
+<button id="goBackButton" onclick="goBack()">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.66 7.93L16.24 6.5 10.5 12l5.74 5.66 1.41-1.41L13.32 12l4.34-4.07z"/></svg>
+		</button>
+<button id="add" onclick="location.href='/addemployee'">Go to Add Employee</button>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Member Name</th>
+        <th>Password</th>
+        <th>Role</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Career</th>
+        <th>Salary</th>
+        <th>Wage</th>
+        <th>Day</th>
+        <th>Incentive</th>
+        <th>오전업무</th>
+        <th>오후업무</th>
+        <th>버튼</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="member : ${members}">
+        <td th:text="${member.id}"></td>
+        <td th:text="${member.memberName}"></td>
+        <td th:text="${member.password}"></td>
+        <td th:text="${member.role}"></td>
+        <td th:text="${member.name}"></td>
+        <td th:text="${member.email}"></td>
+        <td th:text="${member.age}"></td>
+        <td th:text="${member.career}"></td>
+        <td th:text="${member.salary}"></td>
+        <td th:text="${member.wage}"></td>
+        <td th:text="${member.day}"></td>
+        <td th:text="${member.incentive}"></td>
+        <td th:text="${member.morningTask}"></td>
+        <td th:text="${member.afternoonTask}"></td>
+        <td>
+            <!-- Edit 버튼 -->
+            <a th:href="@{/employee/edit/{id}(id=${member.id})}">
+                <button>Edit</button>
+            </a>
+
+
+
+
+
+            <th:block th:unless="${member.id == 1 ||member.id == 2}">
+                <form th:action="@{/employees/delete}" method="post">
+                    <input type="hidden" name="id" th:value="${member.id}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </th:block>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>
+</body>
+</html>

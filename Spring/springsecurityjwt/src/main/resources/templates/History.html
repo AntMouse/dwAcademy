@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>History</title>
+    <link href="history.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="organ.css">
+</head>
+<body>
+<header>
+    <div class="logo">
+        <a href="/index.html">
+            <img src="img\logo.png" alt="로고">
+        </a>
+    </div>
+    <nav>
+        <ul>
+            <li class="sub-menu">
+                <a
+                        href="/History"
+                        onmouseover="showSubMenu(event, 'parkSubMenu')"
+                        onmouseout="hideSubMenu('parkSubMenu')"
+                >공원 소개</a>
+            </li>
+            <li class="sub-menu">
+                <a
+                        href="/Tyrannosaurus"
+                        onmouseover="showSubMenu(event, 'tyrannoSubMenu')"
+                        onmouseout="hideSubMenu('tyrannoSubMenu')"
+                >티라노사우루스</a
+                >
+            </li>
+            <li class="sub-menu">
+                <a
+                        href="/Mosasaurus"
+                        onmouseover="showSubMenu(event, 'mossaSubMenu')"
+                        onmouseout="hideSubMenu('mossaSubMenu')"
+                >모사사우루스</a
+                >
+            </li>
+            <li class="sub-menu">
+                <a
+                        href="/Spinosaurus"
+                        onmouseover="showSubMenu(event, 'spinoSubMenu')"
+                        onmouseout="hideSubMenu('spinoSubMenu')"
+                >스피노사우루스</a
+                >
+            </li>
+            <li class="sub-menu">
+                <a
+                        href="/Triceratops"
+                        onmouseover="showSubMenu(event, 'treeSubMenu')"
+                        onmouseout="hideSubMenu('treeSubMenu')"
+                >트리케라톱스</a>
+            </li>
+            <li class="sub-menu">
+                <a
+                        href="/Pteranodon"
+                        onmouseover="showSubMenu(event, 'pterraSubMenu')"
+                        onmouseout="hideSubMenu('pterraSubMenu')"
+                        onfocus="showSubMenu(event, 'pterraSubMenu')"
+                        onblur="hideSubMenu('pterraSubMenu')"
+                >프테라노돈</a>
+
+            </li>
+            <li class="sub-menu">
+                <a
+                        href="/Employee"
+                        onmouseover="showSubMenu(event, 'staffSubMenu')"
+                        onmouseout="hideSubMenu('staffSubMenu')"
+                >직원 소개</a
+                >
+            </li>
+        </ul>
+    </nav>
+    <!-- 버튼 영역 -->
+    <div class="header-container">
+        <span id="employeeInfoButton" style="display:none"><a href="/myInfo">내정보</a></span>
+        <span id="loginButton" style="display:none"><a href="/login">로그인</a></span>
+        <span>|</span>
+        <span id="signupButton" style="display:none"><a href="/signup">회원가입</a></span>
+        <span id="logoutButton" style="display:none"><a href="/api/logout">로그아웃</a></span>
+    </div>
+</header>
+    <div class="wrap">
+
+        <div class="container">
+
+
+
+          <!-- 공원 소개 부분 시작. 여기서부터 수정한 부분 위에는 안 건드림 -->
+          <div class="first title">
+            <span class="first-title-span">Mesozoic Eden</span>
+          </div>
+
+          <div class="qwe">
+            <table class="qwe-table">
+              <tr>
+                <td class="cell left-cell">
+                  <div class="item">
+                    <div class="polaroid">
+                      <img src="https://cdn.pixabay.com/photo/2022/10/17/19/09/dinosaur-7528512_1280.jpg" alt="Mesozoic Eden" class="fig0">
+                      <div class="caption">Mesozoic Eden</div>
+                    </div>
+                  </div>
+                </td>
+                <td class="cell right-cell">
+                  <div class="right-cell-box">
+                    <div class="right-cell-text">
+                      <h2>Mesozoic Eden</h2>
+                      <p>
+                        "Mesozoic Eden"은 공룡 시대의 신비로운 정원을 상상하게 합니다. <br>
+                        이곳은 시간 여행을 경험하고, 공룡의 환상적인 세계로 눈을 뜰 수 있는 곳입니다. 
+                        공룡들의 활기찬 생활과 자연의 아름다움이 조화롭게 어우러져 공룡 공원은 모험과 
+                        발견의 여정을 위한 완벽한 장소입니다.<br><br>
+                        지금 Mesozoic Eden을 탐험하고 신비한 공룡의 세계를 경험하세요!
+                      </p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>          
+        </div>
+        <div class="container">
+          <div class="headerNew"></div>
+          <div class="second-total-container">
+            <div class="second-title">
+              <h1>이용 안내 주의 사항</h1>
+            </div>
+            <div class="outter-table first">
+                <table class="content-table table-1">
+                    <tr>
+                        <td class="left-column">
+                            <!-- 좌측 컬럼에 들어갈 내용, 이미지 주소에 해당 이미지 넣기 -->
+                            <img src="img/NoEntry.png" alt="table-image-1" width="300px" height="200px">
+                        </td>
+                        <td class="right-column">
+                            <!-- 우측 컬럼에 들어갈 내용 -->
+                            <div class="right-column-box">
+                              <div class="right-column-background">
+                                <h3>외부인 출입금지 구역 안내사항</h3>
+                                <p>
+                                  저희 시설은 안전을 위하여 외부인 출입금지 구역을 설정하 <br>
+                                  고 있습니다. <br>
+                                  최근 외부인 출입금지 구역에 대한 침범 사례가 증가하고<br>
+                                  있어, 안내사항을 준수해 주시기를 부탁드립니다.
+                                </p>
+                              </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+    
+            <hr class="table-width-line">
+    
+            <div class="outter-table">
+                <table class="content-table table-2">
+                    <tr>
+                        <td class="left-column">
+                            <!-- 좌측 컬럼에 들어갈 내용, 이미지 주소에 해당 이미지 넣기 -->
+                            <img src="img/Shelter.png" alt="table-image-1" width="300px" height="200px">
+                        </td>
+                        <td class="right-column">
+                            <!-- 우측 컬럼에 들어갈 내용 -->
+                            <div class="right-column-box">
+                              <div class="right-column-background">
+                                <h3>대피소 안내사항</h3>
+                                <p> 
+                                  저희 시설은 안전을 최우선으로 생각하고 있으며, 비상 상황 <br>
+                                  에 대비하여 대피소를 마련하고 있습니다. <br>
+                                  대피소는 시설 내에서의 안전한 피난 공간을 제공하여 모든 <br>
+                                  이용자의 생명과 안전을 보호하기 위해 마련되었습니다.
+                              </p>
+                              </div>
+                            </div>
+                        </td>
+                        </tr>
+                </table>
+            </div>
+    
+            <hr class="table-width-line">
+
+        </div>
+        </div>
+
+        <div class="container">
+          <div class="headerNew">
+            <div class="tree-box">
+              <div class="tree">
+                <ul>
+                  <li>
+                    <a href="#">Mesozoic Eden</a>
+                    <ul>
+                      <li>
+                        <a href="#">공원관리부</a>
+                        <ul>
+                          <li><a href="#">경영지원과</a>
+                            <ul>
+                              <li>
+                                <a href="#">관리팀</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <a href="#">시설방호과</a>
+                            <ul>
+                              <li>
+                                <a href="#">보안관리팀</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li><a href="#">생태관리과</a>
+                            <ul>
+                              <li>
+                                <a href="#">사육사팀</a>
+                              </li>
+                              <li>
+                                <a href="#">수의사팀</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li><a href="#">관광안내과</a>
+                              <ul>
+                                <li>
+                                  <a href="#">가이드팀</a>
+                                </li>
+                              </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div> <!-- 이 div는 가장 위의 wrap클래스의 div 태그와 연결 되어 있다-->
+    	<footer>
+		<p>&copy; 2024. 모든 권리 보유</p>
+	</footer>
+
+    <!-- 공원 소개 부분 끝 -->
+    <script type="text/javascript" src="scroll.js"></script>/
+<script type="text/javascript" src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE HTML>
+<html xmlns:ns="http://www.thymeleaf.org">
+<head>
+<title>Employee</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="Employee.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+	<div class="logo">
+		<a href="/index.html">
+			<img src="img\logo.png" alt="로고">
+		</a>
+	</div>
+	<nav>
+		<ul>
+			<li class="sub-menu">
+				<a
+						href="/History"
+						onmouseover="showSubMenu(event, 'parkSubMenu')"
+						onmouseout="hideSubMenu('parkSubMenu')"
+				>공원 소개</a>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Tyrannosaurus"
+						onmouseover="showSubMenu(event, 'tyrannoSubMenu')"
+						onmouseout="hideSubMenu('tyrannoSubMenu')"
+				>티라노사우루스</a
+				>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Mosasaurus"
+						onmouseover="showSubMenu(event, 'mossaSubMenu')"
+						onmouseout="hideSubMenu('mossaSubMenu')"
+				>모사사우루스</a
+				>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Spinosaurus"
+						onmouseover="showSubMenu(event, 'spinoSubMenu')"
+						onmouseout="hideSubMenu('spinoSubMenu')"
+				>스피노사우루스</a
+				>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Triceratops"
+						onmouseover="showSubMenu(event, 'treeSubMenu')"
+						onmouseout="hideSubMenu('treeSubMenu')"
+				>트리케라톱스</a>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Pteranodon"
+						onmouseover="showSubMenu(event, 'pterraSubMenu')"
+						onmouseout="hideSubMenu('pterraSubMenu')"
+						onfocus="showSubMenu(event, 'pterraSubMenu')"
+						onblur="hideSubMenu('pterraSubMenu')"
+				>프테라노돈</a>
+
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Employee"
+						onmouseover="showSubMenu(event, 'staffSubMenu')"
+						onmouseout="hideSubMenu('staffSubMenu')"
+				>직원 소개</a
+				>
+			</li>
+		</ul>
+	</nav>
+	<!-- 버튼 영역 -->
+	<div class="header-container">
+		<span id="employeeInfoButton" style="display:none"><a href="/myInfo">내정보</a></span>
+		<span id="loginButton" style="display:none"><a href="/login">로그인</a></span>
+		<span>|</span>
+		<span id="signupButton" style="display:none"><a href="/signup">회원가입</a></span>
+		<span id="logoutButton" style="display:none"><a href="/api/logout">로그아웃</a></span>
+	</div>
+</header>
+
+
+
+	<nav class="nav-left" >
+	</nav>
+	<nav class="nav-right">
+	</nav>
+	<div class="headerBlank"></div>
+	<tit class="title"> <b>직원 소개</b> </tit>
+	<section1>
+	<article>
+		<img src="img/manager1.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${manager1}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+
+	<article>
+		<img src="img/doctor1.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${doctor1}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+
+	<article>
+		<img src="img/guard1.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${security1}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+
+	<article>
+		<img src="img/guide2.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${guide1}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+
+	<article>
+		<img src="img/keeper1.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${keeper1}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+	</section1>
+
+	<section2>
+
+	<article>
+		<img src="img/manager2.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${manager2}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+
+	<article>
+		<img src="img/doctor2.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${doctor2}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+
+	<article>
+		<img src="img/guard2.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${security2}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+
+	<article>
+		<img src="img/guide1.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${guide2}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+
+	<article>
+		<img src="img/keeper2.png" alt="이미지 설명">
+		<hr
+			style="border-width: 1px 0 0 0; border-style: dashed; border-color: #508348; width: 50%;">
+		<div style="margin-left: 8em;">
+			<tr th:each="emp : ${keeper2}">
+				<td><li>이름 : [[${emp.name}]]</td>
+				<br>
+				<td><li>나이 : [[${emp.age}]]살</td>
+				<br>
+				<td><li>경력 : [[${emp.career}]]년</td>
+				<br>
+				<td><li>업무 : [[${emp.role}]]</li></td>
+			</tr>
+		</div>
+	</article>
+	</section2>
+
+	<aside class="aside"></aside>
+
+	<footer>
+		<p>&copy; 2024. 모든 권리 보유</p>
+	</footer>
+<script type="text/javascript" src="login.js"></script>
+<script type="text/javascript" src="login.js"></script>/
+</body>
+</html>

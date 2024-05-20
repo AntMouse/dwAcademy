@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dinosaurs</title>
+</head>
+<body>
+<link href="management.css" rel="stylesheet">
+<h1>List of Dinosaurs</h1>
+<button id="goBackButton" onclick="goBack()">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.66 7.93L16.24 6.5 10.5 12l5.74 5.66 1.41-1.41L13.32 12l4.34-4.07z"/></svg>
+		</button>
+<button id="add" onclick="location.href='/addDinosaur'">Go to Add Dinosaur</button>
+<table>
+    <thead>
+    <tr><th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Weight</th>
+        <th>Diet</th>
+        <th>Species</th>
+        <th>button</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate through dinosaurs and display information -->
+    <tr th:each="dino : ${dinosaurs}">
+        <td th:text="${dino.id}"></td> <!-- ID 출력 -->
+        <td th:text="${dino.dinoName}"></td>
+        <td th:text="${dino.dinoAge}"></td>
+        <td th:text="${dino.dinoWeight}"></td>
+        <td th:text="${dino.dinoDiet}"></td>
+        <td th:text="${dino.dinoSpecies}"></td>
+        <td>
+            <!-- Edit 버튼 -->
+            <a th:href="@{/dinosaur/edit/{id}(id=${dino.id})}">
+                <button>Edit</button>
+            </a>
+
+
+            <!-- Delete 버튼 -->
+            <form th:action="@{/dinosaurs/delete}" method="post">
+                <input type="hidden" name="id" th:value="${dino.id}" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>
+
+</body>
+</html>

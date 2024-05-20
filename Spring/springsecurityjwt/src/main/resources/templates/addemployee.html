@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Member</title>
+<link href="management.css" rel="stylesheet">
+<link href="Add.css" rel="stylesheet">
+</head>
+<div id="box">
+<button id="goBackButton" onclick="goBack()">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.66 7.93L16.24 6.5 10.5 12l5.74 5.66 1.41-1.41L13.32 12l4.34-4.07z"/></svg>
+		</button>
+	<div class="headtitle">Add Employee</div>
+
+	<form method="POST" action="/api/employees"
+		onsubmit="return passwordValidation()">
+		<div class="t">MemberName</div>
+		<input type="text" id="memberName" name="memberName" placeholder="아이디">
+
+		<div class="t">Password</div>
+		<input type="password" id="password" name="password"
+			placeholder="비밀번호">
+
+		<div class="t">Name</div>
+		<input type="text" id="name" name="name" placeholder="이름">
+
+		<div class="t">Email</div>
+		<input type="email" id="email" name="email" placeholder="이메일">
+
+		<div class="t">Age</div>
+		<input type="number" id="age" name="age" placeholder="나이">
+
+		<div class="t">Career</div>
+		<input type="number" id="career" name="career" placeholder="경력"
+			value="0">
+
+		<div class="t">Salary</div>
+		<input type="number" id="salary" name="salary" placeholder="월급"
+			value="0">
+
+		<div class="t">오전업무</div>
+		<input type="text" id="moningTask" name="moningTask" placeholder="오전업무"
+			   value="">
+
+		<div class="t">오후업무</div>
+		<input type="text" id="afternoonTask" name="afternoonTask" placeholder="오후업무"
+			   value="">
+
+		<div class="t">일급</div>
+		<input type="number" id="wage" name="wage" placeholder="일급"
+			   value="0">
+
+		<div class="t">근무일</div>
+		<input type="number" id="day" name="day" placeholder="근무일"
+			   value="0">
+
+		<div class="t">인센티브</div>
+		<input type="number" id="incentive" name="incentive" placeholder="인센티브"
+			   value="0">
+
+		<div class="role-container">
+			<div class="t">Role</div>
+
+			<div>
+				<input type="radio" name="role" value="USER" checked />이용자
+			</div>
+			<div>
+				<input type="radio" name="role" value="PARKMANAGER" />관리자
+			</div>
+			<div>
+				<input type="radio" name="role" value="SECURITYOFFICER" />보안팀
+			</div>
+			<div>
+				<input type="radio" name="role" value="VETERINARIAN" />수의사
+			</div>
+			<div>
+				<input type="radio" name="role" value="GUIDE" />가이드
+			</div>
+			<div>
+				<input type="radio" name="role" value="ZOOKEEPER" />사육사
+			</div>
+		</div>
+
+		<input type="submit" name="submit" value="완료">
+	</form>
+
+</div>
+<script>
+	function goBack() {
+		window.history.back();
+	}
+</script>
+</body>
+</html>

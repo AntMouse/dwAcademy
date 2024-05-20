@@ -1,0 +1,14 @@
+package com.example.springsecurityjwt.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class HistoryController {
+	@GetMapping("/History")
+	public String historyP(Model model) {
+
+		return "History";
+	}
+}

@@ -1,0 +1,349 @@
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	border: 0;
+	padding: 0;
+	overflow: hidden;
+	justify-content: flex-start;
+}
+
+.wrap {
+	position: relative;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	transition: 0.5s;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+	display: block;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.container:nth-child(2) img {
+	/*map*/
+	border-radius: 20px;
+	max-width: 80%;
+	max-height: 80%;
+	height: 80%;
+}
+
+.exBox {
+	/*2번째 페이지 오른쪽박스*/
+	border-radius: 20px;
+	width: 40%;
+	height: 40%;
+	position: relative;
+	border: 5px #f0f0f0 solid;
+	background-color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	right: 40px;
+}
+
+#d1 {
+	/*2번째 페이지 오른쪽박스의 텍스트 박스*/
+	border: 0px blue solid;
+	width: 40%;
+	height: 100%;
+	float: left;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	right: 40px;
+	line-height: 30px;
+	color: #508348;
+}
+
+.container:nth-child(1) {
+	max-width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.main-image {
+	position: absolute;
+	left: 30%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.slide-in {
+	position: absolute;
+	right: -100%;
+	/* 초기 위치를 오른쪽 화면 밖으로 지정 */
+	animation: slideIn 1s forwards;
+	/* 1초간 오른쪽에서 왼쪽으로 슬라이딩되도록 애니메이션 설정 */
+}
+
+@keyframes slideIn {to { right:10%;
+	/* 애니메이션이 끝나는 위치를 지정 */
+	
+}
+
+}
+.container:nth-child(2) {
+	position: relative;
+	max-width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.container:nth-child(2)::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1;
+}
+
+.container:nth-child(2)>* {
+	/* 내부 요소들에 영향을 주지 않도록 */
+	position: relative;
+	z-index: 2;
+}
+
+.container:nth-child(2) img {
+	position: relative;
+	z-index: 2;
+}
+
+.container:nth-child(1) img {
+	max-width: 100%;
+	height: auto;
+}
+
+.container:nth-child(3) {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+}
+
+.container:nth-child(3) h1 {
+	margin-top: 50px;
+	color: #508348;
+	background-color: #f0f0f0;
+}
+
+.container:nth-child(3) article {
+	width: 20%;
+	margin: 10px;
+	background-color: #f0f0f0;
+	padding: 20px;
+	height: 50%;
+}
+
+/*.container:nth-child(3) article:nth-child(3) {
+    width: 50%;
+}*/
+.articles {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	max-width: 100%;
+	height: 65%;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+
+.articles article {
+	flex: 1 1 auto;
+	width: calc(50% - 20px);
+	margin: 10px;
+	background-color: #f0f0f0;
+	padding: 20px;
+	box-sizing: border-box;
+	height: auto;
+}
+
+.articles article img {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	max-height: 300px;
+}
+
+.articles article h2 {
+	margin-top: 0;
+	color: #508348;
+}
+
+.articles article:hover {
+	transform: translateY(-5px) rotate(-1deg);
+	box-shadow: -3px 10px 6px rgba(0, 0, 0, 0.075);
+}
+
+.articles article::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: 15px solid;
+	border-bottom-color: transparent;
+	border-left-color: transparent;
+	opacity: 0.1;
+	border-top-right-radius: 3px;
+}
+
+.articles article h2::before {
+	content: none;
+	font-weight: normal;
+	opacity: 0.7;
+}
+
+.articles article p {
+	margin-left: 1em;
+}
+
+@font-face {
+	font-family: "NEXON Lv1 Gothic OTF";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+body::after {
+	content: "";
+	background-image:
+		url(https://cdn.pixabay.com/photo/2017/11/12/13/37/forest-2942477_1280.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.7;
+	z-index: -1;
+}
+
+body {
+	font-family: "NEXON Lv1 Gothic OTF";
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 0;
+	padding: 0;
+}
+
+header {
+	background-color: #dee2d7;
+	color: #000000;
+	display: flex;
+	align-items: center;
+	border-bottom: 2px solid #508348;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+	padding: 10px;
+}
+
+.logo {
+	margin-left: 10px;
+	text-align: center;
+}
+
+.logo img {
+	height: 50px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+nav {
+	flex: 1; /* 네비게이션 영역이 남은 공간을 모두 차지하도록 설정 */
+}
+
+nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+nav ul li {
+	margin-right: 10px;
+}
+
+nav ul li a {
+	display: block;
+	padding: 15px 50px;
+	color: #508348;
+	font-style: bord;
+	font-size: 15px;
+	text-decoration: none;
+	transition: 0.2s linear;
+}
+
+.header-container {
+	text-align: right;
+	margin-right: 10px;
+}
+
+.header-container span {
+	font-style: bord;
+	font-size: 15px;
+	margin-right: 20px;
+	color: #508348;
+}
+
+.header-container span a:visited {
+	color: #508348;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #dee2d7;
+	color: #333;
+	text-align: center;
+	padding: 5px 0;
+	height: 50px;
+}
+
+.visitor {
+	/*display: inline-block; */
+	/* height: 10px; */
+	/* border: 3px solid red; /* s빨간색 테두리 추가 */
+	/* writing-mode: horizontal-tb; /* 가로 쓰기 방향으로 설정 */
+
+	color: white; /* 글자를 흰색으로 설정 */
+	position: absolute;
+	top: 650px;
+	right: 230px;
+	width: 300px;
+	text-shadow:
+			-2px -2px 0 #111,
+			2px -2px 0 #111,
+			-2px  2px 0 #111,
+			2px  2px 0 #111;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Title</title>
+</head>
+
+<script>
+	function passwordValidation() {
+		let memberName = document.getElementById("memberName").value;
+		let password = document.getElementById("password").value;
+
+		let check = /(?=.{8,})/;
+
+		if (check.test(password)) {
+			return true;
+		} else {
+			alert("비밀번호는 최소 8 자리 입니다.");
+			return false;
+		}
+	}
+	function goBack() {
+		window.history.back();
+	}
+
+	// 회원가입 실패 시에 alert 창을 띄우는 함수
+</script>
+<link href="signup.css" rel="stylesheet" />
+<body>
+	<!--스프링 서버에서는 id가 아닌 name으로 설정해주어야 인식함-->
+	<div id="content">
+	<button id="goBackButton" onclick="goBack()">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.66 7.93L16.24 6.5 10.5 12l5.74 5.66 1.41-1.41L13.32 12l4.34-4.07z"/></svg>
+		</button>
+		<div class="mt">SignUp</div>
+
+		<!-- JavaScript로 회원가입 실패 시 alert 창 띄우기 -->
+
+		<form method="POST" action="/api/signup"
+			onsubmit="return passwordValidation()">
+			<div class="t">MemberName</div>
+			<input type="text" id="memberName" name="memberName"
+				placeholder="아이디" />
+
+			<div class="t">Password</div>
+			<input type="password" id="password" name="password"
+				placeholder="비밀번호" />
+
+			<div class="t">Name</div>
+			<input type="text" id="name" name="name" placeholder="이름" />
+
+			<div class="t">Email</div>
+			<input type="email" id="email" name="email" placeholder="이메일" />
+
+			<div class="t">Age</div>
+			<input type="number" id="age" name="age" placeholder="나이" />
+
+
+
+			<div class="form-group">
+				<div style="display: inline-block;">
+
+					<input type="hidden" id="role" name="role" placeholder="직급" value="USER" >
+					<!--        <div>Career</div>-->
+					<input type="hidden" id="career" name="career" placeholder="경력" value="0" >
+					<input type="hidden" id="salary" name="salary" placeholder="월급" value="0" >
+					<input type="hidden" id="morningTask" name="morningTask" placeholder="오전업무" value="" >
+					<input type="hidden" id="afternoonTask" name="afternoonTask" placeholder="오후업무" value="" >
+					<input type="hidden" id="wage" name="wage" placeholder="일급" value="0" >
+					<input type="hidden" id="day" name="day" placeholder="근무일" value="0" >
+					<input type="hidden" id="incentive" name="incentive" placeholder="인센티브" value="0" >
+
+
+					<input type="submit" name="submit" value="회원 가입" />
+				</div>
+			</div>
+		</form>
+	</div>
+<script type="text/javascript" src="login.js"></script>
+</body>
+</html>

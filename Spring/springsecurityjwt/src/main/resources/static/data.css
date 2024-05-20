@@ -1,0 +1,179 @@
+@font-face {
+	font-family: "NEXON Lv1 Gothic OTF";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: "NEXON Lv1 Gothic OTF";
+	margin: 0;
+	position: relative;
+	text-align: center;
+	color: #508348;
+}
+
+body::after {
+	content: "";
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.7;
+	z-index: -1;
+}
+
+.section {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	margin-top: 20px;
+}
+
+.section .left, .section .right {
+	flex: 1;
+	padding: 10px;
+}
+
+table {
+	border-collapse: collapse;
+	margin-top: 20px;
+	margin-left: 250px; 
+	margin-right: 50px; 
+	margin-bottom: 50px;
+	width: calc(100% - 50px); 
+}
+
+th, td {
+	border: 1px solid #333;
+	padding: 8px;
+	text-align: center;
+}
+
+th {
+	background-color: #dee2d7;
+	color: #508348;
+	font-size: 16px;
+}
+
+tr {
+	background-color: #E5EBDF;
+	color: #508348;
+	font-size: 14px;
+}
+
+tr:nth-child(even) {
+	background-color: #F1F7EB;
+	color: #508348;
+}
+
+footer {
+	text-align: center;
+	margin-top: 20px;
+	color: #333;
+}
+
+.right {
+	float: right;
+	width: calc(50% - 300px); 
+	padding-top: 50px;
+	margin-right: 50px; 
+	margin-top:50px;
+}
+
+.right form {
+	width: 80%;
+	max-width: 30%;
+	margin: auto;
+	padding: 40px;
+	border: 1px solid #dee2d7;
+	border-radius: 10px;
+	font-size: 16px;
+	background-color: rgba(255, 255, 255, 0.5);
+	position: relative;
+}
+
+.right form input[type="text"], .right form input[type="datetime-local"]
+	{
+	width: calc(100% - 20px);
+	margin-bottom: 10px;
+}
+
+.right form button {
+	width: calc(100% - 20px);
+}
+
+form input[type="text"], form input[type="datetime-local"], form select,
+	form input[type="number"], form textarea {
+	width: calc(100% - 20px);
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #dee2d7;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+form input[type="submit"], form button[type="submit"] {
+	width: calc(100% - 20px);
+	padding: 10px;
+	font-size: 16px;
+	background-color: #508348;
+	color: #dee2d7;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+form input[type="submit"]:hover, form button[type="submit"]:hover {
+	background-color: #dee2d7;
+	color: #508348;
+}
+
+form input[type="submit"]:focus, form button[type="submit"]:focus {
+	outline: none;
+}
+
+form select {
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #dee2d7;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+form select option {
+	font-size: 16px;
+	padding: 10px;
+}
+
+#goBackButton {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background-color: #508348;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+#goBackButton:hover {
+	background-color: #dee2d7;
+}
+
+#goBackButton:focus {
+	outline: none;
+}
+
+#goBackButton svg {
+	vertical-align: middle;
+	margin-right: 4px;
+}

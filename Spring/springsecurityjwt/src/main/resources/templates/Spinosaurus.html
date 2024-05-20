@@ -1,0 +1,224 @@
+<!DOCTYPE HTML>
+<html xmlns:ns="http://www.thymeleaf.org">
+<head>
+<title>Spinosaurus</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<link href="main.css" rel="stylesheet">
+<body style="overflow-x: hidden">
+	<div id="move1"></div>
+	<header>
+		<div class="logo">
+			<a href="/index.html">
+				<img src="img\logo.png" alt="로고">
+			</a>
+		</div>
+		<nav>
+			<ul>
+				<li class="sub-menu">
+					<a
+							href="/History"
+							onmouseover="showSubMenu(event, 'parkSubMenu')"
+							onmouseout="hideSubMenu('parkSubMenu')"
+					>공원 소개</a>
+				</li>
+				<li class="sub-menu">
+					<a
+							href="/Tyrannosaurus"
+							onmouseover="showSubMenu(event, 'tyrannoSubMenu')"
+							onmouseout="hideSubMenu('tyrannoSubMenu')"
+					>티라노사우루스</a
+					>
+				</li>
+				<li class="sub-menu">
+					<a
+							href="/Mosasaurus"
+							onmouseover="showSubMenu(event, 'mossaSubMenu')"
+							onmouseout="hideSubMenu('mossaSubMenu')"
+					>모사사우루스</a
+					>
+				</li>
+				<li class="sub-menu">
+					<a
+							href="/Spinosaurus"
+							onmouseover="showSubMenu(event, 'spinoSubMenu')"
+							onmouseout="hideSubMenu('spinoSubMenu')"
+					>스피노사우루스</a
+					>
+				</li>
+				<li class="sub-menu">
+					<a
+							href="/Triceratops"
+							onmouseover="showSubMenu(event, 'treeSubMenu')"
+							onmouseout="hideSubMenu('treeSubMenu')"
+					>트리케라톱스</a>
+				</li>
+				<li class="sub-menu">
+					<a
+							href="/Pteranodon"
+							onmouseover="showSubMenu(event, 'pterraSubMenu')"
+							onmouseout="hideSubMenu('pterraSubMenu')"
+							onfocus="showSubMenu(event, 'pterraSubMenu')"
+							onblur="hideSubMenu('pterraSubMenu')"
+					>프테라노돈</a>
+
+				</li>
+				<li class="sub-menu">
+					<a
+							href="/Employee"
+							onmouseover="showSubMenu(event, 'staffSubMenu')"
+							onmouseout="hideSubMenu('staffSubMenu')"
+					>직원 소개</a
+					>
+				</li>
+			</ul>
+		</nav>
+		<!-- 버튼 영역 -->
+		<div class="header-container">
+			<span id="employeeInfoButton" style="display:none"><a href="/myInfo">내정보</a></span>
+			<span id="loginButton" style="display:none"><a href="/login">로그인</a></span>
+			<span>|</span>
+			<span id="signupButton" style="display:none"><a href="/signup">회원가입</a></span>
+			<span id="logoutButton" style="display:none"><a href="/api/logout">로그아웃</a></span>
+		</div>
+	</header>
+	   
+	
+
+	<nav class="nav-left">
+	    <div class="inner-nav">
+    	<div class="bar top-bar"></div> <!-- 위쪽 막대기 -->
+        <div class="nav-item"><a href="#move1"><img src="img/spino1.png" alt="Mosasaurus1" width="100%" height="100%"></a></div>
+        <div class="nav-item"><a href="#move2"><img src="img/spino2.png" alt="Mosasaurus2" width="100%" height="100%"></a></div>
+        <div class="nav-item"><a href="#move3"><img src="img/spino3.png" alt="Mosasaurus3" width="100%" height="100%"></a></div>
+        <div class="nav-item"><a href="#p7"><img src="img/spino4.png" alt="Mosasaurus4" width="100%" height="100%"></a></div>
+        <div class="bar bottom-bar"></div> <!-- 아래쪽 막대기 -->
+    	</div>
+	</nav>
+	<nav class="nav-right">
+	</nav>
+		<div class="headerBlank"></div>
+	<tit class="title"> <b>Spinosaurus</b> </tit>
+
+	<div class="sectionAll">
+
+
+		<div class="box1">
+			<img src="img/spino1.png" alt="티노2" width="30%" height="80%"
+				class="fig1">
+
+			<aside class="aside1">
+				<div id="p"></div>
+				<div id="p2"></div>
+				<div id="move2"></div>
+			</aside>
+		</div>
+
+
+		<div class="box2">
+			<img src="img/spino2.png" alt="티노2" width="30%" height="80%"
+				class="fig2">
+			<aside class="aside2">
+				<div id="p3"></div>
+				<div id="p4"></div>
+				<div id="move3"></div>
+			</aside>
+		</div>
+
+		<div class="box3">
+			<img src="img/spino3.png" alt="티노2" width="30%" height="80%"
+				class="fig3">
+
+			<aside class="aside3">
+				<div id="p5"></div>
+				<div id="p6"></div>
+			</aside>
+		</div>
+
+
+		<div class="box4">
+			<img src="img/spino4.png" alt="티노2" width="30%" height="80%"
+				class="fig4">
+			<aside class="aside4">
+				<div id="p7"></div>
+				<div id="p8"></div>
+			</aside>
+		</div>
+	</div>
+	<footer>
+		<p>&copy; 2024. 모든 권리 보유</p>
+	</footer>
+	<script type="text/javascript" src="login.js"></script>
+	<script>
+		window.onload = function pageLoad() {
+			var p = document.getElementById("p");
+			var dinoSpecies = "[[${spino1.dinoSpecies}]]";
+			var dinoName = "[[${spino1.dinoName}]]";
+			var dinoAge = "[[${spino1.dinoAge}]]";
+			var dinoWeight = "[[${spino1.dinoWeight}]]";
+			var dinoDiet = "[[${spino1.dinoDiet}]]";
+
+			var text2 = "<li>종 : " + dinoSpecies + "<br>" + "<li>이름 : "
+					+ dinoName + "<br>" + "<li>나이 : " + dinoAge + "살<br>"
+					+ "<li>몸무게 : " + dinoWeight + "kg<br>" + "<li>식성 : "
+					+ dinoDiet + "<br><br><hr>";
+			p.innerHTML = text2;
+
+			var p2 = document.getElementById("p2");
+			p2.innerHTML = "스피노 사우루스는 공통적으로 사납고 호전적입니다.<br>"
+					+ "호전적인 스피노 사우루스는 서로의 영역을 넓히려고 서로 싸우기도 하고 먹이를 놓고 쟁탈전을 하기도 합니다."
+					+ " Jack은 항상 주변을 경계하고 먹이에 대하여 욕심이 많습니다.";
+
+			var p = document.getElementById("p3");
+			var dinoSpecies = "[[${spino2.dinoSpecies}]]";
+			var dinoName = "[[${spino2.dinoName}]]";
+			var dinoAge = "[[${spino2.dinoAge}]]";
+			var dinoWeight = "[[${spino2.dinoWeight}]]";
+			var dinoDiet = "[[${spino2.dinoDiet}]]";
+
+			var text2 = "<li>종 : " + dinoSpecies + "<br>" + "<li>이름 : "
+					+ dinoName + "<br>" + "<li>나이 : " + dinoAge + "살<br>"
+					+ "<li>몸무게 : " + dinoWeight + "kg<br>" + "<li>식성 : "
+					+ dinoDiet + "<br><br><hr>";
+			p.innerHTML = text2;
+			var p2 = document.getElementById("p4");
+			p2.innerHTML = "Luna는 자신의 영역에 대한 집착이 많은 공룡입니다.<br>"
+					+ "자신을 제외한 움직이는 모든것들을 경계하고 쫒아내려고 하는 공룡입니다.";
+
+			var p = document.getElementById("p5");
+			var dinoSpecies = "[[${spino3.dinoSpecies}]]";
+			var dinoName = "[[${spino3.dinoName}]]";
+			var dinoAge = "[[${spino3.dinoAge}]]";
+			var dinoWeight = "[[${spino3.dinoWeight}]]";
+			var dinoDiet = "[[${spino3.dinoDiet}]]";
+
+			var text2 = "<li>종 : " + dinoSpecies + "<br>" + "<li>이름 : "
+					+ dinoName + "<br>" + "<li>나이 : " + dinoAge + "살<br>"
+					+ "<li>몸무게 : " + dinoWeight + "kg<br>" + "<li>식성 : "
+					+ dinoDiet + "<br><br><hr>";
+			p.innerHTML = text2;
+
+			var p2 = document.getElementById("p6");
+			p2.innerHTML = "Bruno는 매일 같이 자신의 영역을 돌아다니며"
+					+ " 사냥을 하고 경계를 하는등 다른 3마리의 스피노사우루스 보다 큰 활동력을 가지고 있습니다";
+
+			var p = document.getElementById("p7");
+			var dinoSpecies = "[[${spino4.dinoSpecies}]]";
+			var dinoName = "[[${spino4.dinoName}]]";
+			var dinoAge = "[[${spino4.dinoAge}]]";
+			var dinoWeight = "[[${spino4.dinoWeight}]]";
+			var dinoDiet = "[[${spino4.dinoDiet}]]";
+
+			var text2 = "<li>종 : " + dinoSpecies + "<br>" + "<li>이름 : "
+					+ dinoName + "<br>" + "<li>나이 : " + dinoAge + "살<br>"
+					+ "<li>몸무게 : " + dinoWeight + "kg<br>" + "<li>식성 : "
+					+ dinoDiet + "<br><br><hr>";
+			p.innerHTML = text2;
+			var p2 = document.getElementById("p8");
+			p2.innerHTML = "Roxy는 Bruno과 비슷한 성격의 공룡입니다. 포효를 하며 돌아다니기도 하고 많은 양의 먹이도 먹습니다.";
+
+		}
+	</script>
+</body>
+</html>

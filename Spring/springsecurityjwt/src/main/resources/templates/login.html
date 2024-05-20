@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Title</title>
+</head>
+
+<script>
+	function loginValidation() {
+		/*비정상적 접근 거부*/
+
+		return true; /*폼 전송*/
+	}
+	function goBack() {
+		window.history.back();
+	}
+</script>
+<link href="login.css" rel="stylesheet" />.
+<link href="header.css" rel="stylesheet" />
+
+<body  style="overflow-y: hidden">
+<header>
+	<div class="logo">
+		<a href="/index.html">
+			<img src="img\logo.png" alt="로고">
+		</a>
+	</div>
+	<nav>
+		<ul>
+			<li class="sub-menu">
+				<a
+						href="/History"
+						onmouseover="showSubMenu(event, 'parkSubMenu')"
+						onmouseout="hideSubMenu('parkSubMenu')"
+				>공원 소개</a>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Tyrannosaurus"
+						onmouseover="showSubMenu(event, 'tyrannoSubMenu')"
+						onmouseout="hideSubMenu('tyrannoSubMenu')"
+				>티라노사우루스</a
+				>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Mosasaurus"
+						onmouseover="showSubMenu(event, 'mossaSubMenu')"
+						onmouseout="hideSubMenu('mossaSubMenu')"
+				>모사사우루스</a
+				>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Spinosaurus"
+						onmouseover="showSubMenu(event, 'spinoSubMenu')"
+						onmouseout="hideSubMenu('spinoSubMenu')"
+				>스피노사우루스</a
+				>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Triceratops"
+						onmouseover="showSubMenu(event, 'treeSubMenu')"
+						onmouseout="hideSubMenu('treeSubMenu')"
+				>트리케라톱스</a>
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Pteranodon"
+						onmouseover="showSubMenu(event, 'pterraSubMenu')"
+						onmouseout="hideSubMenu('pterraSubMenu')"
+						onfocus="showSubMenu(event, 'pterraSubMenu')"
+						onblur="hideSubMenu('pterraSubMenu')"
+				>프테라노돈</a>
+
+			</li>
+			<li class="sub-menu">
+				<a
+						href="/Employee"
+						onmouseover="showSubMenu(event, 'staffSubMenu')"
+						onmouseout="hideSubMenu('staffSubMenu')"
+				>직원 소개</a
+				>
+			</li>
+		</ul>
+	</nav>
+	<!-- 버튼 영역 -->
+	<div class="header-container">
+		<span id="employeeInfoButton" style="display:none"><a href="/myInfo">내정보</a></span>
+		<span id="loginButton" style="display:none"><a href="/login">로그인</a></span>
+		<span>|</span>
+		<span id="signupButton" style="display:none"><a href="/signup">회원가입</a></span>
+		<span id="logoutButton" style="display:none"><a href="/api/logout">로그아웃</a></span>
+	</div>
+</header>
+<div class="container">
+	<div id="login">
+	<button id="goBackButton" onclick="goBack()">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.66 7.93L16.24 6.5 10.5 12l5.74 5.66 1.41-1.41L13.32 12l4.34-4.07z"/></svg>
+	</button>
+	<div class="mt">Login</div>
+	<form method="POST" action="/api/login"
+		  onsubmit="return loginValidation()">
+		<div class="t">MemberName</div>
+		<input type="text" id="memberName" name="memberName" placeholder="아이디" />
+		<div class="t">Password</div>
+		<input type="password" id="password" name="password" placeholder="비밀번호"/>
+		<input type="submit" name="submit" value="로그인" />
+
+		<button type="button" onclick="location.href='/signup'">회원가입</button>
+	</form>
+</div>
+</div>
+<script type="text/javascript" src="login.js"></script>
+
+</body>
+</html>

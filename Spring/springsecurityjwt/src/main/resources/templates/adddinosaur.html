@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Dinosaur</title>
+</head>
+
+<link href="Add.css" rel="stylesheet">
+<body>
+	<!-- 공룡 추가 폼 -->
+	<div id="box">
+		<button id="goBackButton" onclick="goBack()">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.66 7.93L16.24 6.5 10.5 12l5.74 5.66 1.41-1.41L13.32 12l4.34-4.07z"/></svg>
+		</button>
+		<div class="headtitle">Add Dinosaur</div>
+
+		<form method="POST" action="/api/addDinosaur"
+			onsubmit="return validateForm()">
+			<div class="t">Dinosaur Name</div>
+			<input type="text" id="dinoName" name="dinoName"
+				placeholder="Dinosaur Name">
+
+			<div class="t">Dinosaur Age</div>
+			<input type="number" id="dinoAge" name="dinoAge"
+				placeholder="Dinosaur Age">
+
+			<div class="t">Dinosaur Weight</div>
+			<input type="number" id="dinoWeight" name="dinoWeight"
+				placeholder="Dinosaur Weight">
+
+			<div class="t">Dinosaur Diet</div>
+			<input type="text" id="dinoDiet" name="dinoDiet"
+				placeholder="Dinosaur Diet">
+
+			<div class="t">Dinosaur Species</div>
+			<input type="text" id="dinoSpecies" name="dinoSpecies"
+				placeholder="Dinosaur Species"> <input type="submit"
+				value="Add Dinosaur">
+		</form>
+
+	</div>
+
+	<script>
+		function validateForm() {
+			var dinoName = document.getElementById("dinoName").value.trim();
+			var dinoAge = document.getElementById("dinoAge").value.trim();
+			var dinoWeight = document.getElementById("dinoWeight").value.trim();
+			var dinoDiet = document.getElementById("dinoDiet").value.trim();
+			var dinoSpecies = document.getElementById("dinoSpecies").value
+					.trim();
+
+			if (dinoName === "" || dinoAge === "" || dinoWeight === ""
+					|| dinoDiet === "" || dinoSpecies === "") {
+				alert("모든 필드를 채워주세요.");
+				return false;
+			}
+
+			return true;
+		}
+
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+
+</body>
+</html>

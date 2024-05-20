@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>공원 관리 정보</title>
+<link href="/data.css" rel="stylesheet" />
+</head>
+<body>
+	<h1>공원 관리 정보</h1>
+	<button id="goBackButton" onclick="goBack()">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M17.66 7.93L16.24 6.5 10.5 12l5.74 5.66 1.41-1.41L13.32 12l4.34-4.07z"/></svg>
+	</button>
+	<hr>
+	<h2>공룡 건강 관리</h2>
+	<hr>
+	<div class="section">
+		<div class="left">
+			<table>
+				<tr>
+					<th>공룡 이름</th>
+					<th>검진 일자</th>
+					<th>공룡 상태</th>
+					<th>전달 사항</th>
+				</tr>
+				<tr th:each="health : ${healths}">
+					<td th:text="${health.name}"></td>
+					<td th:text="${health.date}"></td>
+					<td th:text="${health.stat}"></td>
+					<td th:text="${health.etc}"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="right">
+			<form action="/new-health" method="post">
+				공룡 이름: <input type="text" name="name" placeholder="공룡 이름"><br>
+				점검 날짜: <input type="datetime-local" name="date"
+					max="2050-12-31 23:59" min="2024-01-01 00:00" th:value="${ldt}"><br>
+				검진 결과: <select name="stat">
+					<option value="양호" selected>좋음</option>
+					<option value="보통">보통</option>
+					<option value="나쁨">나쁨</option>
+				</select><br> 전달 사항: <input type="text" name="etc" placeholder="전달 사항"><br>
+				<button type="submit">저장</button>
+			</form>
+		</div>
+	</div>
+	<br>
+	<hr>
+	<h2>공룡 급식 관리</h2>
+	<hr>
+	<div class="section">
+		<div class="left">
+			<table>
+				<tr>
+					<th>공룡 이름</th>
+					<th>급여 일자</th>
+					<th>먹이 종류</th>
+					<th>급여 량(단위:kg)</th>
+					<th>전달 사항</th>
+				</tr>
+				<tr th:each="food : ${foods}">
+					<td th:text="${food.name}"></td>
+					<td th:text="${food.date}"></td>
+					<td th:text="${food.foodname}"></td>
+					<td th:text="${food.foodweight}"></td>
+					<td th:text="${food.etc}"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="right">
+			<form action="/new-food" method="post">
+				공룡 이름: <input type="text" name="name" placeholder="공룡 이름"><br>
+				급여 날짜: <input type="datetime-local" name="date"
+					max="2050-12-31T23:59" min="2024-01-01T00:00" th:value="${ldt}"><br>
+				급여 먹이: <select name="foodname">
+					<option value=" 고기" selected>고기</option>
+					<option value="풀">풀</option>
+					<option value="물고기">물고기</option>
+				</select><br> 급여 량: <input type="number" name="foodweight"
+					placeholder="0" min="0"><br> 전달 사항: <input type="text"
+					name="etc" placeholder="전달 사항"><br>
+				<button type="submit">저장</button>
+			</form>
+		</div>
+	</div>
+	<hr>
+	<h2>공원 안점 점검</h2>
+	<hr>
+	<div class="section">
+		<div class="left">
+			<table>
+				<tr>
+					<th>점검 일자</th>
+					<th>공룡 우리 상태</th>
+					<th>공원 시설 상태</th>
+					<th>전달 사항</th>
+				</tr>
+				<tr th:each="safety : ${parksafes}">
+					<td th:text="${safety.date}"></td>
+					<td th:text="${safety.dinoCage}"></td>
+					<td th:text="${safety.parkFacility}"></td>
+					<td th:text="${safety.etc}"></td>
+				</tr>
+			</table>
+		</div>
+		<div class="right">
+			<form action="/new-safe" method="post">
+				점검 일자: <input type="datetime-local" name="date"
+					max="2050-12-31T23:59" min="2024-01-01T00:00" th:value="${ldt}"><br>
+				공룡 우리 상태: <select name="dinoCage">
+					<option value="양호" selected>양호</option>
+					<option value="나쁨">나쁨</option>
+				</select><br> 공원 시설 상태: <select name="parkFacility">
+					<option value="양호" selected>양호</option>
+					<option value="나쁨">나쁨</option>
+				</select><br> 전달 사항: <input type="text" name="etc" placeholder="전달 사항"><br>
+				<button type="submit">저장</button>
+			</form>
+		</div>
+	</div>
+	<footer>
+		<p>관리자 전용 페이지</p>
+	</footer>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			window.addEventListener("scroll", function() {
+				var footer = document.querySelector("footer");
+				var bodyHeight = document.body.clientHeight;
+				var windowHeight = window.innerHeight;
+				var scrollPosition = window.scrollY || window.pageYOffset
+						|| document.body.scrollTop || 0;
+
+				if (scrollPosition + windowHeight >= bodyHeight) {
+					footer.style.display = "block";
+				} else {
+					footer.style.display = "none";
+				}
+			});
+		});
+		
+		function goBack() {
+			window.history.back();
+		}
+	</script>
+</body>
+</html>
