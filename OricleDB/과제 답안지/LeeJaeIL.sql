@@ -1,0 +1,178 @@
+/*
+COURSE : 코스
+ENROLLMENT : 등록
+GRADE : 등급
+GRADE CONVERSION : 등급 변경
+GRADE TYPE : 등급 유형
+GRADE TYPE WEIGHT : 등급 유형 중량
+INSTRUCTOR : 강사
+SECTION : 섹션
+STUDENT : 학생
+ZIPCODE : 우편번호
+*/
+
+-- 데이터에 시간도 표시하기
+-- 데이터에 시간이 출력이 안 돼서 추가했습니다.
+-- 데이터에 시간이 출력이 된다면 실행하지 않아도 됩니다.
+ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MON-RRRR HH24:MI:SS';
+
+-- 1번
+SELECT * 
+FROM SECTION
+WHERE TO_CHAR(START_DATE_TIME, 'HH24:MI') = '10:30';
+
+-- 2번
+SELECT TO_CHAR(START_DATE_TIME, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') AS DAY, SECTION_ID
+FROM SECTION
+WHERE SECTION_ID IN (99, 89, 105)
+ORDER BY 
+    CASE 
+        WHEN TO_CHAR(START_DATE_TIME, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') = 'MON' THEN 1
+        WHEN TO_CHAR(START_DATE_TIME, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') = 'TUE' THEN 2
+        WHEN TO_CHAR(START_DATE_TIME, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') = 'WED' THEN 3
+        WHEN TO_CHAR(START_DATE_TIME, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') = 'THU' THEN 4
+        WHEN TO_CHAR(START_DATE_TIME, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') = 'FRI' THEN 5
+        WHEN TO_CHAR(START_DATE_TIME, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') = 'SAT' THEN 6
+        WHEN TO_CHAR(START_DATE_TIME, 'DY', 'NLS_DATE_LANGUAGE=ENGLISH') = 'SUN' THEN 7
+    END;
+
+-- 3번
+SELECT 
+    DISTINCT TO_CHAR(NVL(COST, 0), '$999,999,990.99') AS COST
+FROM 
+    COURSE
+ORDER BY 
+    COST;
+    
+-- 4번
+SELECT *
+FROM GRADE_TYPE
+WHERE EXTRACT(YEAR FROM CREATED_DATE) = 1998;
+
+-- 5번
+/* 
+SELECR은 올바른 키워드가 아닙니다. 올바른 키워드는 SELECT입니다.
+코드 마지막에 ';' 문자가 누락 되었습니다. 마지막에 ';' 문자를 넣어줘야 합니다.
+따라서 코드를 올바르게 수정하면 다음과 같습니다.
+*/
+SELECT ZIP + 100
+FROM ZIPCODE;
+
+-- 6번
+SELECT s.STUDENT_ID, e.ENROLL_DATE
+FROM STUDENT s
+JOIN ENROLLMENT e ON s.STUDENT_ID = e.STUDENT_ID
+WHERE TO_CHAR(e.ENROLL_DATE, 'YYYY-MM-DD') = '2007-01-30';
+
+-- 7번
+/*
+1. WHERE 절: 데이터베이스에서 가장 먼저 실행되는 절입니다. 조건에 맞는 행만을 선택합니다. 
+여기서는 TRUNC(ENROLL_DATE) > TO_DATE('2/16/2007', 'MM/DD/YYYY') 조건에 맞는 행만을 선택합니다. 
+날짜 데이터도 크기를 비교할 수 있고, 과거의 날짜와 현재의 날짜 중에는 현재의 날짜가 더 큰 값입니다.
+따라서 이 조건은 'ENROLL_DATE'가 '2007-02-16' 이후인 행을 선택합니다.
+
+2. GROUP BY 절: WHERE 절 다음에 실행됩니다. GROUP BY 절에 지정된 열을 기준으로 행을 그룹화합니다. 
+여기서는 'SECTION_ID'와 'FINAL_GRADE' 열을 기준으로 그룹화됩니다.
+
+3. HAVING 절: GROUP BY 절 이후에 실행됩니다. 그룹에 대한 조건을 지정합니다. 
+여기서는 그룹에 속한 행의 수가 5보다 큰 경우에만 그룹을 선택합니다.
+
+따라서 SQL 문의 실행 순서는 WHERE -> GROUP BY -> HAVING 입니다.
+*/
+SELECT SECTION_ID, COUNT(*), FINAL_GRADE FROM ENROLLMENT
+WHERE TRUNC(ENROLL_DATE) > TO_DATE('2/16/2007', 'MM/DD/YYYY')
+GROUP BY SECTION_ID, FINAL_GRADE
+HAVING COUNT(*) > 5;
+
+-- 8번
+-- 코스 비용의 값이 다른 경우의 사례를 나타냈습니다.
+SELECT COUNT(DISTINCT COST) AS UNIQUE_COST_COUNT
+FROM COURSE;
+
+-- 9번
+SELECT COUNT(*) AS STUDENT_COUNT
+FROM STUDENT s
+JOIN ZIPCODE z ON s.ZIP = z.ZIP
+WHERE z.ZIP = '10025';
+
+-- 10번
+SELECT EMPLOYER AS EMPLOYER_NAME, COUNT(*) AS STUDENT_COUNT
+FROM STUDENT
+GROUP BY EMPLOYER
+HAVING COUNT(*) >= 4;
+
+-- 11번
+SELECT
+    I.INSTRUCTOR_ID,
+    I.FIRST_NAME,
+    I.LAST_NAME,
+    COUNT(S.SECTION_ID) AS COURSE_COUNT
+FROM
+    INSTRUCTOR I
+LEFT JOIN
+    SECTION S
+ON
+    I.INSTRUCTOR_ID = S.INSTRUCTOR_ID
+GROUP BY
+    I.INSTRUCTOR_ID, I.FIRST_NAME, I.LAST_NAME;
+
+-- 12번
+/*
+이 SQL 쿼리는 SECTION 테이블에서 중복된 start_date_time과 location을 가지는 섹션을 찾는 것을 해결합니다.
+즉, 동일한 시간과 장소에서 중복된 섹션이 있는지 확인하고자 합니다. 
+결과적으로 COUNT(*)이 1보다 큰 섹션들을 반환합니다. 
+이를 통해 중복된 섹션들을 식별할 수 있습니다.
+*/
+SELECT COUNT(*), START_DATE_TIME, location 
+FROM section
+GROUP BY START_DATE_TIME, location
+HAVING COUNT(*) > 1;
+
+-- 13번
+-- 2가지 답변이 있습니다.
+
+-- 13-1 중간 학기를 임의로 계산한 경우
+SELECT 
+    S.COURSE_NO,
+    C.DESCRIPTION AS COURSE_DESCRIPTION,
+    MAX(G.NUMERIC_GRADE) AS HIGHEST_GRADE,
+    CASE 
+        WHEN COUNT(GTW.GRADE_TYPE_CODE) = 0 THEN NULL -- 중간 학기가 없는 경우
+        ELSE
+            TRUNC(S.START_DATE_TIME + ((MAX(GTW.NUMBER_PER_SECTION) / 2) * 7)) -- 중간 학기의 시작일 계산
+    END AS MIDTERM_START_DATE
+FROM 
+    SECTION S
+JOIN 
+    COURSE C ON S.COURSE_NO = C.COURSE_NO
+LEFT JOIN 
+    GRADE G ON S.SECTION_ID = G.SECTION_ID
+LEFT JOIN 
+    GRADE_TYPE_WEIGHT GTW ON S.SECTION_ID = GTW.SECTION_ID
+GROUP BY 
+    S.COURSE_NO, C.DESCRIPTION, S.START_DATE_TIME
+ORDER BY 
+    S.COURSE_NO;
+    
+-- 13-2 중간학기를 임의로 계산하지 않은 경우
+SELECT
+    c.COURSE_NO,
+    c.DESCRIPTION AS COURSE_DESCRIPTION,
+    MAX(g.NUMERIC_GRADE) AS HIGHEST_GRADE
+FROM
+    SECTION s
+    JOIN COURSE c ON s.COURSE_NO = c.COURSE_NO
+    LEFT JOIN GRADE g ON s.SECTION_ID = g.SECTION_ID
+GROUP BY
+    c.COURSE_NO, c.DESCRIPTION
+ORDER BY c.COURSE_NO;
+
+-- 14번
+/*
+SELECT SUM(order_amount) AS "Order Total"
+FROM customer_order;
+
+이 쿼리는 "CUSTOMER_ORDER" 테이블에서 어떤 특정 행을 반환하는 것이 아니라, 
+"CUSTOMER_ORDER" 테이블의 "order_amount" 열의 합계를 SUM() 함수를 사용해 
+반환하므로 결과로 반환되는 행의 수는 1입니다.
+*/
