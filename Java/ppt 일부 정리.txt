@@ -1,0 +1,172 @@
+chap14_collections_and_generics
+
+C1Collections1
+List에서는 배열처럼 특정 값을 얻을 때 변수명.get(인덱스);를 사용한다.
+List의 <>안에 들어가는 게 사용자 생성 객체라면 따로 toString를 오버라이딩 해야
+값을 출력했을 때 알아보기가 쉽다. List는 값의 순서가 보장이 되고 중복을 허용한다.
+
+Set은 HashMap를 사용. 중복 값을 허용하지 않지만 순서가 정렬되지 않는다.
+
+Map은 HashMap을 사용. 순서 보장을 안 하고, 중복을 허용하지 않지만 과정이 복잡하다.
+Map에서는 Value에 대해서는 중복을 허용합니다. 같은 값이 여러 개의 키에 대응할 수 있습니다.
+Map은 각각의 키(key)는 유일해야 하므로, 중복된 키를 허용하지 않습니다. 
+따라서 동일한 키로 값을 추가하면 이전 값은 새로운 값으로 대체됩니다.C2QueuesAndDequeues
+Queue는 먼저 넣은 값이 먼저 빠져나가는 선입 선출 구조다. new LinkedList<>(); 사용.
+변수명.poll();을 사용하면 가장 앞의 값을 리턴하고 해당 값을 삭제한다.
+poll을 2번 쓰면 1번째 값 반환 후 삭제, 2번째 값 반환 후 삭제 작업이 이어진다.
+변수명.peek();는 첫 번째요소를 제거하지 않고 값을 리턴한다.
+poll이나 peek나 첫 번째 값을 반환하지만 poll은 값을 제거하고, peek는 값을 제거하지 않는다.
+
+C3ArrayListAndLickedLisk
+List에서는 변수명.set(번호, 바꿀 내용); 으로 List 내의 내용 변경 갸능.
+변수명.remove(); 에서 값으로 숫자 또는 변수의 실제 값 중 아무거나 입력 가능.
+단, 숫자를 입력하면 리턴으로 삭제한 값을 반환하고, 실제 값을 삭제 칸에 입력하면
+true and false를 반환한다.
+
+C4Sets
+System.out.println(namesHashSet.remove("Janie")); 이런 식으로
+println에 넣었지만 결과만 출력하는 게 아니라 실제로 코드 내용도 실행이 되었다.
+
+HashSet은 요소의 순서를 보장하지 않지만, LinkedHashSet은 요소의 순서를 보장한다.
+HashSet은 LinkedHashSet과 다르게 특정한 작업을 하지 않아서 메모리를 더 적게 사용한다.
+또한 작업 속도가 더 빠르다.
+LinkedHashSet: 요소를 추가한 순서대로 저장합니다. 
+따라서 요소를 추가한 순서와 동일한 순서로 요소가 저장됩니다.
+TreeSet: 요소를 자동으로 정렬하여 저장합니다. 
+문자열인 경우에는 알파벳 순서로, 숫자인 경우에는 작은 숫자부터 큰 숫자 순서로 요소가 저장됩니다.
+
+C5Map
+Map new HashMap은 변수명.put(key, value)으로 값을 저장한다.
+기존에 있는 key 값으로 다른 value를 저장할 경우 기존 value를 덮어쓴다.
+Map.Entry<key, value> 이걸로 key와 value를 모두 값을 받을 수 있다. Entry로 key, value 타입의 변수를 선언하는 거라고 생각해도 될듯.
+변수.entrySet()를 사용하면 key와 value 값을 모두 각각 반환한다.
+변수.getKey()는 key 값을 반환하고, 변수 getValue()는 value 값을 반환한다.
+위에서는 entrySet()로 key와 value로 반환해서 그 값을 Entry에 넣고,
+Entry로 선언한 변수에 getKey 또는 getValue를 사용하면 해당 key나 value 값을 반환한다.변수명.get() 안에 key 값을 넣으면 value를 반환한다. key가 아니라 key의 값에 있는 것을 반환.
+keySet()은 Map의 모든 key 값을 반환한다.
+
+C6Queue
+offer은 add와 똑같이 ()안의 값을 Queue에 넣는다. 
+일반적으로 add보다는 offer을 사용하는 게 더 안전하다.
+offer() 메서드는 큐에 여유 공간이 없는 경우에 예외를 발생시키지 않고 false를 반환합니다. 
+즉, 요소를 큐에 추가할 수 없는 경우에도 예외를 발생시키지 않고 정상적으로 처리할 수 있습니다.
+
+Deque가 있다.
+addLast("Task 1"): Deque의 맨 끝에 "Task 1"을 추가합니다.
+offer("Task 2"): Deque의 맨 끝에 "Task 2"를 추가합니다.
+addFirst("Task 3"): Deque의 맨 앞에 "Task 3"을 추가합니다.
+offerFirst("Task 4"): Deque의 맨 앞에 "Task 4"를 추가합니다.
+
+offerFirst("Task 4");
+addFirst("Task 3");
+이 경우 맨 앞에는 3이 저장된다. 4를 맨 앞에 저장하고, addFirst로 다시 3을 맨 앞에 저장했기 때문.
+
+        Deque<String> deque1 = new LinkedList<>();
+        deque1.offer("Task 2");      
+        deque1.addLast("Task 1");
+        deque1.add("Task 5");    
+        deque1.offerFirst("Task 4");
+        deque1.addFirst("Task 3");
+
+        String head = deque1.peek();
+        System.out.println(deque1.peekLast());
+        for (String element : deque1) {
+            System.out.println(element);
+        }
+
+결과 : Task 5
+Task 3
+Task 4
+Task 2
+Task 1
+Task 5
+
+Deque는 peekLast나 pollLast로 맨 마지막의 값을 반환할 수 있다.
+
+C7Person
+Comparable 인터페이스는 자바에서 정렬 가능한 클래스를 만들기 위해 구현해야 하는 인터페이스입니다. 이 인터페이스는 단일 정렬 기준을 제공하며 해당 클래스의 인스턴스를 기준에 따라 비교할 수 있도록 합니다.
+
+public interface Comparable<T> {
+    public int compareTo(T o);
+}
+여기서 T는 비교 대상 객체의 형식을 나타냅니다. compareTo 메서드는 현재 객체(this)를 기준으로 다른 객체(o)와 비교하며, 이 메서드는 다음과 같은 규칙을 따릅니다.
+
+현재 객체(this)가 다른 객체(o)보다 작으면 음수를 반환합니다.
+현재 객체(this)가 다른 객체(o)와 같으면 0을 반환합니다.
+현재 객체(this)가 다른 객체(o)보다 크면 양수를 반환합니다.
+
+숫자나 문자열과 같은 자바의 기본 타입은 이미 Comparable 인터페이스를 구현하고 있어서, 정렬을 쉽게 할 수 있습니다. 사용자 정의 클래스에서도 이 인터페이스를 구현하여 정렬 기준을 제공할 수 있습니다.
+
+C7Person person1 = new C7Person("John", 30);
+C7Person person2 = new C7Person("Alice", 25);
+C7Person person3 = new C7Person("Bob", 35);
+
+// 나이를 기준으로 사람들을 비교
+int result1 = person1.compareTo(person2);
+int result2 = person1.compareTo(person3);
+
+1은 값이 > 0 이 된다. John이 Alice보다 나이가 많다는 걸 알 수 있다.
+2는 값이 < 0 이 된다. John이 Bob보다 나이가 어리다는 걸 알 수 있다.
+
+Comparator<C7Person> nameComparatorLambda = (p1, p2) -> 
+p1.getName().compareTo(p2.getName());
+p1, p2에 ‘->’ 다음에 있는 걸 이용해 해당 액션 실행. 여기서는 이름을 글자 순서대로 비교하는 기능을 사용했다.
+
+Comparable와 Comparator는 모두 객체를 비교하는 데 사용되는 인터페이스입니다. 하지만 사용하는 상황과 목적이 다릅니다.
+
+Comparable:
+
+객체 자체가 비교 가능한 경우 사용됩니다.
+객체가 Comparable 인터페이스를 구현하면 해당 객체들은 자연 순서(natural order)를 가지게 됩니다.
+자연 순서란 객체의 기본 정렬 순서를 의미하며, 이는 객체가 가진 데이터에 따라 결정됩니다.
+예를 들어, 숫자형 데이터나 문자열 같은 기본 데이터 타입은 이미 Comparable 인터페이스를 구현하고 있어서 내부적으로 정렬될 때 자연 순서를 따릅니다.
+주로 클래스가 자신의 인스턴스들을 정렬하거나 검색하는 경우에 사용됩니다.
+Comparator:
+
+객체들의 정렬 순서를 외부에서 제공하는 경우 사용됩니다.
+Comparator 인터페이스를 구현한 클래스는 객체의 정렬 방법을 제공합니다.
+주로 외부에서 정의된 정렬 기준에 따라 객체를 정렬하는 경우에 사용됩니다.
+여러 가지 정렬 기준이 필요한 경우에 유용합니다. 예를 들어, 이름으로 정렬하거나 나이로 정렬하는 등 다양한 방법으로 객체를 정렬할 수 있습니다.
+따라서, 사용하는 상황에 따라서 Comparable 또는 Comparator를 선택하여 적절히 활용해야 합니다. 만약 객체 자체가 이미 자연 순서를 가지고 있거나 기본 정렬 방식이 필요한 경우에는 Comparable을 사용하고, 외부에서 정의된 복잡한 정렬 기준이 필요한 경우에는 Comparator를 사용하는 것이 좋습니다.
+
+List<C7Person> personList = new ArrayList<>();
+Collections.sort(personList);
+이 코드에선 personList라는 리스트를 sort를 이용해서 List 내의 요소들을 전부 compartTo를 이용해 정렬한다. 이때 compartTo 메서드는 C7Person 클래스에서 오버라이딩 되어 있으며 그 메서드를 가지고 List 전체를 정렬한다.
+
+Collections.sort(personList, nameComparator);
+이 방식은 위와 다르게 오버라이딩된 compartTo가 아니라 nameComparator이라는 기능을 이용하여 personList를 정렬하는 기능이다. nameComparator이라는 변수는 Comparator이라는 기능을 이용해 새로운 정렬 방식을 정의했고, 여기서 sort 기능을 이용해 nameComparator에 새로운 정렬 방식으로 personList를 정렬하는 기능이다.
+
+    @Override
+    public int compareTo(C7Person other) {
+        return Integer.compare(this.age, other.age);
+    }    
+
+public static void main(String[] args) {
+        List<C7Person> personList = new ArrayList<>();
+        personList.add(new C7Person("Huub", 1));
+        personList.add(new C7Person("Joep", 4));
+        personList.add(new C7Person("Anne1", 3));
+        personList.add(new C7Person("Anne23", 3));
+        personList.add(new C7Person("Anne345", 3));
+        personList.add(new C7Person("Znne1", 7));
+        personList.add(new C7Person("Mnne1", 5));
+        /* Collections.sort(personList);
+        /*
+        for (C7Person person : personList) {
+            System.out.println(person.getName());
+        }
+        */
+
+여기서 정렬은 오버라이딩 된 compareTo 메서드를 사용한다.
+
+        Comparator<C7Person> nameComparator = (p1, p2) -> 
+        p1.getName().compareTo(p2.getName());
+        Collections.sort(personList, nameComparator);
+        
+        for (C7Person person : personList) {
+        System.out.println(person.getName());
+        }
+
+여기서 정렬은 Comparator에서 정렬 방식을 따로 정의했다. 그 방식을 변수 nameComparator에 담았고, 그걸 sort에 사용해서 정렬 방식은 nameComparator이 되었다. 오버라이딩된 CompareTo 메서드의 방식으로 정렬하지 않는다. 
+
+따로 정렬한 방식은 String 클래스에 있는 compareTo 메서드를 사용했다. p1.getName은 스트링이고 여기에 .compareTo를 사용했으니 이 compareTo는 스트링에서 오버라이딩한 메서드이다. 그 방식을 nameComparator에 담은 것. 따라서 여기서는 이름을 기준으로 요소를 정렬했다.
