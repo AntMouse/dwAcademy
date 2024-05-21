@@ -1,0 +1,48 @@
+import { useState, useCallback, useEffect } from "react";
+import { Unity, useUnityContext } from "react-unity-webgl";
+
+export function UnityGame() {
+    const {unityProvider, sendMessage, addEventListener,
+    removeEventListener
+    } = useUnityContext({
+        loaderUrl: "Build/WebGLTest.loader.js",
+        dataUrl: "Build/WebGLTest.data",
+        frameworkUrl: "Build/WebGLTest.framework.js",
+        codeUrl: "Build/WebGLTest.wasm",
+    });
+    // useState를 배열로 받아오기 때문에 [] 사용.
+    // 게임이 바로 로딩되지 않고 start버튼을 눌러야 로딩되게 하도록 이렇게 사용.
+    const [playingGame, setPlayingGame] = useState(false);
+
+    function attack() {
+        sendMessage("Player", "Attack");
+    }
+
+    const handleGameOver = useCallback((userName, score)=>{
+        console.log(userName, score);
+    }, [])
+    useEffect(()=>{
+        addEventListener("GameOver", handleGameOver);
+        return ()=>{
+            removeEventListener("GameOver", handleGameOver);
+        };
+    }, [addEventListener, removeEventListener, handleGameOver]);
+    // 마지막 부분은 안전성 때문에 사용.
+
+    // 가로 세로 길이 16:9로 고정. 1344px, 756px
+    // jsx 문법 안에서 자바스크립트를 쓰려면 {} 이걸 써줘야함. 여기 안에서 사용.
+    return <>
+        <h1>Unity Game</h1>
+        <button onClick={()=>setPlayingGame(true)}>Start Game</button>
+        <button onClick={attack}>Attack</button>
+        <div style={{width:"1344px", height:"756px", margin: "auto",
+        border: "1px solid gray"}}>
+            {
+                playingGame ? (
+                    <Unity style={{width: "100%", height: "100%"}}
+                    unityProvider={unityProvider} />
+                ) : null
+            }
+        </div>
+    </>
+}
