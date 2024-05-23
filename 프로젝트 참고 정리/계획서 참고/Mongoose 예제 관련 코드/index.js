@@ -87,6 +87,7 @@ const blog = await Blog.where('author').equals('Jesse Hall').select('title autho
 console.log(blog);
 */
 
+/*
 const user = await User.create({
     name: 'Jesse Hall',
     email: 'jesse@email.com',
@@ -101,7 +102,9 @@ const article = await Blog.create({
 });
 
 console.log(article);
+*/
 
+/*
 const article1 = await Blog.findOne({ title: 'Awesome Post!' }).populate('author');
 console.log(article1);
 
@@ -109,3 +112,15 @@ const article2 = await Blog.findById("664eda9b1a5fc9fed9b46cad").exec();
 article2.title = "Updated Title";
 await article2.save();
 console.log(article2);
+*/
+
+const firstArticle = await Blog.findOne({});
+console.log(firstArticle);
+
+firstArticle.title = "Test Title";
+await firstArticle.save();
+console.log(firstArticle);
+
+const article1 = await Blog.findById("664eddc468d5feba4c963eec", "title slug").exec();
+console.log(article1);
+
