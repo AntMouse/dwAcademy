@@ -23,3 +23,21 @@
 
 리액트랑 연동하고, 리액트에서 저장한 값을 받았을 때 오류가 안 나게 하는 코드.
 기존의 h2에 연동하는 코드에 추가를 했다.
+
+
+3.
+
+장바구니 추가 전 시큐리티 전체
+public class SecurityConfig {
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+        .csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+        .ignoringRequestMatchers(new AntPathRequestMatcher("/api/**"))) // API 요청에 대해 CSRF 무시
+        .headers((headers) -> headers.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter
+        .XFrameOptionsMode.SAMEORIGIN)));
+        return http.build();
+    }
+}
+

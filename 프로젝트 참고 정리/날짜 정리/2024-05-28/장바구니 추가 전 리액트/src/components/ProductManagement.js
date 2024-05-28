@@ -1,15 +1,18 @@
-// import logo from './logo.svg';
-// import './App.css';
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ProductForm from './ProductForm';
+import ProductList from './ProductList';
 
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
-function App() {
+// 필수 입력 항목을 설정
+const requiredFields = ['productType', 'productName', 'price'];
+
+function ProductManagement() {
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState({ productType: '', productName: '', price: '', explanation: '' });
   const [editingProduct, setEditingProduct] = useState(null);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     fetchProducts();
@@ -24,17 +27,32 @@ function App() {
     }
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    requiredFields.forEach(field => {
+      if (!form[field]) {
+        newErrors[field] = `${field} is required`;
+      }
+    });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const createProduct = async () => {
+    if (!validateForm()) return;
     try {
-      await axios.post(`${apiUrl}/api/products`, form);
+      console.log("Sending create request with data:", form);
+      const response = await axios.post(`${apiUrl}/api/products`, form);
+      console.log("Product created successfully:", response.data);
       setForm({ productType: '', productName: '', price: '', explanation: '' });
       fetchProducts();
     } catch (error) {
-      console.error("There was an error creating the product!", error);
+      console.error("There was an error creating the product!", error.response || error.message);
     }
   };
 
   const updateProduct = async () => {
+    if (!validateForm()) return;
     try {
       await axios.put(`${apiUrl}/api/products/${editingProduct.id}`, form);
       setForm({ productType: '', productName: '', price: '', explanation: '' });
@@ -73,49 +91,21 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Product Management</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="productType"
-          placeholder="Product Type"
-          value={form.productType}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="productName"
-          placeholder="Product Name"
-          value={form.productName}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Price"
-          value={form.price}
-          onChange={handleChange}
-        />
-        <textarea
-          name="explanation"
-          placeholder="Explanation"
-          value={form.explanation}
-          onChange={handleChange}
-        />
-        <button type="submit">{editingProduct ? 'Update' : 'Create'}</button>
-      </form>
-      <ul>
-        {products.map(product => (
-          <li key={product.id}>
-            {product.productName} - {product.productType} - {product.price} - {product.explanation}
-            <button onClick={() => handleEdit(product)}>Edit</button>
-            <button onClick={() => deleteProduct(product.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+    <div>
+      <ProductForm 
+        form={form} 
+        handleChange={handleChange} 
+        handleSubmit={handleSubmit} 
+        errors={errors} 
+        editingProduct={editingProduct} 
+      />
+      <ProductList 
+        products={products} 
+        handleEdit={handleEdit} 
+        deleteProduct={deleteProduct} 
+      />
     </div>
   );
 }
 
-export default App;
+export default ProductManagement;
