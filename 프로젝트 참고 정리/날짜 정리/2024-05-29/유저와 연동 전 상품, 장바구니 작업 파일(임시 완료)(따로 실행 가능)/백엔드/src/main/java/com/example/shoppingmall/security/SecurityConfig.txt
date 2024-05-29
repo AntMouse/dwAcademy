@@ -1,0 +1,43 @@
+1.
+
+        // h2 콘솔 접속용 코드 시작
+        .csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+        ).headers((headers) -> headers.addHeaderWriter
+        (new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.
+        SAMEORIGIN)))
+        // h2 콘솔 접속용 코드 끝 여기 코드는 데이터 베이스에서 h2를 사용하지 않으면 없어도 되는 코드.
+
+리액트랑 연동하기 전에 h2 콘솔에 접속하기 위한 코드.
+이 코드만 빼면 h2에 접속하기 위한 코드만 빼는 것이기 때문에 다른 기능에는 지장이 없다.
+
+
+2.
+
+        // h2 콘솔 접속 및 리액트 연동 관련 코드 시작
+        .csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+        .ignoringRequestMatchers(new AntPathRequestMatcher("/api/**"))) // API 요청에 대해 CSRF 무시
+        .headers((headers) -> headers.addHeaderWriter
+        (new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.
+        SAMEORIGIN)))
+        // h2 콘솔 접속 및 리액트 연동 관련 코드 끝.
+
+리액트랑 연동하고, 리액트에서 저장한 값을 받았을 때 오류가 안 나게 하는 코드.
+기존의 h2에 연동하는 코드에 추가를 했다.
+
+
+3.
+
+장바구니 추가 전 시큐리티 전체
+public class SecurityConfig {
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
+        .requestMatchers(new AntPathRequestMatcher("/**")).permitAll())
+        .csrf((csrf) -> csrf.ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"))
+        .ignoringRequestMatchers(new AntPathRequestMatcher("/api/**"))) // API 요청에 대해 CSRF 무시
+        .headers((headers) -> headers.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter
+        .XFrameOptionsMode.SAMEORIGIN)));
+        return http.build();
+    }
+}
+
