@@ -1,0 +1,156 @@
+1. 시작 화면의 검색창에 mysql 검색
+2. MySQL Client (MariaDB 11.3 (x64)) 실행
+3. 아래 명령어 입력하면서 계정 만들고 실행
+
+
+-------------------------
+Enter password: ********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 56
+Server version: 11.3.2-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cardb              |
+| information_schema |
+| mesozoicedendb     |
+| mysql              |
+| performance_schema |
+| spring-jwt         |
+| sys                |
++--------------------+
+7 rows in set (0.060 sec)
+
+MariaDB [(none)]> create database testdb;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cardb              |
+| information_schema |
+| mesozoicedendb     |
+| mysql              |
+| performance_schema |
+| spring-jwt         |
+| sys                |
+| testdb             |
++--------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [(none)]> select user,host, parssword from user
+    -> ;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use mysql;
+Database changed
+MariaDB [mysql]> select user,host, parssword from user
+    -> ;
+ERROR 1054 (42S22): Unknown column 'parssword' in 'field list'
+MariaDB [mysql]> select user,host, password from user;r
++-------------+-----------------+-------------------------------------------+
+| User        | Host            | Password                                  |
++-------------+-----------------+-------------------------------------------+
+| mariadb.sys | localhost       |                                           |
+| root        | localhost       | *E4F25140FFA2AED9AF9528B1514DBDE20F3D6373 |
+| root        | desktop-l4o03cm | *E4F25140FFA2AED9AF9528B1514DBDE20F3D6373 |
+| root        | 127.0.0.1       | *E4F25140FFA2AED9AF9528B1514DBDE20F3D6373 |
+| root        | ::1             | *E4F25140FFA2AED9AF9528B1514DBDE20F3D6373 |
++-------------+-----------------+-------------------------------------------+
+5 rows in set (0.006 sec)
+
+    -> Bye
+Ctrl-C -- exit!
+
+C:\Program Files\MariaDB 11.3\bin>mariadb -u root -p
+Enter password: ********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 57
+Server version: 11.3.2-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show global valiavbles like 'port';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'valiavbles like 'port'' at line 1
+MariaDB [(none)]> show global variables like 'port';
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| port          | 3306  |
++---------------+-------+
+1 row in set (0.013 sec)
+
+MariaDB [(none)]> create user 'dwshopproject' @'%' identified by '123';
+Query OK, 0 rows affected (0.348 sec)
+
+MariaDB [(none)]>
+MariaDB [(none)]> select user, host from user;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use mysql;
+Database changed
+MariaDB [mysql]> select user, host from user;
++---------------+-----------------+
+| User          | Host            |
++---------------+-----------------+
+| dwshopproject | %               |
+| root          | 127.0.0.1       |
+| root          | ::1             |
+| root          | desktop-l4o03cm |
+| mariadb.sys   | localhost       |
+| root          | localhost       |
++---------------+-----------------+
+6 rows in set (0.001 sec)
+
+MariaDB [mysql]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cardb              |
+| information_schema |
+| mesozoicedendb     |
+| mysql              |
+| performance_schema |
+| spring-jwt         |
+| sys                |
+| testdb             |
++--------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [mysql]> grant all privileges on testdb to dwshopproject @host identified by '123';
+Query OK, 0 rows affected (0.007 sec)
+
+MariaDB [mysql]> select user, host from user;
++---------------+-----------------+
+| User          | Host            |
++---------------+-----------------+
+| dwshopproject | %               |
+| root          | 127.0.0.1       |
+| root          | ::1             |
+| root          | desktop-l4o03cm |
+| dwshopproject | host            |
+| mariadb.sys   | localhost       |
+| root          | localhost       |
++---------------+-----------------+
+7 rows in set (0.001 sec)
+
+MariaDB [mysql]> use testdb;
+Database changed
+MariaDB [testdb]>
+
+
+----------------------------------------------
+
+
+
+
+
+
+
