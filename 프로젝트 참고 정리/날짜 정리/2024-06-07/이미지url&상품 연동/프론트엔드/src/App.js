@@ -5,6 +5,7 @@ import MainPage from './components/page/MainPage';
 import CartList from './components/page/cartlist'; // CartList 컴포넌트 import 경로 수정
 import useAuth from './test-list/Hooks/useAuth';
 import ProductList from './components/page/ProductList'; // ProductList 컴포넌트 import 추가
+import PriceEdit from './components/page/PriceEdit';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/main" element={<MainPage />} />
         <Route path="/cart" element={<CartList currentMember={currentMember} />} /> {/* CartList 경로 추가 */}
         <Route path="/products" element={<ProductList />} /> {/* ProductList 경로 추가 */}
+        <Route path="/priceedit" element={<PriceEdit />} />
       </Routes>
     </div>
 
