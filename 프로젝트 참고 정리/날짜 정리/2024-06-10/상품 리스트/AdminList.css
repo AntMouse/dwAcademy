@@ -1,0 +1,68 @@
+.product-list-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  .product-list {
+    list-style: none;
+    padding: 10px;
+  }
+  
+  .product-item {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .product-name {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  .product-price {
+    font-size: 18px;
+    color: #000000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .product-details {
+    font-size: 16px;
+    color: #888;
+  }
+  
+  .product-details div {
+    margin-bottom: 10px;
+  }
+  
+  .product-edit-buttons {
+    margin-top: 10px;
+  }
+  
+  .product-edit-buttons button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .product-edit-buttons button:hover {
+    background-color: #0056b3;
+  }
+
+  .product-item input[type="text"] {
+    width: calc(100% - 20px); /* 상품 항목의 패딩을 고려하여 크기 조정 */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  
