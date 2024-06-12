@@ -1,0 +1,202 @@
+/* General Container Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.product-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Table Styles */
+.table-container {
+  overflow-y: scroll; /* 평소에도 스크롤바가 나타나도록 설정 */
+  height: 400px;
+  border: 2px solid gray; /* 테두리 추가 */
+  box-sizing: border-box; /* 테두리가 컨테이너 크기에 포함되도록 설정 */
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.product-table th, .product-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.product-table th {
+  background-color: #87CEFA; /* 파란색 또는 하늘색 계열 */
+  color: white;
+  font-weight: bold;
+  position: sticky; /* 위쪽에 고정 */
+  top: 0;
+  z-index: 1; /* 다른 셀보다 앞에 위치 */
+}
+
+.product-table th::before {
+  content: "";
+  display: block;
+  height: 1px; /* 필요에 따라 조정 */
+  background-color: #87CEFA; /* 헤더와 동일한 배경색 */
+  position: absolute;
+  top: -1px; /* 헤더 바로 위에 위치 */
+  left: 0;
+  right: 0;
+}
+
+.product-table tr:nth-child(even) td {
+  background-color: #f2f2f2; /* 회색 */
+}
+
+.product-table tr:nth-child(odd) td {
+  background-color: #fff; /* 흰색 */
+}
+
+/* Form and Input Styles */
+.product-field {
+  margin-bottom: 10px;
+}
+
+.product-field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.product-input {
+  width: calc(100% - 20px);
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.product-textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* Button Styles */
+.product-edit-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.product-edit-buttons button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-edit-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.invisible-button {
+  background-color: transparent;
+  border: none;
+  color: transparent;
+  cursor: default;
+  display: inline-block;
+  height: 100%; 
+  pointer-events: none;
+
+  opacity: 0; /* 추가: 투명도 설정 */
+}
+
+/* Filter and Sort Controls */
+.filter-container,
+.sort-controls,
+.pagination-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-select,
+.filter-select:disabled {
+  width: 150px; /* 메인 타입과 서브 타입 드롭다운 메뉴의 너비를 동일하게 설정 */
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.product-input.disabled {
+  padding: 8px;
+  font-size: 14px;
+  width: 150px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.product-input.disabled,
+.filter-select:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.sort-controls label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* Pagination Styles */
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pagination-buttons .disabled {
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+/* Add styles for the new control table */
+.control-table {
+  width: 100%;
+  margin-bottom: 10px;
+  border-collapse: collapse;
+  margin-bottom: 0px; /* 상품목록 테이블과 거리 조절 */
+}
+
+.control-table th, .control-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.control-table th {
+  background-color: #f2f2f2;
+}
+
+.control-table select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.control-table label {
+  margin-right: 10px;
+  font-weight: bold;
+}
