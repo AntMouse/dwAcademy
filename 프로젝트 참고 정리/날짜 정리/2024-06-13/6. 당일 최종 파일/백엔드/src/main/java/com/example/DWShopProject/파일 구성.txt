@@ -1,0 +1,59 @@
+src
+└── main
+    └── java
+        └── com.example.DWShopProject
+            ├── config
+            │   └── DataInitializer
+            ├── controller
+            │   ├── CartController
+            │   ├── MemberController.java
+            │   ├── MemberRestController
+            │   ├── ProductController
+            │   ├── ProductTypeController
+            │   └── OrderController  // 새로 추가
+            ├── dto
+            │   ├── CartDto
+            │   ├── CartItemDto
+            │   ├── LoginDto
+            │   ├── MemberDto
+            │   ├── ProductDto
+            │   ├── OrderDto  // 새로 추가
+            │   └── OrderItemDto  // 새로 추가
+            ├── entity
+            │   ├── Cart
+            │   ├── CartItem
+            │   ├── Member
+            │   ├── Order  // 새로 추가
+            │   ├── OrderItem  // 새로 추가
+            │   ├── Product
+            │   └── ProductTypeMgmt
+            ├── enums
+            │   ├── OrderStatus  // 새로 추가
+            │   ├── ParentTypeEnum
+            │   └── ProductTypeEnum
+            ├── exception
+            │   ├── GlobalExceptionHandler
+            │   └── ResourceNotFoundException
+            ├── jwt
+            │   ├── JwtAuthFilter
+            │   └── JwtUtil
+            ├── repository
+            │   ├── CartItemRepository
+            │   ├── CartRepository
+            │   ├── MemberRepository
+            │   ├── ProductRepository
+            │   ├── OrderRepository  // 새로 추가
+            │   └── OrderItemRepository  // 새로 추가
+            ├── security
+            │   ├── MemberDetailsImpl
+            │   ├── MemberDetailsServiceImpl
+            │   ├── MemberRoleEnum
+            │   └── SecurityConfig
+            ├── service
+            │   ├── CartService
+            │   ├── MemberService
+            │   ├── ProductService
+            │   ├── OrderService  // 새로 추가
+            │   └── ProductTypeService
+            ├── DwShopProjectApplication
+            └── Test
