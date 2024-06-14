@@ -1,0 +1,140 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* 브라우저 창 크기에 맞춰 높이 설정 */
+    width: 100%;
+    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능 */
+    
+}
+
+/* 제품 상세 페이지의 메인 컨테이너 */
+.product-detail-container {
+    margin: 0 auto; /* 중앙 정렬 */
+    width: calc(100% - 400px); /* 전체 너비에서 양옆 마진 제외 */
+}
+
+/* 제품 이미지와 간단 설명을 담는 섹션 */
+.product-detail-img-info {
+    display: flex;
+    justify-content: space-around; /* 요소들 간격 일정하게 */
+    align-items: center; /* 수직 중앙 정렬 */
+    height: 600px;
+    margin: 0 200px; /* 양옆 마진 설정 */
+}
+
+.product-img, .product-detail {
+    height: 500px;
+    width: 500px;
+
+}
+
+
+.product-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* 이미지 비율 유지하며 div에 맞춤 */
+}
+
+.product-detail {
+    
+    
+}
+
+.product-img {
+    
+}
+
+.product-detail h1 {
+    color: rgb(201, 10, 10);
+}
+
+.product-detail span {
+    font-size: 14px;
+}
+
+.product-detail hr {
+    
+    border: solid 0.1px rgb(221, 221, 221);
+}
+.btn-3, .btn-5 {
+    position: relative;
+    overflow: hidden;
+    width: 250px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    border: none;
+    transition: background 0.3s ease;
+    color: white; /* 초기 글자색 하얀색 */
+    border-radius: 50px;
+}
+
+.btn-3 {
+    background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+}
+
+.btn-5 {
+    background: linear-gradient(0deg, rgba(255,27,0,1) 0%, rgb(251, 122, 2) 100%);
+    margin-top: 150px; /* 버튼 간 간격 */
+}
+
+.btn-3:hover, .btn-5:hover {
+    background: white; /* 마우스 오버 시 배경색 변경 */
+}
+
+.btn-3:hover {
+    color: rgba(2,126,251,1); /* 글자색 파란색으로 변경 */
+}
+
+.btn-5:hover {
+    color: #f0094a; /* 글자색 빨간색으로 변경 */
+}
+
+.btn-3:before, .btn-3:after, .btn-3 span:before, .btn-3 span:after,
+.btn-5:before, .btn-5:after, .btn-5 span:before, .btn-5 span:after {
+    position: absolute;
+    content: "";
+    transition: all 0.3s ease;
+}
+
+.btn-3:before, .btn-3:after, .btn-3 span:before, .btn-3 span:after {
+    background: rgba(2,126,251,1);
+}
+
+.btn-5:before, .btn-5:after, .btn-5 span:before, .btn-5 span:after {
+    background: #f0094a;
+}
+
+/* 테두리 애니메이션 */
+.btn-3:before, .btn-5:before { /* 상단 테두리 */
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.btn-3:after, .btn-5:after { /* 하단 테두리 */
+    bottom: 0; right: 0;
+    width: 100%; height: 2px;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+.btn-3 span:before, .btn-5 span:before { /* 왼쪽 테두리 */
+    top: 0; left: 0;
+    width: 2px; height: 100%;
+    transform: scaleY(0);
+    transform-origin: top;
+}
+
+.btn-3 span:after, .btn-5 span:after { /* 오른쪽 테두리 */
+    bottom: 0; right: 0;
+    width: 2px; height: 100%;
+    transform: scaleY(0);
+    transform-origin: bottom;
+}
+
+.btn-3:hover:before, .btn-3:hover:after, .btn-3 span:hover:before, .btn-3 span:hover:after,
+.btn-5:hover:before, .btn-5:hover:after, .btn-5 span:hover:before, .btn-5 span:hover:after {
+    transform: scale(1);
+}

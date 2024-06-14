@@ -1,0 +1,119 @@
+/* General Container Styles */
+.order-list-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Filter Controls */
+.order-filter-controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.order-filter-controls-select {
+  width: 200px;
+  padding: 8px;
+}
+
+/* Sort Controls */
+.order-sort-controls-container {
+  display: flex;
+  gap: 10px;
+}
+
+.order-sort-controls-select {
+  padding: 8px;
+}
+
+/* Pagination Controls */
+.order-pagination-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.order-pagination-select {
+  padding: 8px;
+}
+
+/* Table Styles */
+.order-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.order-list-table th, .order-list-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.order-list-table th {
+  background-color: #87CEFA;
+  color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.order-list-table tr:nth-child(even) td {
+  background-color: #f2f2f2;
+}
+
+.order-list-table tr:nth-child(odd) td {
+  background-color: #fff;
+}
+
+/* Pagination Buttons */
+.order-pagination-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.order-pagination-button {
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-pagination-button.active {
+  background-color: #0056b3;
+}
+
+.order-pagination-button.disabled {
+  background-color: #e0e0e0;
+  color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+/* Other Styles */
+.order-list-detail-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-list-detail-button:hover {
+  background-color: #0056b3;
+}
+
+.order-list-checkbox {
+  cursor: pointer;
+}
