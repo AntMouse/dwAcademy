@@ -1,0 +1,48 @@
+dw_shop_app
+└── images
+    ├── banners
+    ├── products
+    │   ├── accessories
+    │   │   ├── bags
+    │   │   ├── earrings
+    │   │   ├── hats
+    │   │   ├── necklaces
+    │   │   ├── rings_bracelets
+    │   │   ├── sunglasses_glasses
+    │   │   └── watches
+    │   ├── bottoms
+    │   │   ├── cotton_pants
+    │   │   ├── denim_pants
+    │   │   ├── dresses
+    │   │   ├── jogger_pants
+    │   │   ├── jumpsuits
+    │   │   ├── leggings
+    │   │   ├── skirts
+    │   │   ├── sportswear_bottoms
+    │   │   └── suit_slacks
+    │   ├── outerwear
+    │   │   ├── anorak_jackets
+    │   │   ├── cardigans
+    │   │   ├── coats
+    │   │   ├── long_padding
+    │   │   ├── moustangs
+    │   │   ├── short_padding
+    │   │   └── suits
+    │   ├── shoes
+    │   │   ├── boots
+    │   │   ├── crocs
+    │   │   ├── dress_shoes
+    │   │   ├── flats
+    │   │   ├── running_shoes
+    │   │   ├── slippers
+    │   │   └── sports_shoes
+    │   └── tops
+    │       ├── collar_tshirts
+    │       ├── hoodies
+    │       ├── knit_sweaters
+    │       ├── long_sleeve_tshirts
+    │       ├── shirts_blouses
+    │       ├── short_sleeve_tshirts
+    │       ├── sportswear_tops
+    │       └── sweatshirts
+    └── users
