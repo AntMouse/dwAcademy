@@ -15,3 +15,7 @@ api에서 enum의 displayname 값을 나오도록 수정.
 
 3-1. 검색기능 먼저. 검색 조건은 상품명, 상품설명, 카테고리(디스플레이 네임/ENUM).
 productname, explanation, category 이걸 상대연산자로 or로 넣기.
+
+3-2. 검색기능 백엔드 틀 만들기(진행중).
+
+3-3. 검색기능 테스트(진행중).
