@@ -1,0 +1,174 @@
+/* cartlist.css */
+.cart {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center; /* 로고와 장바구니 섹션을 가운데 정렬 */
+}
+
+.logo {
+  max-width: 150px;
+  margin-bottom: 20px;
+}
+
+.cart-section {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 200px; /* 최소 높이 설정 */
+  text-align: left; /* 섹션 내부 텍스트를 왼쪽 정렬 */
+}
+
+.cart-section h2 {
+  margin-top: 0;
+}
+
+.purchase-text {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: beige;
+}
+
+.inner-section {
+  display: flex;
+  justify-content: space-between; /* 요소들을 좌우로 배치 */
+}
+
+.section1 {
+  width: 65%; /* 각 섹션의 너비 설정 */
+  border: 1px solid #000000;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: beige;
+  
+}
+
+.section2 {
+  width: 25%; /* 각 섹션의 너비 설정 */
+  border: 1px solid #000000;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  height: 100%; /* 섹션 2의 높이를 100%로 설정하여 내용이 없더라도 높이가 고정되도록 합니다. */
+  background-color: beige;
+}
+
+.section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 20px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #000000; /* 실선 추가 */
+  padding-bottom: 10px; /* 실선과 글 사이 간격 추가 */
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.checkbox-item label {
+  font-size: 16px;
+  color: #333;
+}
+
+.section-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #000000;
+}
+
+.name {
+  margin-left: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.price {
+  margin-left: 15px;
+  font-size: 18px;
+  color: red;
+  font-weight: 700;
+}
+
+.select-all-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* 버튼 간 간격 추가 */
+  margin-top: 20px;
+}
+
+.select-all-container button {
+  margin-right: 10px; /* 버튼 간 간격 추가 */
+  background-color: #e0e0e6; /* 버튼 배경색 지정 */
+  padding : 7px;
+  border-radius: 5px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.quantity-control button {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.quantity-control span {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.total {
+  border-top: 1px solid #000000; /* 실선 추가 */
+  padding-top: 10px; /* 실선과 글 사이 간격 추가 */
+  text-align: right;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.checkout-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkout-button:hover {
+  background-color: #0056b3;
+}
