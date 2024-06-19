@@ -1,4 +1,4 @@
-1. 리뷰 기능 틀 만들기.
+1. 리뷰 기능 틀 만들기(완료).
 
 1-1. 리뷰 작성, 수정, 삭제 기능 만들기(완료).
 
@@ -10,3 +10,8 @@
 className = "product-list-container" 이런 식으로.
 이렇게 해야 다른 css 영향 안 받고, App.js 에서 css 영향 안 받고, 이름 안 겹처서 오류 줄어듦.
 api에서 enum의 displayname 값을 나오도록 수정.
+
+3. 검색기능, 판매량(매출), AI 채팅봇, 쇼핑제안(Top 5) 기능 마무리 짓기.
+
+3-1. 검색기능 먼저. 검색 조건은 상품명, 상품설명, 카테고리(디스플레이 네임/ENUM).
+productname, explanation, category 이걸 상대연산자로 or로 넣기.
