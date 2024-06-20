@@ -1,0 +1,67 @@
+src
+└── main
+    └── java
+        └── com.example.DWShopProject
+            ├── config
+            │   └── DataInitializer
+            ├── controller
+            │   ├── CartController
+            │   ├── MemberController
+            │   ├── MemberRestController
+            │   ├── OrderController
+            │   ├── OrderStatusController
+            │   ├── ProductController
+            │   └── ProductTypeController
+            │   └── ReviewController  // 새로 추가
+            ├── dto
+            │   ├── CartDto
+            │   ├── CartitemDto
+            │   ├── LoginDto
+            │   ├── MemberDto
+            │   ├── OrderDto
+            │   ├── OrderitemDto
+            │   ├── OrderStatusDto
+            │   ├── ProductDto
+            │   └── ReviewDto  // 새로 추가
+            ├── entity
+            │   ├── Cart
+            │   ├── Cartitem
+            │   ├── Member
+            │   ├── Order
+            │   ├── Orderitem
+            │   ├── Product
+            │   ├── ProductTypeMgmt
+            │   └── Review  // 새로 추가
+            ├── enums
+            │   ├── OrderStatus
+            │   ├── ParentTypeEnum
+            │   └── ProductTypeEnum
+            ├── exception
+            │   ├── GlobalExceptionHandler
+            │   └── ResourceNotFoundException
+            ├── jwt
+            │   ├── JwtAuthFilter
+            │   └── JwtUtil
+            ├── repository
+            │   ├── CartitemRepository
+            │   ├── CartRepository
+            │   ├── MemberRepository
+            │   ├── OrderitemRepository
+            │   ├── OrderRepository
+            │   ├── ProductRepository
+            │   └── ReviewRepository  // 새로 추가
+            ├── security
+            │   ├── MemberDetailsImpl
+            │   ├── MemberDetailsServiceImpl
+            │   ├── MemberRoleEnum
+            │   └── SecurityConfig
+            ├── service
+            │   ├── CartService
+            │   ├── MemberService
+            │   ├── OrderService
+            │   ├── OrderStatusService
+            │   ├── ProductService
+            │   └── ProductTypeService
+            │   └── ReviewService  // 새로 추가
+            ├── DWShopProjectApplication
+            └── Test

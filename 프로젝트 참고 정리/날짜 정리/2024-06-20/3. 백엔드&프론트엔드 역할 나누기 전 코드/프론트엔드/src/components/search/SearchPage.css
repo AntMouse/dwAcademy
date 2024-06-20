@@ -1,0 +1,68 @@
+/* SearchPage.css */
+
+/* SearchBar.js */
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 요소 간 간격 */
+    margin-top: 20px; /* 전체 컨테이너를 아래로 내림 */
+  }
+  
+  .search-bar-select,
+  .search-bar-input,
+  .search-bar-button {
+    height: 36px; /* 동일한 높이 설정 */
+    font-size: 14px;
+    border-radius: 4px; /* 모서리 둥글게 */
+    border: 1px solid #ccc; /* 기본 테두리 */
+    box-sizing: border-box; /* 테두리와 패딩을 포함한 크기 계산 */
+  }
+  
+  .search-bar-select:focus,
+  .search-bar-input:focus {
+    border: 1px solid black; /* 포커스 시 검은색 굵은 테두리 */
+    outline: none; /* 기본 포커스 아웃라인 제거 */
+  }
+  
+  .search-bar-input {
+    
+  }
+  
+  .search-bar-button {
+    padding: 0 10px; /* 상하 패딩 제거, 좌우 패딩만 설정 */
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #28a745; /* 녹색 계열 색상 */
+    color: white; /* 하얀색 글자 */
+    border: none; /* 테두리 제거 */
+    box-sizing: border-box; /* 테두리와 패딩을 포함한 크기 계산 */
+  }
+  
+  .search-bar-button:hover {
+    background-color: #218838; /* 호버 시 더 진한 녹색 */
+  }
+  
+  /* SearchResults.js */
+  .search-results-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .search-results-item h3 {
+    margin: 0;
+  }
+  
+  .search-results-item p {
+    margin: 5px 0;
+  }
+  
+  .search-results-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* SearchPage.js */
+  .search-results-count {
+    margin-top: 10px;
+  }
+  
