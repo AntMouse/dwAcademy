@@ -1,0 +1,30 @@
+/* src/Components/css/AdminSales.css */
+.admin-sales-container {
+    display: grid;
+    grid-template-rows: 1fr 2fr 6fr;
+    height: 100vh;
+}
+
+.admin-sales-header-section {
+    border: 2px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.admin-sales-sub-header-section {
+    border: 2px solid orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.admin-sales-main-section {
+    border: 2px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
