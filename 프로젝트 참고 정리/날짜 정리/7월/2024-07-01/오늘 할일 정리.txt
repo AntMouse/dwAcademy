@@ -1,0 +1,5 @@
+1. 로그인, 회원가입, 관리자 관련 백엔드 코드 구축하기.
+
+1-1. UserDetailsImpl, UserDetailsServiceImpl 클래스 검토. admin, user를 서로 분리했다.
+1-2. 공통 모듈 수정하기.
+1-3. 개별 코드 수정하기.

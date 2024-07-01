@@ -1,0 +1,66 @@
+com.example.DWTransferScoutProject
+├── address
+│   ├── controller
+│   │   └── AddressController.java
+│   ├── dto
+│   │   └── AddressDto.java
+│   ├── entity
+│   │   └── Address.java
+│   ├── repository
+│   │   └── AddressRepository.java
+│   └── service
+│       └── AddressService.java
+├── admin
+│   ├── controller
+│   │   └── AdminController.java
+│   ├── dto
+│   │   └── AdminDto.java
+│   ├── entity
+│   │   └── Admin.java
+│   ├── repository
+│   │   └── AdminRepository.java
+│   └── service
+│       └── AdminService.java
+├── auth
+│   ├── controller
+│   │   └── AuthController.java
+│   ├── security
+│   │   ├── JwtAuthFilter.java
+│   │   ├── JwtUtil.java
+│   │   ├── UserDetailsImpl.java
+│   │   ├── UserDetailsServiceImpl.java
+│   │   └── UserRoleEnum.java
+│   └── service
+│       └── AuthService.java
+├── common
+│   ├── config
+│   │   └── RestClientConfig.java
+│   ├── exception
+│   │    ├── GlobalExceptionHandler.java
+│   │    └── ResourceNotFoundException.java
+│   └── utils
+├── config
+│   ├── security
+│   │   └── SpringSecurityConfig.java
+│   └── web
+│       ├── WebConfig.java
+│       └── WebMvcConfig.java
+├── email
+│   ├── controller
+│   │   └── EmailController.java
+│   └── service
+│       └── EmailService.java
+├── test
+├── user
+│   ├── controller
+│   │   └── UserController.java
+│   ├── dto
+│   │   ├── LoginDto.java
+│   │   └── UserDto.java
+│   ├── entity
+│   │   └── User.java
+│   ├── repository
+│   │   └── UserRepository.java
+│   └── service
+│       └── UserService.java
+└── DWTransferScoutProject.java // Main application file
