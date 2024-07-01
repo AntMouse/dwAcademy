@@ -3,7 +3,7 @@ package com.example.DWTransferScoutProject.admin.service;
 import com.example.DWTransferScoutProject.admin.dto.AdminDto;
 import com.example.DWTransferScoutProject.admin.entity.Admin;
 import com.example.DWTransferScoutProject.admin.repository.AdminRepository;
-import com.example.DWTransferScoutProject.auth.security.UserRoleEnum;
+import com.example.DWTransferScoutProject.auth.security.ApplicationRoleEnum;
 import com.example.DWTransferScoutProject.user.dto.UserDto;
 import com.example.DWTransferScoutProject.user.entity.User;
 import com.example.DWTransferScoutProject.user.repository.UserRepository;
@@ -25,7 +25,7 @@ public class AdminService {
         admin.setAdminId(adminDto.getAdminId()); // 기존 userId에서 변경
         admin.setPassword(passwordEncoder.encode(adminDto.getPassword()));
         admin.setEmail(adminDto.getEmail());
-        admin.setUserType(UserRoleEnum.ADMIN);
+        admin.setUserType(ApplicationRoleEnum.ADMIN);
 
         if (adminRepository.findByAdminId(admin.getAdminId()).isPresent()) { // 기존 findByUserId에서 변경
             throw new IllegalArgumentException("이미 존재하는 아이디 입니다: " + admin.getAdminId()); // 기존 userId에서 변경

@@ -1,6 +1,6 @@
 package com.example.DWTransferScoutProject.auth.service;
 
-import com.example.DWTransferScoutProject.auth.security.UserRoleEnum;
+import com.example.DWTransferScoutProject.auth.security.ApplicationRoleEnum;
 import com.example.DWTransferScoutProject.user.dto.LoginDto;
 import com.example.DWTransferScoutProject.user.dto.UserDto;
 import com.example.DWTransferScoutProject.user.entity.User;
@@ -60,7 +60,7 @@ public class AuthService {
         user.setGender(userDto.getGender());
         user.setEmail(userDto.getEmail());
         user.setContact(userDto.getContact());
-        user.setUserType(UserRoleEnum.USER);
+        user.setUserType(ApplicationRoleEnum.USER);
 
         if (userRepository.findByUserId(user.getUserId()).isPresent()) {
             throw new IllegalArgumentException("이미 존재하는 아이디 입니다: " + user.getUserId());

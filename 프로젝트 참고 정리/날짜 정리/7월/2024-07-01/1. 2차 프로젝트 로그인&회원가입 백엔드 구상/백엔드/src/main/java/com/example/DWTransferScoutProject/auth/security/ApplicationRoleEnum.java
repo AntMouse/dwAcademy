@@ -3,14 +3,14 @@ package com.example.DWTransferScoutProject.auth.security;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-public enum UserRoleEnum {
+public enum ApplicationRoleEnum {
 
     USER(Authority.USER),
     ADMIN(Authority.ADMIN);
 
     private final String authority;
 
-    UserRoleEnum(String authority) {
+    ApplicationRoleEnum(String authority) {
         this.authority = authority;
     }
 
@@ -24,8 +24,8 @@ public enum UserRoleEnum {
     }
 
     @JsonCreator
-    public static UserRoleEnum fromString(String userType) {
-        for (UserRoleEnum role : UserRoleEnum.values()) {
+    public static ApplicationRoleEnum fromString(String userType) {
+        for (ApplicationRoleEnum role : ApplicationRoleEnum.values()) {
             if (role.name().equalsIgnoreCase(userType)) {
                 return role;
             }

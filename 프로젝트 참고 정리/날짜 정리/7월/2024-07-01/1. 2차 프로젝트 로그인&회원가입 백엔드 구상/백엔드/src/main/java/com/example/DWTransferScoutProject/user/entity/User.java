@@ -1,6 +1,6 @@
 package com.example.DWTransferScoutProject.user.entity;
 
-import com.example.DWTransferScoutProject.auth.security.UserRoleEnum;
+import com.example.DWTransferScoutProject.auth.security.ApplicationRoleEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +18,7 @@ public class User {
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private UserRoleEnum userType;
+    private ApplicationRoleEnum userType;
 
     @Column(nullable = false, unique = true)
     private String userId; // 사이트에서 사용하는 ID
@@ -35,7 +35,7 @@ public class User {
     private String contact;
 
     @Builder
-    public User(UserRoleEnum userType, String userId, String username, String password,
+    public User(ApplicationRoleEnum userType, String userId, String username, String password,
                 String birthdate, String gender, String email, String contact) {
         this.userType = userType;
         this.userId = userId;
@@ -56,7 +56,7 @@ public class User {
         if (contact != null) this.contact = contact;
     }
 
-    public void updateUserType(UserRoleEnum userType) {
+    public void updateUserType(ApplicationRoleEnum userType) {
         if (userType != null) {
             this.userType = userType;
         }

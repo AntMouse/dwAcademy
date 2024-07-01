@@ -1,6 +1,6 @@
 package com.example.DWTransferScoutProject.admin.dto;
 
-import com.example.DWTransferScoutProject.auth.security.UserRoleEnum;
+import com.example.DWTransferScoutProject.auth.security.ApplicationRoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,5 +15,5 @@ public class AdminDto {
     private String adminId;
     private String password;
     private String email;
-    private UserRoleEnum userType;
+    private ApplicationRoleEnum userType;
 }

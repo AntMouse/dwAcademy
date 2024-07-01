@@ -1,6 +1,6 @@
 package com.example.DWTransferScoutProject.user.dto;
 
-import com.example.DWTransferScoutProject.auth.security.UserRoleEnum;
+import com.example.DWTransferScoutProject.auth.security.ApplicationRoleEnum;
 import com.example.DWTransferScoutProject.user.entity.User;
 import lombok.*;
 
@@ -18,7 +18,7 @@ public class UserDto {
     private String gender;
     private String email;
     private String contact;
-    private UserRoleEnum userType;
+    private ApplicationRoleEnum userType;
 
     public UserDto(User user) {
         this.id = user.getId();

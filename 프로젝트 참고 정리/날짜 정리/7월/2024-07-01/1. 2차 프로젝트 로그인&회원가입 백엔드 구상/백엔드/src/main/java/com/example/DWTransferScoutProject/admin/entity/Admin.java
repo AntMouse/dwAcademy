@@ -1,6 +1,6 @@
 package com.example.DWTransferScoutProject.admin.entity;
 
-import com.example.DWTransferScoutProject.auth.security.UserRoleEnum;
+import com.example.DWTransferScoutProject.auth.security.ApplicationRoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,5 +25,5 @@ public class Admin {
     private String email;
 
     @Enumerated(value = EnumType.STRING)
-    private UserRoleEnum userType;
+    private ApplicationRoleEnum userType;
 }
