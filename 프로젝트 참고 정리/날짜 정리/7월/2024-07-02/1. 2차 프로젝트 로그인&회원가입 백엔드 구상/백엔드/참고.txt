@@ -1,0 +1,825 @@
+// 사용자의 서비스 로직을 처리하는 클래스
+@Service
+@Slf4j
+@AllArgsConstructor
+public class UserService implements BaseAccountService<User, UserDto> {
+
+    private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
+
+    // 사용자를 등록하는 메서드
+    @Override
+    public User signUp(UserDto userDto) {
+        // 빌더 패턴을 사용하여 User 엔티티 생성
+        User user = User.builder()
+                .accountType(ApplicationRoleEnum.USER)
+                .accountId(userDto.getUserId())
+                .username(userDto.getUsername())
+                .password(passwordEncoder.encode(userDto.getPassword())) // 비밀번호 암호화
+                .birthdate(userDto.getBirthdate())
+                .gender(userDto.getGender())
+                .userEmail(userDto.getUserEmail())
+                .contact(userDto.getContact())
+                .build();
+
+        // 이미 존재하는 아이디인지 확인
+        if (userRepository.findByAccountId(user.getAccountId()).isPresent()) {
+            throw new IllegalArgumentException("이미 존재하는 아이디 입니다: " + user.getAccountId());
+        }
+
+        // User 엔티티 저장
+        return userRepository.save(user);
+    }
+
+    // 사용자를 삭제하는 메서드
+    @Override
+    public void deleteAccount(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    // 사용자의 정보를 업데이트하는 메서드
+    @Override
+    public UserDto updateAccount(Long id, UserDto userDto) {
+        // 해당 ID의 사용자를 찾거나 예외를 발생시킴
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        // 사용자 정보 업데이트
+        existingUser.updateUserInfo(
+                userDto.getUsername(),
+                userDto.getBirthdate(),
+                userDto.getGender(),
+                userDto.getUserEmail(),
+                userDto.getContact()
+        );
+
+        // 사용자 역할 업데이트
+        if (userDto.getAccountType() != null) {
+            existingUser.updateAccountType(userDto.getAccountType());
+        }
+
+        // 업데이트된 사용자 정보를 저장하고 DTO로 변환
+        User updatedUser = userRepository.save(existingUser);
+        return mapToDTO(updatedUser);
+    }
+
+    // 사용자의 정보를 편집하는 메서드
+    public UserDto edit(UserDto userDto) {
+        return updateAccount(userDto.getId(), userDto);
+    }
+
+    // 사용자의 비밀번호를 변경하는 메서드
+    public void updateUserPassword(Long id, String newPassword) {
+        // 해당 ID의 사용자를 찾거나 예외를 발생시킴
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        // 비밀번호 업데이트
+        existingUser.updateUserPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(existingUser);
+    }
+
+    // ID를 통해 사용자를 찾는 메서드
+    @Override
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    // 모든 사용자 리스트를 가져오는 메서드
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    // User 엔티티를 UserDto로 변환하는 메서드
+    @Override
+    public UserDto mapToDTO(User user) {
+        return UserDto.builder()
+                .id(user.getId())
+                .userId(user.getAccountId())
+                .username(user.getUsername())
+                .password(null) // 비밀번호는 반환하지 않음
+                .birthdate(user.getBirthdate())
+                .gender(user.getGender())
+                .userEmail(user.getUserEmail())
+                .contact(user.getContact())
+                .accountType(user.getAccountType())
+                .build();
+    }
+
+    // 계정 ID를 통해 사용자를 찾는 메서드
+    @Override
+    public Optional<User> findByAccountId(String accountId) {
+        return userRepository.findByAccountId(accountId);
+    }
+
+    // 사용자 이름을 통해 사용자를 찾는 메서드
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+}
+
+// 사용자의 요청을 처리하는 컨트롤러 클래스
+@Slf4j
+@RestController
+@RequestMapping("/api")
+public class UserController {
+    private final UserService userService;
+    private final JwtUtil jwtUtil;
+
+    @Autowired
+    public UserController(UserService userService, JwtUtil jwtUtil) {
+        this.userService = userService;
+        this.jwtUtil = jwtUtil;
+    }
+
+    // 모든 사용자의 정보를 가져오는 API
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<User> users = userService.findAllUsers();
+        List<UserDto> userDtos = users.stream()
+                .map(userService::mapToDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(userDtos);
+    }
+
+    // ID를 통해 특정 사용자의 정보를 가져오는 API
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        User user = userService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        return ResponseEntity.ok(userService.mapToDTO(user));
+    }
+
+    // 사용자의 정보를 업데이트하는 API
+    @PutMapping("/users/{id}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        log.info("컨트롤러 DTO:{}", userDto);
+
+        UserDto user = userService.updateAccount(id, userDto);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // 사용자를 삭제하는 API
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        try {
+            userService.deleteAccount(id);
+            return ResponseEntity.ok("사용자가 성공적으로 삭제되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("사용자 삭제 중 오류가 발생했습니다. 다시 시도해주세요.");
+        }
+    }
+
+    // 자신의 정보를 가져오는 API
+    @GetMapping("/mypage")
+    public ResponseEntity<UserDto> getMyPage(@AuthenticationPrincipal AccountDetailsImpl userDetails) {
+        BaseAccount account = userDetails.getAccount();
+        if (account instanceof User) {
+            User user = (User) account;
+            UserDto myPageDTO = userService.mapToDTO(user);
+            return ResponseEntity.ok(myPageDTO);
+        } else {
+            return ResponseEntity.status(403).build(); // 권한 없음 상태 반환
+        }
+    }
+
+    // 자신의 계정을 삭제하고 JWT 쿠키를 삭제하는 API
+    @DeleteMapping("/mypage")
+    public ResponseEntity<String> deleteMyUser(@AuthenticationPrincipal AccountDetailsImpl userDetails,
+                                               @CookieValue(value = "Authorization", defaultValue = "", required = false) Cookie jwtCookie,
+                                               HttpServletResponse response) {
+        userService.deleteAccount(userDetails.getAccount().getId());
+        jwtCookie.setValue(null);
+        jwtCookie.setMaxAge(0);
+        jwtCookie.setPath("/");
+        response.addCookie(jwtCookie);
+        return ResponseEntity.ok("사용자 계정이 성공적으로 삭제되었습니다.");
+    }
+
+    // 자신의 정보를 업데이트하고 JWT 쿠키를 삭제하는 API
+    @PutMapping("/mypage")
+    public ResponseEntity<UserDto> updateMyUser(@RequestBody UserDto userDto,
+                                                @AuthenticationPrincipal AccountDetailsImpl userDetails,
+                                                @CookieValue(value = "Authorization", defaultValue = "", required = false) Cookie jwtCookie,
+                                                HttpServletResponse response) {
+        BaseAccount account = userDetails.getAccount();
+        if (account instanceof User) {
+            User currentUser = (User) account;
+            if (!currentUser.getId().equals(userDto.getId())) {
+                return ResponseEntity.status(403).build();
+            }
+
+            UserDto user = userService.edit(userDto);
+            jwtCookie.setValue(null);
+            jwtCookie.setMaxAge(0);
+            jwtCookie.setPath("/");
+            response.addCookie(jwtCookie);
+
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(403).build(); // 권한 없음 상태 반환
+        }
+    }
+}
+
+// 관리자의 서비스 로직을 처리하는 클래스
+@Service
+@AllArgsConstructor
+public class AdminService implements BaseAccountService<Admin, AdminDto> {
+    private final AdminRepository adminRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    // 관리자를 등록하는 메서드
+    @Override
+    public Admin signUp(AdminDto adminDto) {
+        // 빌더 패턴을 사용하여 Admin 엔티티 생성
+        Admin admin = Admin.builder()
+                .accountId(adminDto.getAdminId())
+                .password(passwordEncoder.encode(adminDto.getPassword()))
+                .adminEmail(adminDto.getAdminEmail())
+                .accountType(ApplicationRoleEnum.ADMIN)
+                .build();
+
+        // 이미 존재하는 아이디인지 확인
+        if (adminRepository.findByAccountId(admin.getAccountId()).isPresent()) {
+            throw new IllegalArgumentException("이미 존재하는 아이디 입니다: " + admin.getAccountId());
+        }
+
+        // Admin 엔티티 저장
+        Admin savedAdmin = adminRepository.save(admin);
+        return savedAdmin;
+    }
+
+    // 관리자를 삭제하는 메서드
+    @Override
+    public void deleteAccount(Long id) {
+        adminRepository.deleteById(id);
+    }
+
+    // 관리자의 정보를 업데이트하는 메서드
+    @Override
+    public AdminDto updateAccount(Long id, AdminDto adminDto) {
+        // 해당 ID의 관리자를 찾거나 예외를 발생시킴
+        Admin existingAdmin = adminRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Admin not found"));
+
+        // 관리자 정보 업데이트
+        existingAdmin.updateAdminInfo(
+                adminDto.getAdminEmail(),
+                adminDto.getAccountType()
+        );
+
+        // 업데이트된 관리자 정보를 저장하고 DTO로 변환
+        Admin updatedAdmin = adminRepository.save(existingAdmin);
+        return mapToDTO(updatedAdmin);
+    }
+
+    // 관리자의 비밀번호를 변경하는 메서드
+    public void updateAdminPassword(Long id, String newPassword) {
+        // 해당 ID의 관리자를 찾거나 예외를 발생시킴
+        Admin existingAdmin = adminRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Admin not found"));
+
+        // 비밀번호 업데이트
+        existingAdmin.updateAdminPassword(passwordEncoder.encode(newPassword));
+        adminRepository.save(existingAdmin);
+    }
+
+    // 관리자의 정보를 편집하는 메서드
+    public AdminDto edit(AdminDto adminDto) {
+        return updateAccount(adminDto.getId(), adminDto);
+    }
+
+    // ID를 통해 관리자를 찾는 메서드
+    @Override
+    public Optional<Admin> findById(Long id) {
+        return adminRepository.findById(id);
+    }
+
+    // 계정 ID를 통해 관리자를 찾는 메서드
+    @Override
+    public Optional<Admin> findByAccountId(String accountId) {
+        return adminRepository.findByAccountId(accountId);
+    }
+
+    // Admin 엔티티를 AdminDto로 변환하는 메서드
+    @Override
+    public AdminDto mapToDTO(Admin admin) {
+        return AdminDto.builder()
+                .id(admin.getId())
+                .adminId(admin.getAccountId())
+                .password(null) // 비밀번호는 반환하지 않음
+                .adminEmail(admin.getAdminEmail())
+                .accountType(admin.getAccountType())
+                .build();
+    }
+
+    // 관리자가 사용자 정보를 업데이트하는 메서드
+    public UserDto AdminupdateUser(Long id, UserDto userDto) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        if (userDto.getAccountType() != null) {
+            existingUser.updateAccountType(userDto.getAccountType());
+        }
+
+        User updatedUser = userRepository.save(existingUser);
+        return mapToUserDTO(updatedUser);
+    }
+
+    // User 엔티티를 UserDto로 변환하는 메서드
+    public UserDto mapToUserDTO(User user) {
+        return UserDto.builder()
+                .id(user.getId())
+                .userId(user.getAccountId())
+                .accountType(user.getAccountType())
+                .username(user.getUsername())
+                .password(null)
+                .birthdate(user.getBirthdate())
+                .gender(user.getGender())
+                .userEmail(user.getUserEmail())
+                .contact(user.getContact())
+                .build();
+    }
+}
+
+// 관리자의 요청을 처리하는 컨트롤러 클래스
+@RestController
+@RequestMapping("/api/admins")
+@AllArgsConstructor
+public class AdminController {
+    private final AdminService adminService;
+
+    // 관리자를 생성하는 API
+    @PostMapping
+    public ResponseEntity<AdminDto> createAdmin(@RequestBody AdminDto adminDto) {
+        return ResponseEntity.ok(adminService.mapToDTO(adminService.signUp(adminDto)));
+    }
+
+    // 관리자의 정보를 업데이트하는 API
+    @PutMapping("/{id}")
+    public ResponseEntity<AdminDto> updateAdmin(@PathVariable Long id, @RequestBody AdminDto adminDto) {
+        return ResponseEntity.ok(adminService.updateAccount(id, adminDto));
+    }
+
+    // 관리자를 삭제하는 API
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAdmin(@PathVariable Long id) {
+        adminService.deleteAccount(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    // ID를 통해 특정 관리자의 정보를 가져오는 API
+    @GetMapping("/{id}")
+    public ResponseEntity<AdminDto> getAdminById(@PathVariable Long id) {
+        return ResponseEntity.ok(adminService.mapToDTO(
+                adminService.findById(id)
+                        .orElseThrow(() -> new ResourceNotFoundException("Admin not found with id: " + id))
+        ));
+    }
+}
+
+// 인증 관련 로직을 처리하는 서비스 클래스
+@Service
+@Slf4j
+@AllArgsConstructor
+public class AuthService {
+
+    private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
+
+    // 로그인 처리 메서드
+    @Transactional
+    public String login(LoginDto loginDto, HttpServletResponse response) {
+        Optional<User> optionalUser = userRepository.findByAccountId(loginDto.getAccountId());
+
+        if (optionalUser.isEmpty()) {
+            throw new IllegalArgumentException("회원이 존재하지 않음");
+        }
+
+        User user = optionalUser.get();
+
+        if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        String token = jwtUtil.createToken(user.getAccountId(), user.getAccountType());
+
+        return token;
+    }
+
+    // 회원가입 처리 메서드
+    public User signUp(UserDto userDto) {
+        // 빌더 패턴을 사용하여 User 엔티티 생성
+        User user = User.builder()
+                .accountId(userDto.getUserId())
+                .username(userDto.getUsername())
+                .password(passwordEncoder.encode(userDto.getPassword()))
+                .birthdate(userDto.getBirthdate())
+                .gender(userDto.getGender())
+                .userEmail(userDto.getUserEmail()) // 수정된 부분
+                .contact(userDto.getContact())
+                .accountType(ApplicationRoleEnum.USER)
+                .build();
+
+        // 이미 존재하는 아이디인지 확인
+        if (userRepository.findByAccountId(user.getAccountId()).isPresent()) {
+            throw new IllegalArgumentException("이미 존재하는 아이디 입니다: " + user.getAccountId());
+        }
+
+        // 엔티티 저장
+        userRepository.save(user);
+
+        return user;
+    }
+
+    // 사용자 이름을 통해 사용자를 찾는 메서드
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    // 사용자 이름과 이메일을 통해 사용자를 찾는 메서드
+    public Optional<User> findUserByUsernameAndEmail(String username, String email) {
+        return userRepository.findByUsernameAndUserEmail(username, email);
+    }
+
+    // 이메일을 통해 사용자를 찾는 메서드
+    public List<User> findUsersByEmail(String email) {
+        return userRepository.findAllByUserEmail(email);
+    }
+
+    // 이메일을 통한 비밀번호 초기화 메서드
+    public void passwordResetByEmail(User user, int verificationCode) {
+        user.updateUserPassword(passwordEncoder.encode(String.valueOf(verificationCode)));
+        userRepository.save(user);
+    }
+
+    // 계정 ID를 통해 사용자를 찾는 메서드
+    public Optional<User> findByUserId(String userId) {
+        return userRepository.findByAccountId(userId);
+    }
+}
+
+// 인증 관련 요청을 처리하는 컨트롤러 클래스
+@Slf4j
+@RestController
+@RequestMapping("/api")
+public class AuthController {
+    private final AuthService authService;
+    private final JwtUtil jwtUtil;
+
+    @Autowired
+    public AuthController(AuthService authService, JwtUtil jwtUtil) {
+        this.authService = authService;
+        this.jwtUtil = jwtUtil;
+    }
+
+    // 로그인 API
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDao, HttpServletResponse response) {
+        try {
+            String token = authService.login(loginDao, response); // 로그인 서비스에서 토큰 생성 및 반환
+            return ResponseEntity.ok(token); // 클라이언트에게 토큰을 반환
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
+        }
+    }
+
+    // 로그아웃 API
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@CookieValue(value = "Authorization", defaultValue = "", required = false) Cookie jwtCookie,
+                                         HttpServletResponse response) {
+        jwtCookie.setValue(null);
+        jwtCookie.setMaxAge(0);
+        jwtCookie.setPath("/");
+        response.addCookie(jwtCookie);
+
+        return ResponseEntity.ok("로그아웃이 성공적으로 완료되었습니다.");
+    }
+
+    // 회원가입 API
+    @PostMapping("/signup")
+    public ResponseEntity<?> signUp(@RequestBody UserDto userDto) {
+        Optional<User> optionalUser = authService.findByUsername(userDto.getUsername());
+        List<User> users = authService.findUsersByEmail(userDto.getUserEmail());
+
+        try {
+            if (optionalUser.isPresent()) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            } else if (users.size() > 3) { // EmailController().MAX_EMAIL_ASSOCIATED_ACCOUNTS 값을 직접 지정하거나 상수로 정의
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("하나의 이메일에 3개의 아이디만 만들 수 있습니다."); // 직접 숫자 사용
+            }
+
+            User user = authService.signUp(userDto);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+        }
+    }
+
+    // ID 중복 확인 API
+    @PostMapping("/idcheck")
+    public ResponseEntity<?> idCheck(@RequestBody UserDto userDto) {
+        Optional<User> optionalUser = authService.findByUsername(userDto.getUsername());
+        if (optionalUser.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    // 토큰으로 사용자 유형 확인 API
+    @GetMapping("/user/type")
+    public ResponseEntity<?> getUserType(HttpServletRequest request) {
+        String token = jwtUtil.resolveToken(request);
+        if (token == null || !jwtUtil.validateToken(token)) {
+            return ResponseEntity.status(401).body("Invalid token");
+        }
+
+        String userType = jwtUtil.getAccountTypeFromToken(token);
+        return ResponseEntity.ok(Collections.singletonMap("userType", userType)); // userType으로 반환
+    }
+}
+
+// JWT 유틸리티 클래스
+@Slf4j
+@Component
+public class JwtUtil {
+
+    public static final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String AUTHORIZATION_KEY = "auth";
+    private static final String BEARER_PREFIX = "Bearer ";
+    private static final long TOKEN_TIME = 60 * 60 * 1000L;
+
+    private final AccountDetailsServiceImpl userDetailsService;
+
+    public JwtUtil(AccountDetailsServiceImpl userDetailsService) {
+        super();
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Value("${jwt.secret.key}")
+    private String secretKey;
+    private Key key;
+    private final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+
+    // JWT 초기화 메서드
+    @PostConstruct
+    public void init() {
+        byte[] bytes = Base64.getDecoder().decode(secretKey);
+        key = Keys.hmacShaKeyFor(bytes);
+    }
+
+    // HttpServletRequest에서 JWT 토큰을 추출하는 메서드
+    public String resolveToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+
+        if (bearerToken == null) {
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie c : cookies) {
+                    String name = c.getName();
+                    String value = c.getValue();
+                    if (name.equals(AUTHORIZATION_HEADER)) {
+                        bearerToken = value;
+                    }
+                }
+            }
+        }
+
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
+            String token = bearerToken.substring(BEARER_PREFIX.length()).trim();
+            return token;
+        }
+        return null;
+    }
+
+    // JWT 토큰을 생성하는 메서드
+    public String createToken(String username, ApplicationRoleEnum userType) {
+        Date date = new Date();
+
+        return BEARER_PREFIX +
+                Jwts.builder()
+                        .setSubject(username)
+                        .claim(AUTHORIZATION_KEY, userType)
+                        .setExpiration(new Date(date.getTime() + TOKEN_TIME))
+                        .setIssuedAt(date)
+                        .signWith(key, signatureAlgorithm)
+                        .compact();
+    }
+
+    // JWT 토큰을 검증하는 메서드
+    public boolean validateToken(String token) {
+        try {
+            token = token.trim();
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return true;
+        } catch (SecurityException | MalformedJwtException e) {
+            // handle exception
+        } catch (ExpiredJwtException e) {
+            // handle exception
+        } catch (UnsupportedJwtException e) {
+            // handle exception
+        } catch (IllegalArgumentException e) {
+            // handle exception
+        }
+        return false;
+    }
+
+    // JWT 토큰에서 계정 정보를 추출하는 메서드
+    public Claims getAccountInfoFromToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+    }
+
+    // 사용자 이름으로 인증 객체를 생성하는 메서드
+    public Authentication createAuthentication(String username) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+    }
+
+    // JWT 토큰에서 사용자 유형을 추출하는 메서드
+    public String getAccountTypeFromToken(String token) {
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+        return claims.get(AUTHORIZATION_KEY, String.class);
+    }
+
+    // JWT 토큰에서 사용자 이름을 추출하는 메서드
+    public String getAccountnameFromToken(String token) {
+        Claims claims = getAccountInfoFromToken(token);
+        return claims.getSubject();
+    }
+}
+
+// JWT 인증 필터 클래스
+public class JwtAuthFilter extends OncePerRequestFilter {
+
+    private final JwtUtil jwtUtil;
+
+    public JwtAuthFilter(JwtUtil jwtUtil) {
+        super();
+        this.jwtUtil = jwtUtil;
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        String token = jwtUtil.resolveToken(request);
+
+        if (token != null) {
+            if (!jwtUtil.validateToken(token)) {
+                throw new IllegalArgumentException("JWT Token 인증 실패");
+            }
+            Claims info = jwtUtil.getAccountInfoFromToken(token);
+            setAuthentication(info.getSubject());
+        }
+        filterChain.doFilter(request, response);
+    }
+
+    // 인증 설정 메서드
+    public void setAuthentication(String username) {
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
+        Authentication authentication = jwtUtil.createAuthentication(username);
+        context.setAuthentication(authentication);
+
+        SecurityContextHolder.setContext(context);
+    }
+}
+
+// 사용자 역할을 정의하는 열거형
+public enum ApplicationRoleEnum {
+
+    USER(Authority.USER),
+    ADMIN(Authority.ADMIN);
+
+    private final String authority;
+
+    ApplicationRoleEnum(String authority) {
+        this.authority = authority;
+    }
+
+    public String getAuthority() {
+        return this.authority;
+    }
+
+    public static class Authority {
+        public static final String USER = "ROLE_USER";
+        public static final String ADMIN = "ROLE_ADMIN";
+    }
+
+    @JsonCreator
+    public static ApplicationRoleEnum fromString(String userType) {
+        for (ApplicationRoleEnum role : ApplicationRoleEnum.values()) {
+            if (role.name().equalsIgnoreCase(userType)) {
+                return role;
+            }
+        }
+        throw new IllegalArgumentException("Unknown role: " + userType);
+    }
+
+    @JsonValue
+    public String toValue() {
+        return this.name();
+    }
+}
+
+// 사용자와 관리자의 인증 세부 정보를 로드하는 서비스 클래스
+@Service
+public class AccountDetailsServiceImpl implements UserDetailsService {
+    private final UserRepository userRepository;
+    private final AdminRepository adminRepository;
+
+    public AccountDetailsServiceImpl(UserRepository userRepository, AdminRepository adminRepository) {
+        super();
+        this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String accountId) throws UsernameNotFoundException { // username을 accountId로 변경
+        User user = userRepository.findByAccountId(accountId).orElse(null);
+        Admin admin = adminRepository.findByAccountId(accountId).orElse(null);
+
+        BaseAccount account = user != null ? user : admin;
+
+        if (account != null) {
+            return new AccountDetailsImpl(account);
+        } else {
+            throw new UsernameNotFoundException("사용자를 찾을 수 없습니다.");
+        }
+    }
+
+    // userId를 통해 User 엔티티를 찾는 메서드
+    public User findUserEntityByUserId(String userId) throws UsernameNotFoundException {
+        return userRepository.findByAccountId(userId)
+                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
+    }
+
+    // adminId를 통해 Admin 엔티티를 찾는 메서드
+    public Admin findAdminEntityByAdminId(String adminId) throws UsernameNotFoundException {
+        return adminRepository.findByAccountId(adminId)
+                .orElseThrow(() -> new UsernameNotFoundException("관리자를 찾을 수 없습니다."));
+    }
+}
+
+// 사용자 인증 세부 정보를 나타내는 클래스
+public class AccountDetailsImpl implements UserDetails {
+    private final BaseAccount account;
+    private final String password;
+    private final String accountId;
+    private final ApplicationRoleEnum role;
+
+    public AccountDetailsImpl(BaseAccount account) {
+        this.account = account;
+        this.password = account.getPassword();
+        this.accountId = account.getAccountId();
+        this.role = account.getAccountRole();
+    }
+
+    public BaseAccount getAccount() {
+        return this.account;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        String authority = role.getAuthority();
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(simpleGrantedAuthority);
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.accountId; // accountId로 변경
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+}
