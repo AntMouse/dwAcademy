@@ -1,0 +1,150 @@
+com.example.DWShopProject
+├── address
+│   ├── controller
+│   │   └── AddressController.java
+│   ├── dto
+│   ├── entity
+│   │   └── Address.java
+│   ├── repository
+│   │   └── AddressRepository.java
+│   └── service
+│       └── AddressService.java
+├── admin
+│   ├── orderadmin
+│   │   ├── controller
+│   │   │   └── AOrderController.java
+│   │   ├── dto
+│   │   │   ├── AOrderDto.java
+│   │   │   └── AOrderItemDto.java
+│   │   ├── entity
+│   │   ├── repository
+│   │   │   ├── AOrderItemRepository.java
+│   │   │   └── AOrderRepository.java
+│   │   └── service
+│   │       └── AOrderService.java
+│   └── test
+├── cart
+│   ├── controller
+│   │   └── CartController.java
+│   ├── dto
+│   │   ├── CartDto.java
+│   │   └── CartItemDto.java
+│   ├── entity
+│   │   ├── Cart.java
+│   │   └── CartItem.java
+│   ├── repository
+│   │   ├── CartItemRepository.java
+│   │   └── CartRepository.java
+│   └── service
+│       └── CartService.java
+├── common
+│   ├── constants
+│   │   └── Constants.java
+│   ├── dto
+│   │   └── LoginDto.java
+│   ├── exception
+│   │   ├── GlobalExceptionHandler.java
+│   │   └── ResourceNotFoundException.java
+│   └── test
+├── config
+│   ├── DataInitializer.java
+│   ├── RestClientConfig.java
+│   ├── SpringSecurityConfig.java
+│   ├── WebConfig.java
+│   └── WebMvcConfig.java
+├── email
+│   ├── controller
+│   │   └── EmailController.java
+│   └── service
+│       └── EmailService.java
+├── member
+│   ├── controller
+│   │   └── MemberRestController.java
+│   ├── dto
+│   │   └── MemberDto.java
+│   ├── entity
+│   │   └── Member.java
+│   ├── repository
+│   │   └── MemberRepository.java
+│   └── service
+│       └── MemberService.java
+├── order
+│   ├── controller
+│   │   ├── OrderController.java
+│   │   └── OrderStatusController.java
+│   ├── dto
+│   │   ├── OrderDto.java
+│   │   ├── OrderItemDto.java
+│   │   └── OrderStatusDto.java
+│   ├── entity
+│   │   ├── Order.java
+│   │   └── OrderItem.java
+│   ├── enums
+│   │   └── OrderStatus.java
+│   ├── repository
+│   │   ├── OrderItemRepository.java
+│   │   └── OrderRepository.java
+│   └── service
+│       ├── OrderService.java
+│       └── OrderStatusService.java
+├── paypal
+│   ├── controller
+│   │   └── PayPalController.java
+│   └── service
+│       └── PayPalService.java
+├── product
+│   ├── controller
+│   │   ├── ProductController.java
+│   │   └── ProductTypeController.java
+│   ├── dto
+│   │   └── ProductDto.java
+│   ├── entity
+│   │   ├── Product.java
+│   │   └── ProductTypeMgmt.java
+│   ├── enums
+│   │   ├── ParentType.java
+│   │   └── ProductType.java
+│   ├── repository
+│   │   ├── ProductRepository.java
+│   │   └── ProductTypeMgmtRepository.java
+│   └── service
+│       ├── ProductService.java
+│       └── ProductTypeService.java
+├── review
+│   ├── controller
+│   │   └── ReviewController.java
+│   ├── dto
+│   │   └── ReviewDto.java
+│   ├── entity
+│   │   └── Review.java
+│   ├── repository
+│   │   └── ReviewRepository.java
+│   └── service
+│       └── ReviewService.java
+├── search
+│   ├── controller
+│   │   └── SearchController.java
+│   ├── dto
+│   │   ├── SearchDto.java
+│   │   └── SearchResultDto.java
+│   ├── entity
+│   ├── repository
+│   └── service
+│       └── SearchService.java
+├── security
+│   ├── enums
+│   │   └── MemberRole.java
+│   ├── jwt
+│   │   ├── JwtAuthFilter.java
+│   │   └── JwtUtil.java
+│   └── userdetails
+│       ├── MemberDetailsImpl.java
+│       └── MemberDetailsServiceImpl.java
+├── temporaryorder
+│   ├── entity
+│   │   └── TemporaryOrder.java
+│   └── repository
+│       └── TemporaryOrderRepository.java
+├── DwShopProjectApplication.java
+├── 추가한파일목록.txt
+└── 파일목록.txt
