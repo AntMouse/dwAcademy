@@ -1,0 +1,31 @@
+상품 레퍼지토리 일부 수정 -> 이후 수정 취소.
+상품 타입 컨트롤러 일부 수정.
+매출 dto 수정.
+상품 타입 서비스 일부 수정.
+------------------------
+리액트 npm install
+
+React Chart.js 사용을 위해:
+
+npm install react-chartjs-2 chart.js
+React 프로젝트에서 차트를 그리기 위해 Chart.js와 React Chart.js를 설치했습니다.
+axios 설치를 위해:
+
+npm install axios
+React에서 HTTP 요청을 처리하기 위해 axios 라이브러리를 설치했습니다.
+OpenAI API 사용을 위해:
+
+npm install openai
+Node.js 프로젝트에서 OpenAI API를 사용하기 위해 OpenAI 라이브러리를 설치했습니다.
+
+npm install @mui/material @emotion/react @emotion/styled
+추가 설치.
+
+리액트 css 폴더에 AdminSales.css 추가.
+page/admin 폴더에 AdminSales.js 추가.
+
+npm install react-datepicker
+npm install date-fns
+추가 설치.
+
+SalesRequestDto 클래스 추가.
