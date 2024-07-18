@@ -1,0 +1,22 @@
+package com.example.DWShopProject.product.repository;
+
+import com.example.DWShopProject.product.entity.Product;
+import com.example.DWShopProject.product.entity.ProductSubType;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ProductRepository extends JpaRepository<Product, Long> {
+    Optional<Product> findByProductName(String productName);  // 상품 이름으로 검색하는 메서드 추가
+
+    List<Product> findByProductType(ProductSubType productType);
+
+    // 상품명을 포함한 검색 (메서드 쿼리 방식)
+    List<Product> findByProductNameContaining(String keyword);
+
+    // 설명을 포함한 검색 (메서드 쿼리 방식)
+    List<Product> findByExplanationContaining(String keyword);
+
+    List<Product> findByProductSubTypeId(Long subTypeId);
+}
