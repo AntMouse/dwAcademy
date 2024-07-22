@@ -1,0 +1,152 @@
+├── accountmanagement
+│   ├── controller
+│   │   ├── AdminController.java
+│   │   ├── AuthenticationController.java
+│   │   ├── BaseAccountController.java
+│   │   ├── EmailController.java
+│   │   ├── GenderController.java
+│   │   └── UserController.java
+│   ├── dto
+│   │   ├── AdminDto.java
+│   │   ├── BaseAccountDto.java
+│   │   ├── GenderDto.java
+│   │   ├── LoginDto.java
+│   │   └── UserDto.java
+│   ├── entity
+│   │   ├── Admin.java
+│   │   ├── BaseAccount.java
+│   │   └── User.java
+│   ├── enums
+│   │   └── Gender.java
+│   ├── repository
+│   │   ├── AdminRepository.java
+│   │   ├── BaseAccountRepository.java
+│   │   └── UserRepository.java
+│   └── service
+│       ├── AdminService.java
+│       ├── AuthenticationService.java
+│       ├── BaseAccountService.java
+│       ├── EmailService.java
+│       └── UserService.java
+├── addressmanagement
+│   ├── controller
+│   │   └── AddressController.java
+│   ├── dto
+│   │   └── AddressDto.java
+│   ├── entity
+│   │   └── Address.java
+│   ├── repository
+│   │   └── AddressRepository.java
+│   └── service
+│       └── AddressService.java
+├── cartmanagement
+│   ├── controller
+│   │   └── CartController.java
+│   ├── dto
+│   │   ├── CartDto.java
+│   │   ├── CartItemDto.java
+│   │   └── CartProductSnapshotDto.java
+│   ├── entity
+│   │   ├── Cart.java
+│   │   ├── CartItem.java
+│   │   └── CartProductSnapshot.java
+│   ├── repository
+│   │   ├── CartItemRepository.java
+│   │   ├── CartProductSnapshotRepository.java
+│   │   └── CartRepository.java
+│   └── service
+│       └── CartService.java
+├── common
+│   ├── config
+│   │   ├── DataInitializer.java
+│   │   ├── RestClientConfig.java
+│   │   ├── SpringSecurityConfig.java
+│   │   ├── WebConfig.java
+│   │   └── WebMvcConfig.java
+│   ├── constants
+│   │   └── Constants.java
+│   ├── exception
+│   │   ├── GlobalExceptionHandler.java
+│   │   └── ResourceNotFoundException.java
+│   ├── security
+│   │   ├── enums
+│   │   │   └── ApplicationRole.java
+│   │   ├── jwt
+│   │   │   ├── JwtAuthFilter.java
+│   │   │   └── JwtUtil.java
+│   │   └── userdetails
+│   │       ├── UserDetailsImpl.java
+│   │       └── UserDetailsServiceImpl.java
+│   └── utility
+│       └── 공통 유틸리티 클래스들
+├── mainapplication
+│   ├── DwShopProjectApplication.java
+│   ├── 추가한파일목록.txt
+│   └── 파일목록.txt
+├── ordermanagement
+│   ├── controller
+│   │   ├── OrderController.java
+│   │   └── OrderStatusController.java
+│   ├── dto
+│   │   ├── OrderDto.java
+│   │   ├── OrderItemDto.java
+│   │   ├── OrderProductSnapshotDto.java
+│   │   └── OrderStatusDto.java
+│   ├── entity
+│   │   ├── Order.java
+│   │   ├── OrderItem.java
+│   │   ├── OrderProductSnapshot.java
+│   │   └── TemporaryOrder.java
+│   ├── enums
+│   │   └── OrderStatus.java
+│   ├── repository
+│   │   ├── OrderItemRepository.java
+│   │   ├── OrderProductSnapshotRepository.java
+│   │   ├── OrderRepository.java
+│   │   └── TemporaryOrderRepository.java
+│   └── service
+│       ├── OrderService.java
+│       └── OrderStatusService.java
+├── paymentmanagement
+│   ├── controller
+│   │   └── PayPalController.java
+│   └── service
+│       └── PayPalService.java
+├── productmanagement
+│   ├── controller
+│   │   ├── ProductController.java
+│   │   └── ProductTypeController.java
+│   ├── dto
+│   │   ├── ProductDto.java
+│   │   ├── ProductMainTypeDto.java
+│   │   └── ProductSubTypeDto.java
+│   ├── entity
+│   │   ├── Product.java
+│   │   ├── ProductMainType.java
+│   │   └── ProductSubType.java
+│   ├── repository
+│   │   ├── ProductMainTypeRepository.java
+│   │   ├── ProductRepository.java
+│   │   └── ProductSubTypeRepository.java
+│   └── service
+│       ├── ProductService.java
+│       └── ProductTypeService.java
+├── reviewmanagement
+│   ├── controller
+│   │   └── ReviewController.java
+│   ├── dto
+│   │   └── ReviewDto.java
+│   ├── entity
+│   │   └── Review.java
+│   ├── repository
+│   │   └── ReviewRepository.java
+│   └── service
+│       └── ReviewService.java
+└── searchmanagement
+    ├── controller
+    │   └── SearchController.java
+    ├── dto
+    │   ├── SearchDto.java
+    │   └── SearchResultDto.java
+    └── service
+        └── SearchService.java
